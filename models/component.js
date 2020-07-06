@@ -5,10 +5,11 @@ const componentSchema = new Schema({
   name: { type: String, required: true },
   type: {
     type: String,
-    enum: ["Frame", "Fork", "Drivetrain", "Cockpit"],
+    enum: ["Frame", "Fork", "Drivetrain", "Cockpit", "Wheel"],
     required: true,
   },
-  manufacturerSKU: { type: String, required: true },
+  pointsOfContact: [],
+  influencers: [],
   description: String,
   date: { type: Date, default: Date.now },
 });

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
+import { useIntl } from "react-intl";
 import { useHistory } from "react-router-dom";
 import { saveAuthorisation, isAuthorised } from "../utils/auth";
 import MenuContext from "material-ui-shell/lib/providers/Menu/Context";
@@ -14,7 +15,6 @@ import {
   makeStyles,
 } from "@material-ui/core/";
 import Page from "material-ui-shell/lib/containers/Page/Page";
-import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3),
     [theme.breakpoints.up(620 + theme.spacing(6))]: {
-      width: "90%",
+      width: 400,
       marginLeft: "auto",
       marginRight: "auto",
     },
@@ -56,8 +56,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Components() {
+function AddComponent() {
   const classes = useStyles();
+  const intl = useIntl();
   const history = useHistory();
   const { setAuthMenuOpen } = useContext(MenuContext);
   // Setting our component's initial state
@@ -76,8 +77,11 @@ function Components() {
       .catch((err) => console.log(err));
   }
 
-  function filterComponents() {
-    // function to filter componet based on component type and and
+  // Deletes a component from the database with a given id, then reloads components from the db
+  function deleteComponent(id) {
+    API.deleteComponent(id)
+      .then((res) => loadComponents())
+      .catch((err) => console.log(err));
   }
 
   // Handles updating component state when the user types into the input field
@@ -86,28 +90,39 @@ function Components() {
     setFormObject({ ...formObject, [name]: value });
   }
 
+  // When the form is submitted, use the API.savecomponent method to save the component data
+  // Then reload components from the database
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    if (formObject.name && formObject.type && formObject.manufacturerSKU) {
+      API.saveComponent({
+        name: formObject.name,
+        type: formObject.type,
+        manufacturerSKU: formObject.manufacturerSKU,
+        description: formObject.description,
+      })
+        .then((res) => loadComponents())
+        .catch((err) => console.log(err));
+    }
+  }
+
   return (
-    <Page pageTitle="Components">
-      <Scrollbar
-        style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
-      >
-        <Paper className={classes.paper} elevation={6}>
-          <div className={classes.container}>
-            <h1>Search the component database</h1>
-            <form className={classes.form}>
-              <TextField
-                onInput={(e) => setComponents(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="component"
-                label="Search for a component"
-                name="component"
-                autoComplete="component"
-                autoFocus
-              />
-              {/* <Select
+    <Page pageTitle={intl.formatMessage({ id: "components" })}>
+      <Paper className={classes.paper} elevation={6}>
+        <div className={classes.container}>
+          <h1>Do you have a component that you would like to add?</h1>
+          <form className={classes.form}>
+            <Input
+              onChange={handleInputChange}
+              name="name"
+              placeholder="Title (required)"
+            />
+            {/* <Input
+              onChange={handleInputChange}
+              name="type"
+              placeholder="Component Type (required)"
+            /> */}
+            <Select
               onChange={handleInputChange}
               name="type"
               placeholder="Component Type (required)"
@@ -122,29 +137,29 @@ function Components() {
               onClick={handleFormSubmit}
             >
               Submit Component
-            </Button> */}
-            </form>
-            <h1>Components</h1>
-            {components.length ? (
-              <List>
-                {components.map((component) => (
-                  <ListItem key={component._id}>
-                    <Link to={"/components/" + component._id}>
-                      <strong>
-                        {component.name} in {component.type}
-                      </strong>
-                    </Link>
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </div>
-        </Paper>
-      </Scrollbar>
+            </Button>
+          </form>
+          <h1>Saved Components</h1>
+          {components.length ? (
+            <List>
+              {components.map((component) => (
+                <ListItem key={component._id}>
+                  <Link to={"/components/" + component._id}>
+                    <strong>
+                      {component.name} in {component.type}
+                    </strong>
+                  </Link>
+                  <Button onClick={() => deleteComponent(component._id)} />
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <h3>No Results to Display</h3>
+          )}
+        </div>
+      </Paper>
     </Page>
   );
 }
 
-export default Components;
+export default AddComponent;

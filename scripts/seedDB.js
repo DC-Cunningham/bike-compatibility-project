@@ -9,13 +9,45 @@ mongoose.connect(
 
 const componentSeed = [
   {
-    name: "DUB BSA 68",
+    name: "Bottom Bracket",
     type: "Drivetrain",
-    manufacturerSKU: "",
+    pointsOfContact: [],
+    influencers: [],
     description: "",
     date: new Date(Date.now()),
   },
-  {},
+  {
+    name: "Cassette",
+    type: "Drivetrain",
+    pointsOfContact: [],
+    influencers: [],
+    description: "",
+    date: new Date(Date.now()),
+  },
+  {
+    name: "Chain",
+    type: "Drivetrain",
+    pointsOfContact: [],
+    influencers: [],
+    description: "",
+    date: new Date(Date.now()),
+  },
+  {
+    name: "Saddle",
+    type: "Cockpit",
+    pointsOfContact: [],
+    influencers: [],
+    description: "",
+    date: new Date(Date.now()),
+  },
+  {
+    name: "Pedal",
+    type: "Drivetrain",
+    pointsOfContact: [],
+    influencers: [],
+    description: "",
+    date: new Date(Date.now()),
+  },
 ];
 
 db.Component.remove({})
