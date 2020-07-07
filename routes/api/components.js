@@ -7,11 +7,4 @@ router
   .get(componentsController.findAll)
   .post(componentsController.create);
 
-// Matches with "/api/components/:id"
-router
-  .route("/:id")
-  .get(componentsController.findById)
-  .put(componentsController.update)
-  .delete(componentsController.remove);
-
 module.exports = router;

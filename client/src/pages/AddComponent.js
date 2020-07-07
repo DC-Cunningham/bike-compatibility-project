@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3),
     [theme.breakpoints.up(620 + theme.spacing(6))]: {
-      width: 400,
+      // width: 400,
       marginLeft: "auto",
       marginRight: "auto",
     },
@@ -115,7 +115,7 @@ function AddComponent() {
             <Input
               onChange={handleInputChange}
               name="name"
-              placeholder="Title (required)"
+              placeholder="Name of Component to add"
             />
             {/* <Input
               onChange={handleInputChange}

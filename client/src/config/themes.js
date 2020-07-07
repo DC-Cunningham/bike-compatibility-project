@@ -1,13 +1,13 @@
-import red from '@material-ui/core/colors/red'
-import pink from '@material-ui/core/colors/pink'
-import green from '@material-ui/core/colors/green'
+import red from "@material-ui/core/colors/red";
+import pink from "@material-ui/core/colors/pink";
+import green from "@material-ui/core/colors/green";
 
 const themes = [
   {
-    id: 'default',
+    id: "default",
   },
   {
-    id: 'red',
+    id: "red",
     color: red[500],
     source: {
       palette: {
@@ -18,7 +18,7 @@ const themes = [
     },
   },
   {
-    id: 'green',
+    id: "green",
     color: green[500],
     source: {
       palette: {
@@ -28,6 +28,6 @@ const themes = [
       },
     },
   },
-]
+];
 
-export default themes
+export default themes;

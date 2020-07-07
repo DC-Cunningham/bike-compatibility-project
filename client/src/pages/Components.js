@@ -6,16 +6,22 @@ import { saveAuthorisation, isAuthorised } from "../utils/auth";
 import MenuContext from "material-ui-shell/lib/providers/Menu/Context";
 import {
   Input,
+  InputLabel,
+  MenuItem,
   TextField,
   Select,
   Button,
   List,
   ListItem,
   makeStyles,
+  Paper,
+  FormHelperText,
+  FormControl,
 } from "@material-ui/core/";
 import Page from "material-ui-shell/lib/containers/Page/Page";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
-import Paper from "@material-ui/core/Paper";
+import Sorting from "../components/Sorting";
+import ComponentList from "../components/ComponentList";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -61,7 +67,11 @@ function Components() {
   const history = useHistory();
   const { setAuthMenuOpen } = useContext(MenuContext);
   // Setting our component's initial state
-  const [components, setComponents] = useState([]);
+  const [components, setComponents] = useState({});
+  const [componentTypes, setComponentTypes] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sorted, setSorted] = useState(false);
+  const [filteredComponents, setFilteredComponents] = useState(false);
   const [formObject, setFormObject] = useState({});
 
   // Load all components and store them with setComponents
@@ -76,71 +86,60 @@ function Components() {
       .catch((err) => console.log(err));
   }
 
-  function filterComponents() {
-    // function to filter componet based on component type and and
+  // sorts all the components by their name
+  function handleSortByName() {
+    if (!sorted) {
+      setComponents(components.sort((a, b) => (a.name > b.name ? 1 : -1)));
+      setSorted(true);
+    } else {
+      setComponents(components.sort((a, b) => (a.name > b.name ? -1 : 1)));
+      setSorted(false);
+    }
   }
 
-  // Handles updating component state when the user types into the input field
-  function handleInputChange(event) {
-    const { name, value } = event.target;
-    setFormObject({ ...formObject, [name]: value });
+  function handleSortByType() {
+    if (!sorted) {
+      setComponents(components.sort((a, b) => (a.type > b.type ? 1 : -1)));
+      setSorted(true);
+    } else {
+      setComponents(components.sort((a, b) => (a.type > b.type ? -1 : 1)));
+      setSorted(false);
+    }
+  }
+
+  function search(type) {
+    API.getComponents(`type= ${type}`)
+      .then((res) => setComponents(res.data))
+      .catch((err) => console.log(err));
+  }
+
+  function handleSearchTerm(event) {
+    setSearchTerm(event.target.value);
+  }
+
+  function handleInputChange(input) {
+    console.log(input);
+    // let filteredComponents = components.filter((x) =>
+    //   x.name.toLowerCase().includes(input.toLowerCase())
+    // );
+    // setComponents(filteredComponents);
   }
 
   return (
-    <Page pageTitle="Components">
+    <Page pageTitle="Search the component database">
       <Scrollbar
         style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
       >
         <Paper className={classes.paper} elevation={6}>
-          <div className={classes.container}>
-            <h1>Search the component database</h1>
-            <form className={classes.form}>
-              <TextField
-                onInput={(e) => setComponents(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="component"
-                label="Search for a component"
-                name="component"
-                autoComplete="component"
-                autoFocus
-              />
-              {/* <Select
-              onChange={handleInputChange}
-              name="type"
-              placeholder="Component Type (required)"
-            />
-            <TextField
-              onChange={handleInputChange}
-              name="description"
-              placeholder="Description (Optional)"
-            />
-            <Button
-              disabled={!(formObject.name && formObject.type)}
-              onClick={handleFormSubmit}
-            >
-              Submit Component
-            </Button> */}
-            </form>
-            <h1>Components</h1>
-            {components.length ? (
-              <List>
-                {components.map((component) => (
-                  <ListItem key={component._id}>
-                    <Link to={"/components/" + component._id}>
-                      <strong>
-                        {component.name} in {component.type}
-                      </strong>
-                    </Link>
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </div>
+          <Sorting
+            onSearch={handleSearchTerm}
+            searchTerm={searchTerm}
+            handleSortByName={handleSortByName}
+            handleSortByType={handleSortByType}
+            loadComponents={loadComponents}
+            onSubmit={handleInputChange(searchTerm)}
+          ></Sorting>
+          <ComponentList components={components} />
         </Paper>
       </Scrollbar>
     </Page>

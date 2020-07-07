@@ -4,16 +4,12 @@ import InfoOutlined from "@material-ui/icons/InfoOutlined";
 import LockIcon from "@material-ui/icons/Lock";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { logout } from "../utils/auth";
-import LanguageIcon from "@material-ui/icons/Language";
 import SettingsIcon from "@material-ui/icons/SettingsApplications";
-import MenuOpenIcon from "@material-ui/icons/MenuOpen";
 import GetApp from "@material-ui/icons/GetApp";
-import ChromeReaderMode from "@material-ui/icons/ChromeReaderMode";
-import StyleIcon from "@material-ui/icons/Style";
-import allThemes from "./themes";
+import AddIcon from "@material-ui/icons/Add";
 
 const getMenuItems = (props) => {
-  const { appConfig, intl, menuContext, themeContext, a2HSContext } = props;
+  const { appConfig, menuContext, themeContext, a2HSContext } = props;
   const { auth } = appConfig || {};
   const { isDesktop, isAuthMenuOpen } = menuContext;
   const { themeID, setThemeID } = themeContext;
@@ -23,6 +19,12 @@ const getMenuItems = (props) => {
 
   if (isAuthMenuOpen || !isAuthorised) {
     return [
+      {
+        value: "/about",
+        visible: true,
+        primaryText: "About the Project",
+        leftIcon: <InfoOutlined />,
+      },
       {
         value: "/signin",
         onClick: isAuthorised ? logout : () => {},
@@ -47,6 +49,12 @@ const getMenuItems = (props) => {
       leftIcon: <DashboardIcon />,
     },
     { divider: true },
+    {
+      value: "/addcomponent",
+      visible: isAuthorised,
+      primaryText: "Add a Component",
+      leftIcon: <AddIcon />,
+    },
     {
       primaryText: "Settings",
       primaryTogglesNestedList: true,
