@@ -19,8 +19,7 @@ function Sorting({
   searchTerm,
   handleSortByName,
   handleSortByType,
-  handleInputChange,
-  loadComponents,
+  showAllComponents,
 }) {
   return (
     <>
@@ -28,22 +27,19 @@ function Sorting({
         <Input
           value={searchTerm}
           onChange={onSearch}
-          onSubmit={handleInputChange}
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          id="component"
-          label="Filter components by name"
-          name="component"
-          color="secondary"
-        />
-
-        {/* <input
-          value={searchTerm}
-          onChange={onSearch}
           type="text"
-          placeholder="search by component name"
-        /> */}
+          onKeyPress={(e) => {
+            e.key === "Enter" && e.preventDefault();
+          }}
+          // onSubmit={handleInputChange}
+          // variant="outlined"
+          // margin="normal"
+          // fullWidth
+          // id="component"
+          // label="Filter components by name"
+          // name="component"
+          // color="secondary"
+        />
       </form>
       <div>
         <strong>Sort by:</strong>
@@ -51,7 +47,7 @@ function Sorting({
         <button onClick={handleSortByType}>Type</button>
       </div>
       <div>
-        <button onClick={loadComponents}>Clear All Filters</button>
+        <button onClick={showAllComponents}>Show all Components</button>
       </div>
     </>
   );

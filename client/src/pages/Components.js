@@ -72,7 +72,6 @@ function Components() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sorted, setSorted] = useState(false);
   const [filteredComponents, setFilteredComponents] = useState(false);
-  const [formObject, setFormObject] = useState({});
 
   // Load all components and store them with setComponents
   useEffect(() => {
@@ -113,16 +112,17 @@ function Components() {
       .catch((err) => console.log(err));
   }
 
-  function handleSearchTerm(event) {
+  function handleSearch(event) {
     setSearchTerm(event.target.value);
+    const filtered = components.filter((component) =>
+      component.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    console.log(filtered);
+    setFilteredComponents(filtered);
   }
 
-  function handleInputChange(input) {
-    console.log(input);
-    // let filteredComponents = components.filter((x) =>
-    //   x.name.toLowerCase().includes(input.toLowerCase())
-    // );
-    // setComponents(filteredComponents);
+  function showAllComponents() {
+    setFilteredComponents(components);
   }
 
   return (
@@ -132,14 +132,13 @@ function Components() {
       >
         <Paper className={classes.paper} elevation={6}>
           <Sorting
-            onSearch={handleSearchTerm}
+            onSearch={handleSearch}
             searchTerm={searchTerm}
             handleSortByName={handleSortByName}
             handleSortByType={handleSortByType}
-            loadComponents={loadComponents}
-            onSubmit={handleInputChange(searchTerm)}
+            showAllComponents={showAllComponents}
           ></Sorting>
-          <ComponentList components={components} />
+          <ComponentList components={filteredComponents} />
         </Paper>
       </Scrollbar>
     </Page>
