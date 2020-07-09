@@ -31,14 +31,6 @@ function Sorting({
           onKeyPress={(e) => {
             e.key === "Enter" && e.preventDefault();
           }}
-          // onSubmit={handleInputChange}
-          // variant="outlined"
-          // margin="normal"
-          // fullWidth
-          // id="component"
-          // label="Filter components by name"
-          // name="component"
-          // color="secondary"
         />
       </form>
       <div>

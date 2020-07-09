@@ -34,6 +34,7 @@ const getMenuItems = (props) => {
       },
     ];
   }
+  console.log(auth);
   return [
     {
       value: "/about",
@@ -50,23 +51,10 @@ const getMenuItems = (props) => {
     },
     { divider: true },
     {
-      value: "/addcomponent",
+      value: "/definecomponent",
       visible: isAuthorised,
       primaryText: "Add a Component",
       leftIcon: <AddIcon />,
-    },
-    {
-      primaryText: "Settings",
-      primaryTogglesNestedList: true,
-      leftIcon: <SettingsIcon />,
-      nestedItems: [
-        {
-          value: "/account",
-          visible: isAuthorised,
-          primaryText: "Account",
-          leftIcon: <DashboardIcon />,
-        },
-      ],
     },
     {
       value: null,

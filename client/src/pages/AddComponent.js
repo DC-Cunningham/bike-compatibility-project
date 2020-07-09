@@ -22,7 +22,7 @@ import Page from "material-ui-shell/lib/containers/Page/Page";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import Sorting from "../components/Sorting";
 import ComponentList from "../components/ComponentList";
-import CreateComponentForm from "../components/CreateComponentForm";
+import DefineComponentForm from "../components/DefineComponentForm";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,7 +71,7 @@ function AddComponents() {
         style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
       >
         <Paper className={classes.paper} elevation={6}>
-          <CreateComponentForm />
+          <DefineComponentForm />
         </Paper>
       </Scrollbar>
     </Page>

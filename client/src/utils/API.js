@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getAuth, saveAuthorisation } from "./auth";
 
 export default {
   // Gets all components
@@ -16,5 +17,28 @@ export default {
   // Saves a component to the database
   saveComponent: function (componentData) {
     return axios.post("/api/components", componentData);
+  },
+  loginAPI: async function (data) {
+    const response = await axios.post("/api/login", data);
+    saveAuthorisation(response.data.data.user, response.data.data.token);
+    return response;
+  },
+  registerAPI: function (data) {
+    return axios.post("/api/register", data);
+  },
+  getUser: function () {
+    return axios.get("/api/me", {
+      headers: {
+        authorization: "Bearer " + getAuth(),
+      },
+    });
+  },
+  getUserBasedOnToken: function (token) {
+    return axios.get("/api/user", {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+    });
   },
 };

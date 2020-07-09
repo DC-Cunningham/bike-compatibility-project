@@ -1,3 +1,4 @@
 module.exports = {
-  Component: require("./component"),
+  Component: require("./componentModel"),
+  User: require("./userModel"),
 };

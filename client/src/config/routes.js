@@ -10,21 +10,25 @@ const PasswordReset = lazy(() => import("../pages/PasswordReset"));
 const About = lazy(() => import("../pages/About"));
 const Home = lazy(() => import("../pages/Home"));
 const Components = lazy(() => import("../pages/Components"));
+const DefineComponent = lazy(() => import("../pages/AddComponent"));
+const LinkComponent = lazy(() => import("../pages/AddComponent"));
 const AddComponent = lazy(() => import("../pages/AddComponent"));
 const Account = lazy(() => import("../pages/Account"));
 
 const routes = [
-  <Route path="/signin" redirectTo="/" exact component={SignIn} />,
-  <Route path="/signup" redirectTo="/" exact component={SignUp} />,
+  <PublicRoute path="/signin" redirectTo="/" exact component={SignIn} />,
+  <PublicRoute path="/signup" redirectTo="/" exact component={SignUp} />,
   <Route
     path="/password_reset"
     redirectTo="/"
     exact
     component={PasswordReset}
   />,
-  <Route path="/about" exact component={About} />,
+  <PublicRoute path="/about" exact component={About} />,
   <PrivateRoute path="/home" exact component={Home} />,
   <PrivateRoute path="/components" exact component={Components} />,
+  <PrivateRoute path="/definecomponent" exact component={DefineComponent} />,
+  <PrivateRoute path="/linkcomponent" exact component={LinkComponent} />,
   <PrivateRoute path="/addcomponent" exact component={AddComponent} />,
   <PrivateRoute path="/account" exact component={Account} />,
 ];

@@ -52,7 +52,7 @@ const reducer = (state, action) => {
   }
 };
 
-const StoreProvider = ({ value = [], ...props }) => {
+const ComponentStore = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     components: [],
     currentComponent: {
@@ -71,4 +71,4 @@ const useStoreContext = () => {
   return useContext(StoreContext);
 };
 
-export { StoreProvider, useStoreContext };
+export { ComponentStore, useStoreContext };
