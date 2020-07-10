@@ -8,6 +8,7 @@ export default {
   },
   // Gets the component with the given id
   getComponent: function (id) {
+    console.log(id);
     return axios.get("/api/components/" + id);
   },
   // Deletes the component with the given id
@@ -16,6 +17,7 @@ export default {
   },
   // Saves a component to the database
   saveComponent: function (componentData) {
+    console.log(componentData);
     return axios.post("/api/components", componentData);
   },
   loginAPI: async function (data) {

@@ -10,6 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const User = require("./models/userModel");
+const Component = require("./models/componentModel");
 const { json } = require("express");
 const JWT_SECRET = "HJLVBG&&#BJFUY&#NBFKI";
 
@@ -44,8 +45,6 @@ async function main() {
   // Add routes, both API and view
 
   app.post("/api/login", async (req, res) => {
-    console.log("Login");
-
     const {
       body: { password, email },
     } = req;
@@ -107,8 +106,26 @@ async function main() {
   });
 
   app.get("/api/me", authMiddleWare, (req, res) => {
-    console.log(req.user);
     return res.json({ data: "you got mail" });
+  });
+
+  app.post("/api/components", async (req, res) => {
+    const {
+      body: { name, type, description },
+    } = req;
+    if (!name || !type)
+      return res.status(404).send("Component name and type are required");
+
+    const component = await Component.findOne({ name });
+    if (component) return res.status(404).send("Component already exists");
+
+    const newComponent = await Component.create({ name, type, description });
+
+    return res.json({
+      data: {
+        component: newComponent,
+      },
+    });
   });
 
   app.use(routes);

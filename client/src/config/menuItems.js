@@ -2,6 +2,7 @@ import React from "react";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import InfoOutlined from "@material-ui/icons/InfoOutlined";
 import LockIcon from "@material-ui/icons/Lock";
+import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { logout } from "../utils/auth";
 import SettingsIcon from "@material-ui/icons/SettingsApplications";
@@ -16,6 +17,7 @@ const getMenuItems = (props) => {
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext;
 
   const isAuthorised = auth.isAuthenticated();
+  const isAdmin = true;
 
   if (isAuthMenuOpen || !isAuthorised) {
     return [
@@ -37,8 +39,14 @@ const getMenuItems = (props) => {
   console.log(auth);
   return [
     {
+      value: "/home",
+      visible: isAuthorised,
+      primaryText: "home",
+      leftIcon: <HomeIcon />,
+    },
+    {
       value: "/about",
-      visible: true,
+      visible: isAuthorised,
       primaryText: "About the Project",
       leftIcon: <InfoOutlined />,
     },
@@ -52,7 +60,7 @@ const getMenuItems = (props) => {
     { divider: true },
     {
       value: "/definecomponent",
-      visible: isAuthorised,
+      visible: isAdmin,
       primaryText: "Add a Component",
       leftIcon: <AddIcon />,
     },

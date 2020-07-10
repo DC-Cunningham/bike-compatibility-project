@@ -18,21 +18,3 @@ export default class Demo extends Component {
     );
   }
 }
-
-// const Test = () => {
-//   const [user, setUser] = useState(null);
-
-//   useEffect(() => {
-//     API.loginAPI({
-//       email: "dc@beautifulrevolution.com.au",
-//       password: "dc",
-//     }).then(() => {
-//       API.getUser().then((data) => {
-//         console.log(data);
-
-//         setUser(data);
-//       });
-//     });
-//   }, []);
-//   return <p>{user && user.data.data}</p>;
-// };
