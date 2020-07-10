@@ -29,8 +29,6 @@ function DefineComponentForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(nameRef.current.value);
-    console.log(typeRef.current.value);
     dispatch({ type: LOADING });
     await API.saveComponent({
       name: nameRef.current.value,
@@ -45,7 +43,8 @@ function DefineComponentForm(props) {
         });
       })
       .catch((err) => console.log(err));
-    props.history.push("./linkcomponent");
+    props.history.push("/linkPOC");
+    // props.history.push(props.nextPage);
   };
 
   return (

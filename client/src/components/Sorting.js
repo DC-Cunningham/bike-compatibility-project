@@ -35,11 +35,11 @@ function Sorting({
       </form>
       <div>
         <strong>Sort by:</strong>
-        <button onClick={handleSortByName}>Name</button>
-        <button onClick={handleSortByType}>Type</button>
+        <Button onClick={handleSortByName}>Name</Button>
+        <Button onClick={handleSortByType}>Type</Button>
       </div>
       <div>
-        <button onClick={showAllComponents}>Show all Components</button>
+        <Button onClick={showAllComponents}>Show all Components</Button>
       </div>
     </>
   );

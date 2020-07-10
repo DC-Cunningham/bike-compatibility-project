@@ -1,6 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_COMPONENT, LOADING } from "../utils/actions";
+import { useHistory } from "react-router-dom";
+import {
+  UPDATE_COMPONENTS,
+  SET_CURRENT_COMPONENT,
+  LOADING,
+} from "../utils/actions";
 import API from "../utils/API";
 import {
   Input,
@@ -8,6 +13,7 @@ import {
   MenuItem,
   TextField,
   Select,
+  ButtonGroup,
   Button,
   List,
   ListItem,
@@ -18,20 +24,61 @@ import {
 } from "@material-ui/core/";
 
 function LinkComponentForm(props) {
+  const history = useHistory();
   const [state, dispatch] = useStoreContext();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(state);
+  useEffect(() => {
+    API.getComponents()
+      .then((res) =>
+        dispatch({ type: UPDATE_COMPONENTS, components: res.data })
+      )
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleLinking = (component) => {
+    console.log(component);
+    const payload = {
+      ...state.currentComponent,
+      [props.relationship]: state.currentComponent[props.relationship].concat(
+        component._id
+      ),
+    };
+    dispatch({ type: SET_CURRENT_COMPONENT, component: payload });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    history.push(props.nextPage);
+  };
+
+  const generateButtons = () => {
+    return state.components.length ? (
+      state.components.map((component) => {
+        if (component._id === state.currentComponent._id) {
+          return <></>;
+        }
+        return (
+          <Button onClick={() => handleLinking(component)}>
+            {component.name}
+          </Button>
+        );
+      })
+    ) : (
+      <p> there are no components available</p>
+    );
   };
 
   return (
-    <div>
-      <h1>
-        Which components does {state.currentComponent.name} physically touch?
-      </h1>
-      <button onClick={handleSubmit}>Button</button>
-    </div>
+    <>
+      <h5>
+        Please select all components that a {state.currentComponent.name}{" "}
+        physically touches?
+      </h5>
+      <ButtonGroup variant="contained" color="primary">
+        {generateButtons()}
+      </ButtonGroup>
+      <Button onClick={handleSubmit}>Confirm</Button>
+    </>
   );
 }
 

@@ -13,7 +13,6 @@ const { Provider } = StoreContext;
 const reducer = (state, action) => {
   switch (action.type) {
     case SET_CURRENT_COMPONENT:
-      console.log(action);
       return {
         ...state,
         currentComponent: action.component,
@@ -21,6 +20,7 @@ const reducer = (state, action) => {
       };
 
     case UPDATE_COMPONENTS:
+      console.log(action);
       return {
         ...state,
         components: [...action.components],
@@ -57,7 +57,7 @@ const ComponentStore = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     components: [],
     currentComponent: {
-      // _id: 0,
+      _id: 0,
       name: "",
       type: "",
       description: "",

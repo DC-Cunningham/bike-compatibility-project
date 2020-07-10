@@ -5,7 +5,7 @@ import LockIcon from "@material-ui/icons/Lock";
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { logout } from "../utils/auth";
-import SettingsIcon from "@material-ui/icons/SettingsApplications";
+import EditIcon from "@material-ui/icons/Edit";
 import GetApp from "@material-ui/icons/GetApp";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -36,7 +36,6 @@ const getMenuItems = (props) => {
       },
     ];
   }
-  console.log(auth);
   return [
     {
       value: "/home",
@@ -46,7 +45,7 @@ const getMenuItems = (props) => {
     },
     {
       value: "/about",
-      visible: isAuthorised,
+      visible: true,
       primaryText: "About the Project",
       leftIcon: <InfoOutlined />,
     },
@@ -59,10 +58,20 @@ const getMenuItems = (props) => {
     },
     { divider: true },
     {
+      visible: isAdmin,
+      primaryText: "Admin",
+    },
+    {
       value: "/definecomponent",
       visible: isAdmin,
       primaryText: "Add a Component",
       leftIcon: <AddIcon />,
+    },
+    {
+      value: "/editcomponent",
+      visible: isAdmin,
+      primaryText: "Edit a Component",
+      leftIcon: <EditIcon />,
     },
     {
       value: null,

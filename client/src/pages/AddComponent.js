@@ -46,10 +46,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddComponents() {
+function AddComponents(props) {
   const classes = useStyles();
   return (
-    <Page pageTitle="Add a new component to the database">
+    <Page pageTitle="Add a component">
       <Scrollbar
         style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
       >
@@ -60,7 +60,26 @@ function AddComponents() {
               path="/definecomponent"
               component={DefineComponentForm}
             />
-            <Route path="/linkcomponent" component={LinkComponentForm} />
+            <Route
+              path="/linkPOC"
+              component={() => (
+                <LinkComponentForm
+                  relationship="pointsOfContact"
+                  nextPage="/linkinfluencer"
+                  pageTitle={props.pageTitle}
+                />
+              )}
+            />
+            <Route
+              path="/linkinfluencer"
+              component={() => (
+                <LinkComponentForm
+                  relationship="influencers"
+                  nextPage="/submitcomponent"
+                  pageTitle={props.pageTitle}
+                />
+              )}
+            />
             <Route path="/submitcomponent" component={SubmitComponentForm} />
           </Router>
         </Paper>

@@ -109,6 +109,11 @@ async function main() {
     return res.json({ data: "you got mail" });
   });
 
+  app.get("/api/components", async (req, res) => {
+    const components = await Component.find();
+    return res.json(components);
+  });
+
   app.post("/api/components", async (req, res) => {
     const {
       body: { name, type, description },

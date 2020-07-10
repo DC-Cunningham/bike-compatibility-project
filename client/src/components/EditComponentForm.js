@@ -1,15 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
-import API from "../utils/API";
-import { Link } from "react-router-dom";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { saveAuthorisation, isAuthorised } from "../utils/auth";
+import { useStoreContext } from "../utils/GlobalState";
 import MenuContext from "material-ui-shell/lib/providers/Menu/Context";
+import {
+  UPDATE_COMPONENTS,
+  SET_CURRENT_COMPONENT,
+  LOADING,
+} from "../utils/actions";
+import API from "../utils/API";
 import {
   Input,
   InputLabel,
   MenuItem,
   TextField,
   Select,
+  ButtonGroup,
   Button,
   List,
   ListItem,
@@ -21,13 +26,7 @@ import {
 import Page from "material-ui-shell/lib/containers/Page/Page";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import Sorting from "../components/Sorting";
-import {
-  UPDATE_COMPONENTS,
-  SET_CURRENT_COMPONENT,
-  LOADING,
-} from "../utils/actions";
 import ComponentList from "../components/ComponentList";
-import { useStoreContext } from "../utils/GlobalState";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -68,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Components() {
-  const classes = useStyles();
+function EditComponentForm(props) {
   const history = useHistory();
+  const classes = useStyles();
   const { setAuthMenuOpen } = useContext(MenuContext);
   const [state, dispatch] = useStoreContext();
   // Setting our component's initial state
@@ -94,7 +93,6 @@ function Components() {
     API.getComponents()
       .then((res) => setComponents(res.data))
       .catch((err) => console.log(err));
-    console.log(state);
   }
 
   // sorts all the components by their name
@@ -126,7 +124,7 @@ function Components() {
 
   function handleSearch(event) {
     setSearchTerm(event.target.value);
-    const filtered = state.components.filter((component) =>
+    const filtered = components.filter((component) =>
       component.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
     console.log(filtered);
@@ -134,27 +132,74 @@ function Components() {
   }
 
   function showAllComponents() {
-    setFilteredComponents(state.components);
+    setFilteredComponents(components);
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(nameRef.current.value);
+    // console.log(typeRef.current.value);
+    // dispatch({ type: LOADING });
+    // await API.saveComponent({
+    //   name: nameRef.current.value,
+    //   type: typeRef.current.value,
+    //   description: descriptionRef.current.value,
+    // })
+    //   .then((result) => {
+    //     console.log(result);
+    //     dispatch({
+    //       type: SET_CURRENT_COMPONENT,
+    //       component: result.data.data.component,
+    //     });
+    //   })
+    //   .catch((err) => console.log(err));
+    props.history.push("/linkPOC");
+    // props.history.push(props.nextPage);
+  };
+  const handleLinking = (component) => {
+    console.log(component);
+    const payload = {
+      ...state.currentComponent,
+      [props.relationship]: state.currentComponent[props.relationship].concat(
+        component._id
+      ),
+    };
+    dispatch({ type: SET_CURRENT_COMPONENT, component: payload });
+  };
+
+  const generateButtons = () => {
+    return state.components.length ? (
+      state.components.map((component) => {
+        if (component._id === state.currentComponent._id) {
+          return <></>;
+        }
+        return (
+          <Button onClick={() => handleLinking(component)}>
+            {component.name}
+          </Button>
+        );
+      })
+    ) : (
+      <p> there are no components available</p>
+    );
+  };
+
   return (
-    <Page pageTitle="Search the component database">
-      <Scrollbar
-        style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
-      >
-        <Paper className={classes.paper} elevation={6}>
-          <Sorting
-            onSearch={handleSearch}
-            searchTerm={searchTerm}
-            handleSortByName={handleSortByName}
-            handleSortByType={handleSortByType}
-            showAllComponents={showAllComponents}
-          ></Sorting>
-          <ComponentList components={filteredComponents} />
-        </Paper>
-      </Scrollbar>
-    </Page>
+    <div>
+      <h1>Define a new component</h1>
+      <Sorting
+        onSearch={handleSearch}
+        searchTerm={searchTerm}
+        handleSortByName={handleSortByName}
+        handleSortByType={handleSortByType}
+        showAllComponents={showAllComponents}
+      ></Sorting>
+      {/* <ComponentList components={filteredComponents} /> */}
+      <ButtonGroup variant="contained" color="primary">
+        {generateButtons()}
+      </ButtonGroup>
+    </div>
   );
 }
 
-export default Components;
+export default EditComponentForm;
