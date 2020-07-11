@@ -80,7 +80,7 @@ function Components() {
   const [sorted, setSorted] = useState(false);
   const [filteredComponents, setFilteredComponents] = useState(false);
 
-  // Load all components and store them with setComponents
+  // Load all components and store them in state
   useEffect(() => {
     API.getComponents()
       .then((res) =>
@@ -89,31 +89,31 @@ function Components() {
       .catch((err) => console.log(err));
   }, []);
 
-  // Loads all components and sets them to components
-  function loadComponents() {
-    API.getComponents()
-      .then((res) => setComponents(res.data))
-      .catch((err) => console.log(err));
-    console.log(state);
-  }
-
   // sorts all the components by their name
   function handleSortByName() {
     if (!sorted) {
-      setComponents(components.sort((a, b) => (a.name > b.name ? 1 : -1)));
+      setFilteredComponents(
+        state.components.sort((a, b) => (a.name > b.name ? 1 : -1))
+      );
       setSorted(true);
     } else {
-      setComponents(components.sort((a, b) => (a.name > b.name ? -1 : 1)));
+      setFilteredComponents(
+        state.components.sort((a, b) => (a.name > b.name ? -1 : 1))
+      );
       setSorted(false);
     }
   }
 
   function handleSortByType() {
     if (!sorted) {
-      setComponents(components.sort((a, b) => (a.type > b.type ? 1 : -1)));
+      setFilteredComponents(
+        state.components.sort((a, b) => (a.type > b.type ? 1 : -1))
+      );
       setSorted(true);
     } else {
-      setComponents(components.sort((a, b) => (a.type > b.type ? -1 : 1)));
+      setFilteredComponents(
+        state.components.sort((a, b) => (a.type > b.type ? -1 : 1))
+      );
       setSorted(false);
     }
   }

@@ -27,24 +27,18 @@ function DefineComponentForm(props) {
   const descriptionRef = useRef();
   const [state, dispatch] = useStoreContext();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: LOADING });
-    await API.saveComponent({
+    API.saveComponent({
       name: nameRef.current.value,
       type: typeRef.current.value,
       description: descriptionRef.current.value,
     })
       .then((result) => {
         console.log(result);
-        dispatch({
-          type: SET_CURRENT_COMPONENT,
-          component: result.data.data.component,
-        });
+        props.setFormState(result.data.data.component);
       })
       .catch((err) => console.log(err));
-    props.history.push("/linkPOC");
-    // props.history.push(props.nextPage);
   };
 
   return (

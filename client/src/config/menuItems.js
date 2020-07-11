@@ -62,7 +62,7 @@ const getMenuItems = (props) => {
       primaryText: "Admin",
     },
     {
-      value: "/definecomponent",
+      value: "/addcomponent",
       visible: isAdmin,
       primaryText: "Add a Component",
       leftIcon: <AddIcon />,

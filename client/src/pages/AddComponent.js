@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, Paper } from "@material-ui/core/";
 import Page from "material-ui-shell/lib/containers/Page/Page";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import DefineComponentForm from "../components/DefineComponentForm";
 import LinkComponentForm from "../components/LinkComponentForm";
 import SubmitComponentForm from "../components/SubmitComponentForm";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import API from "../utils/API";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,41 +47,73 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AddComponents(props) {
+  const [formState, setFormState] = useState({
+    items: [],
+    currentItem: {},
+    formStep: 1,
+  });
   const classes = useStyles();
+
+  useEffect(() => {
+    API.getComponents()
+      .then((res) => setFormState({ items: res.data, formStep: 1 }))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Page pageTitle="Add a component">
       <Scrollbar
         style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
       >
         <Paper className={classes.paper} elevation={6}>
-          <Router>
-            <Route
-              exact
-              path="/definecomponent"
-              component={DefineComponentForm}
+          {formState.formStep === 1 && (
+            <DefineComponentForm
+              setFormState={(value) =>
+                setFormState({ ...formState, currentItem: value, formStep: 2 })
+              }
             />
-            <Route
-              path="/linkPOC"
-              component={() => (
-                <LinkComponentForm
-                  relationship="pointsOfContact"
-                  nextPage="/linkinfluencer"
-                  pageTitle={props.pageTitle}
-                />
-              )}
+          )}
+          {formState.formStep === 2 && (
+            <LinkComponentForm
+              name="a point of contact"
+              items={formState.items}
+              relationship="pointsOfContact"
+              currentItem={formState.currentItem}
+              setFormState={(value) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...value },
+                  formStep: 3,
+                })
+              }
             />
-            <Route
-              path="/linkinfluencer"
-              component={() => (
-                <LinkComponentForm
-                  relationship="influencers"
-                  nextPage="/submitcomponent"
-                  pageTitle={props.pageTitle}
-                />
-              )}
+          )}
+          {formState.formStep === 3 && (
+            <LinkComponentForm
+              name=" an influence"
+              relationship="influencers"
+              currentItem={formState}
+              setFormState={(value) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...value },
+                  formStep: 4,
+                })
+              }
             />
-            <Route path="/submitcomponent" component={SubmitComponentForm} />
-          </Router>
+          )}
+          {formState.formStep === 4 && (
+            <SubmitComponentForm
+              currentItem={formState}
+              setFormState={(value) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...value },
+                  formStep: 5,
+                })
+              }
+            />
+          )}
         </Paper>
       </Scrollbar>
     </Page>

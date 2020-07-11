@@ -12,8 +12,6 @@ const About = lazy(() => import("../pages/About"));
 const Home = lazy(() => import("../pages/Home"));
 const Components = lazy(() => import("../pages/Components"));
 const AddComponent = lazy(() => import("../pages/AddComponent"));
-const DefineComponent = lazy(() => import("../pages/AddComponent"));
-const SubmitComponent = lazy(() => import("../components/SubmitComponentForm"));
 const EditComponent = lazy(() => import("../pages/EditComponent"));
 const Account = lazy(() => import("../pages/Account"));
 
@@ -30,30 +28,6 @@ const routes = [
   <PrivateRoute path="/home" exact component={Home} />,
   <PrivateRoute path="/components" exact component={Components} />,
   <PrivateRoute path="/addcomponent" exact component={AddComponent} />,
-  <PrivateRoute path="/definecomponent" exact component={DefineComponent} />,
-  <PrivateRoute
-    path="/linkPOC"
-    exact
-    component={() => (
-      <LinkComponentForm
-        relationship="pointsOfContact"
-        nextPage="/linkinfluencer"
-        pageTitle="Link the Component to it's points of contact"
-      />
-    )}
-  />,
-  <PrivateRoute
-    path="/linkinfluencer"
-    exact
-    component={() => (
-      <LinkComponentForm
-        relationship="influencers"
-        nextPage="/submitcomponent"
-        pageTitle="Link the Component to it's influencers"
-      />
-    )}
-  />,
-  <PrivateRoute path="/submitcomponent" exact component={SubmitComponent} />,
   <PrivateRoute path="/editcomponent" exact component={EditComponent} />,
   <PrivateRoute path="/account" exact component={Account} />,
 ];

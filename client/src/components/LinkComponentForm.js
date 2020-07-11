@@ -24,60 +24,80 @@ import {
 } from "@material-ui/core/";
 
 function LinkComponentForm(props) {
-  const history = useHistory();
-  const [state, dispatch] = useStoreContext();
+  const [selected, setSelected] = useState([]);
 
-  useEffect(() => {
-    API.getComponents()
-      .then((res) =>
-        dispatch({ type: UPDATE_COMPONENTS, components: res.data })
-      )
-      .catch((err) => console.log(err));
-  }, []);
+  const handleLinking = (item) => {
+    const newSelected = selected.concat(item);
+    setSelected(newSelected);
+  };
 
-  const handleLinking = (component) => {
-    console.log(component);
-    const payload = {
-      ...state.currentComponent,
-      [props.relationship]: state.currentComponent[props.relationship].concat(
-        component._id
-      ),
-    };
-    dispatch({ type: SET_CURRENT_COMPONENT, component: payload });
+  const handleUnlinking = (item) => {
+    const unselected = selected.filter(function (obj) {
+      return obj._id !== item._id;
+    });
+    setSelected(unselected);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    history.push(props.nextPage);
+    const item = {
+      ...props.currentItem,
+      [props.relationship]: props.currentItem[props.relationship].concat(
+        selected
+      ),
+    };
+    props.setFormState(item);
   };
 
-  const generateButtons = () => {
-    return state.components.length ? (
-      state.components.map((component) => {
-        if (component._id === state.currentComponent._id) {
-          return <></>;
-        }
+  const selectedButtons = () => {
+    return selected.length ? (
+      selected.map((item) => {
         return (
-          <Button onClick={() => handleLinking(component)}>
-            {component.name}
-          </Button>
+          <Button onClick={() => handleUnlinking(item)}>{item.name}</Button>
         );
       })
     ) : (
-      <p> there are no components available</p>
+      <p>You have not selected any components yet </p>
+    );
+  };
+
+  const unselectedButtons = () => {
+    console.log(selected);
+    return props.items.length ? (
+      props.items.map((item) => {
+        // if (item._id === props.currentItem._id || selectedArray.includes()) {
+        if (
+          item._id === props.currentItem._id ||
+          selected.some((e) => e._id === item._id)
+        ) {
+          return <></>;
+        }
+        return <Button onClick={() => handleLinking(item)}>{item.name}</Button>;
+      })
+    ) : (
+      <p> There are no more components available</p>
     );
   };
 
   return (
     <>
-      <h5>
-        Please select all components that a {state.currentComponent.name}{" "}
-        physically touches?
-      </h5>
-      <ButtonGroup variant="contained" color="primary">
-        {generateButtons()}
-      </ButtonGroup>
-      <Button onClick={handleSubmit}>Confirm</Button>
+      <div>
+        <h5>
+          Please select all components with which a {props.currentItem.name} is{" "}
+          {props.name}
+        </h5>
+      </div>
+      <div>
+        <ButtonGroup variant="contained" color="primary">
+          {unselectedButtons()}
+        </ButtonGroup>
+      </div>
+      <div>
+        <ButtonGroup variant="contained" color="primary">
+          {selectedButtons()}
+        </ButtonGroup>
+      </div>
+      <Button onClick={handleSubmit}>Submit</Button>
     </>
   );
 }
