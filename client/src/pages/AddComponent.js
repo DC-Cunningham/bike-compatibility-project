@@ -5,6 +5,7 @@ import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import DefineComponentForm from "../components/DefineComponentForm";
 import LinkComponentForm from "../components/LinkComponentForm";
 import SubmitComponentForm from "../components/SubmitComponentForm";
+import ComponentCard from "../components/ComponentCard";
 import API from "../utils/API";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,13 +47,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddComponents(props) {
+function AddComponent(props) {
+  const classes = useStyles();
   const [formState, setFormState] = useState({
     items: [],
     currentItem: {},
     formStep: 1,
   });
-  const classes = useStyles();
 
   useEffect(() => {
     API.getComponents()
@@ -76,13 +77,13 @@ function AddComponents(props) {
           {formState.formStep === 2 && (
             <LinkComponentForm
               name="a point of contact"
-              items={formState.items}
               relationship="pointsOfContact"
+              items={formState.items}
               currentItem={formState.currentItem}
-              setFormState={(value) =>
+              setFormState={(values) =>
                 setFormState({
                   ...formState,
-                  currentItem: { ...formState.currentItem, ...value },
+                  currentItem: { ...formState.currentItem, ...values },
                   formStep: 3,
                 })
               }
@@ -92,7 +93,8 @@ function AddComponents(props) {
             <LinkComponentForm
               name=" an influence"
               relationship="influencers"
-              currentItem={formState}
+              items={formState.items}
+              currentItem={formState.currentItem}
               setFormState={(value) =>
                 setFormState({
                   ...formState,
@@ -104,7 +106,8 @@ function AddComponents(props) {
           )}
           {formState.formStep === 4 && (
             <SubmitComponentForm
-              currentItem={formState}
+              items={formState.items}
+              currentItem={formState.currentItem}
               setFormState={(value) =>
                 setFormState({
                   ...formState,
@@ -114,10 +117,18 @@ function AddComponents(props) {
               }
             />
           )}
+          {formState.formStep === 5 && (
+            <>
+              <h1>Your Component has been Submitted</h1>
+              <ComponentCard
+                currentItem={formState.currentItem}
+              ></ComponentCard>
+            </>
+          )}
         </Paper>
       </Scrollbar>
     </Page>
   );
 }
 
-export default AddComponents;
+export default AddComponent;

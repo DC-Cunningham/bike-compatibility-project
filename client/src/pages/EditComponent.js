@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, Paper } from "@material-ui/core/";
 import Page from "material-ui-shell/lib/containers/Page/Page";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import EditComponentForm from "../components/EditComponentForm";
 import LinkComponentForm from "../components/LinkComponentForm";
 import SubmitComponentForm from "../components/SubmitComponentForm";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import ComponentCard from "../components/ComponentCard";
+import API from "../utils/API";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,40 +47,89 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function EditComponents(props) {
+function EditComponent(props) {
+  const [formState, setFormState] = useState({
+    items: [],
+    currentItem: {},
+    formStep: 1,
+  });
   const classes = useStyles();
+
+  useEffect(() => {
+    API.getComponents()
+      .then((res) => setFormState({ items: res.data, formStep: 1 }))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Page pageTitle="Edit a component">
       <Scrollbar
         style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
       >
         <Paper className={classes.paper} elevation={6}>
-          <Router>
-            <Route exact path="/editcomponent" component={EditComponentForm} />
-            <Route
-              path="/linkPOC"
-              component={() => (
-                <LinkComponentForm
-                  relationship="pointsOfContact"
-                  nextPage="/linkinfluencer"
-                />
-              )}
+          {formState.formStep === 1 && (
+            <EditComponentForm
+              items={formState.items}
+              setFormState={(value) =>
+                setFormState({ ...formState, currentItem: value, formStep: 2 })
+              }
             />
-            <Route
-              path="/linkinfluencer"
-              component={() => (
-                <LinkComponentForm
-                  relationship="influencers"
-                  nextPage="/submitcomponent"
-                />
-              )}
+          )}
+          {formState.formStep === 2 && (
+            <LinkComponentForm
+              name="a point of contact"
+              relationship="pointsOfContact"
+              items={formState.items}
+              currentItem={formState.currentItem}
+              setFormState={(values) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...values },
+                  formStep: 3,
+                })
+              }
             />
-            <Route path="/submitcomponent" component={SubmitComponentForm} />
-          </Router>
+          )}
+          {formState.formStep === 3 && (
+            <LinkComponentForm
+              name=" an influence"
+              relationship="influencers"
+              items={formState.items}
+              currentItem={formState.currentItem}
+              setFormState={(value) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...value },
+                  formStep: 4,
+                })
+              }
+            />
+          )}
+          {formState.formStep === 4 && (
+            <SubmitComponentForm
+              items={formState.items}
+              currentItem={formState.currentItem}
+              setFormState={(value) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...value },
+                  formStep: 5,
+                })
+              }
+            />
+          )}
+          {formState.formStep === 5 && (
+            <>
+              <h1>Your Component has been Submitted</h1>
+              <ComponentCard
+                currentItem={formState.currentItem}
+              ></ComponentCard>
+            </>
+          )}
         </Paper>
       </Scrollbar>
     </Page>
   );
 }
 
-export default EditComponents;
+export default EditComponent;

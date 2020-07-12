@@ -9,14 +9,14 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const User = require("./models/userModel");
-const Component = require("./models/componentModel");
+const { User, Component } = require("./models");
 const { json } = require("express");
 const JWT_SECRET = "HJLVBG&&#BJFUY&#NBFKI";
 
 // Defining middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+mongoose.set("useFindAndModify", false);
 app.use(cors());
 
 async function main() {
@@ -82,6 +82,7 @@ async function main() {
   });
 
   app.post("/api/signup", async (req, res) => {
+    console.log(req.body);
     const {
       body: { email, password },
     } = req;
@@ -129,6 +130,27 @@ async function main() {
     return res.json({
       data: {
         component: newComponent,
+      },
+    });
+  });
+
+  app.put("/api/components", async (req, res) => {
+    console.log("update in server");
+    console.log(req.body.name);
+    if (!req.body.name || !req.body.type)
+      return res.status(404).send("Component name and type are required");
+
+    const component = await Component.findOne({ name: req.body.name });
+    if (!component)
+      return res.status(404).send("A component with this name already exists");
+
+    const updateComponent = await Component.findOneAndUpdate(
+      { _id: req.body.id },
+      req.body
+    ).populate("pointsOfContact");
+    return res.json({
+      data: {
+        component: updateComponent,
       },
     });
   });

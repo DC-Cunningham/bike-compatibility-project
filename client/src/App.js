@@ -1,11 +1,10 @@
-import React, { Component, useEffect, useState } from "react";
-import { render } from "react-dom";
+import React, { Component } from "react";
 import App from "base-shell/lib";
+import { render } from "react-dom";
 import MUIConfig from "material-ui-shell/lib";
 import merge from "base-shell/lib/utils/config";
 import { ComponentStore } from "./utils/GlobalState";
 import _config from "./config";
-import API from "./utils/API";
 
 const config = merge(MUIConfig, _config);
 

@@ -1,31 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { saveAuthorisation, isAuthorised } from "../utils/auth";
 import MenuContext from "material-ui-shell/lib/providers/Menu/Context";
-import {
-  Input,
-  InputLabel,
-  MenuItem,
-  TextField,
-  Select,
-  Button,
-  List,
-  ListItem,
-  makeStyles,
-  Paper,
-  FormHelperText,
-  FormControl,
-} from "@material-ui/core/";
+import { makeStyles, Paper } from "@material-ui/core/";
 import Page from "material-ui-shell/lib/containers/Page/Page";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
-import Sorting from "../components/Sorting";
-import {
-  UPDATE_COMPONENTS,
-  SET_CURRENT_COMPONENT,
-  LOADING,
-} from "../utils/actions";
+import Search from "../components/Search";
+import { UPDATE_COMPONENTS } from "../utils/actions";
 import ComponentList from "../components/ComponentList";
 import { useStoreContext } from "../utils/GlobalState";
 
@@ -70,72 +51,16 @@ const useStyles = makeStyles((theme) => ({
 
 function Components() {
   const classes = useStyles();
-  const history = useHistory();
-  const { setAuthMenuOpen } = useContext(MenuContext);
-  const [state, dispatch] = useStoreContext();
-  // Setting our component's initial state
-  const [components, setComponents] = useState({});
-  const [componentTypes, setComponentTypes] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sorted, setSorted] = useState(false);
-  const [filteredComponents, setFilteredComponents] = useState(false);
+  const [formState, setFormState] = useState({
+    items: [],
+    currentItem: {},
+  });
 
-  // Load all components and store them in state
   useEffect(() => {
     API.getComponents()
-      .then((res) =>
-        dispatch({ type: UPDATE_COMPONENTS, components: res.data })
-      )
+      .then((res) => setFormState({ items: res.data }))
       .catch((err) => console.log(err));
   }, []);
-
-  // sorts all the components by their name
-  function handleSortByName() {
-    if (!sorted) {
-      setFilteredComponents(
-        state.components.sort((a, b) => (a.name > b.name ? 1 : -1))
-      );
-      setSorted(true);
-    } else {
-      setFilteredComponents(
-        state.components.sort((a, b) => (a.name > b.name ? -1 : 1))
-      );
-      setSorted(false);
-    }
-  }
-
-  function handleSortByType() {
-    if (!sorted) {
-      setFilteredComponents(
-        state.components.sort((a, b) => (a.type > b.type ? 1 : -1))
-      );
-      setSorted(true);
-    } else {
-      setFilteredComponents(
-        state.components.sort((a, b) => (a.type > b.type ? -1 : 1))
-      );
-      setSorted(false);
-    }
-  }
-
-  function search(type) {
-    API.getComponents(`type= ${type}`)
-      .then((res) => setComponents(res.data))
-      .catch((err) => console.log(err));
-  }
-
-  function handleSearch(event) {
-    setSearchTerm(event.target.value);
-    const filtered = state.components.filter((component) =>
-      component.name.toLowerCase().includes(event.target.value.toLowerCase())
-    );
-    console.log(filtered);
-    setFilteredComponents(filtered);
-  }
-
-  function showAllComponents() {
-    setFilteredComponents(state.components);
-  }
 
   return (
     <Page pageTitle="Search the component database">
@@ -143,14 +68,7 @@ function Components() {
         style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
       >
         <Paper className={classes.paper} elevation={6}>
-          <Sorting
-            onSearch={handleSearch}
-            searchTerm={searchTerm}
-            handleSortByName={handleSortByName}
-            handleSortByType={handleSortByType}
-            showAllComponents={showAllComponents}
-          ></Sorting>
-          <ComponentList components={filteredComponents} />
+          <Search items={formState.items}></Search>
         </Paper>
       </Scrollbar>
     </Page>

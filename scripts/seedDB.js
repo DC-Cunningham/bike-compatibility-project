@@ -64,7 +64,7 @@ const userSeed = [
   {
     name: "DC",
     email: "dc@beautifulrevolution.com.au",
-    password: "",
+    password: "dc",
     role: "admin",
     date: new Date(Date.now()),
   },

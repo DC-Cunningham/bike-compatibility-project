@@ -8,16 +8,34 @@ import { logout } from "../utils/auth";
 import EditIcon from "@material-ui/icons/Edit";
 import GetApp from "@material-ui/icons/GetApp";
 import AddIcon from "@material-ui/icons/Add";
+import allThemes from "./themes";
+
+import SettingsIcon from "@material-ui/icons/SettingsApplications";
+import MenuOpenIcon from "@material-ui/icons/MenuOpen";
+import ChromeReaderMode from "@material-ui/icons/ChromeReaderMode";
+import StyleIcon from "@material-ui/icons/Style";
 
 const getMenuItems = (props) => {
   const { appConfig, menuContext, themeContext, a2HSContext } = props;
   const { auth } = appConfig || {};
-  const { isDesktop, isAuthMenuOpen } = menuContext;
   const { themeID, setThemeID } = themeContext;
+  const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext;
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext;
 
   const isAuthorised = auth.isAuthenticated();
   const isAdmin = true;
+
+  const themeItems = allThemes.map((t) => {
+    return {
+      value: undefined,
+      visible: true,
+      primaryText: { id: t.id },
+      onClick: () => {
+        setThemeID(t.id);
+      },
+      leftIcon: <StyleIcon style={{ color: t.color }} />,
+    };
+  });
 
   if (isAuthMenuOpen || !isAuthorised) {
     return [
@@ -74,12 +92,37 @@ const getMenuItems = (props) => {
       leftIcon: <EditIcon />,
     },
     {
+      primaryText: "settings",
+      primaryTogglesNestedList: true,
+      leftIcon: <SettingsIcon />,
+      nestedItems: [
+        {
+          primaryText: "theme",
+          secondaryText: themeID,
+          primaryTogglesNestedList: true,
+          leftIcon: <StyleIcon />,
+          nestedItems: themeItems,
+        },
+        {
+          visible: isDesktop ? true : false,
+          onClick: () => {
+            setMiniMode(!useMiniMode);
+          },
+          primaryText: "menu_mini_mode",
+          leftIcon: useMiniMode ? <MenuOpenIcon /> : <ChromeReaderMode />,
+        },
+      ],
+    },
+    {
       value: null,
       visible: isAppInstallable && !isAppInstalled,
       onClick: () => {
         deferredPrompt.prompt();
       },
-      primaryText: "Install",
+      primaryText: {
+        id: "install",
+        defaultMessage: "Install",
+      },
       leftIcon: <GetApp />,
     },
   ];

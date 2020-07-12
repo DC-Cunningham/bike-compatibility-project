@@ -3,7 +3,6 @@ import React, { lazy } from "react";
 import PrivateRoute from "base-shell/lib/components/PrivateRoute/PrivateRoute";
 import PublicRoute from "base-shell/lib/components/PublicRoute/PublicRoute";
 import { Route } from "react-router-dom";
-import LinkComponentForm from "../components/LinkComponentForm";
 
 const SignIn = lazy(() => import("../pages/SignIn"));
 const SignUp = lazy(() => import("../pages/SignUp"));

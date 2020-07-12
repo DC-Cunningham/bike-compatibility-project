@@ -17,8 +17,11 @@ export default {
   },
   // Saves a component to the database
   saveComponent: function (componentData) {
-    console.log(componentData);
     return axios.post("/api/components", componentData);
+  },
+  updateComponent: function (componentData) {
+    console.log(componentData);
+    return axios.put("/api/components", componentData);
   },
   loginAPI: async function (data) {
     const response = await axios.post("/api/login", data);

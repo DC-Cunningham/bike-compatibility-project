@@ -5,7 +5,7 @@ export function saveAuthorisation(user, token) {
   console.log(user);
   console.log(token);
   const userDetails = {
-    displayName: user.name,
+    displayName: user.displayName,
     email: user.email,
     isAuthorised: true,
   };

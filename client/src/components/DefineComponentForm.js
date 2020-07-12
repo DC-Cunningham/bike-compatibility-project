@@ -1,37 +1,28 @@
 import React, { useRef, useState } from "react";
 import { useStoreContext } from "../utils/GlobalState";
-import {
-  ADD_COMPONENT,
-  SET_CURRENT_COMPONENT,
-  LOADING,
-} from "../utils/actions";
 import API from "../utils/API";
 import {
-  Input,
-  InputLabel,
-  MenuItem,
-  TextField,
   Select,
-  Button,
-  List,
-  ListItem,
-  makeStyles,
-  Paper,
   FormHelperText,
-  FormControl,
+  MenuItem,
+  Button,
+  TextField,
 } from "@material-ui/core/";
 
 function DefineComponentForm(props) {
   const nameRef = useRef();
-  const typeRef = useRef();
+  const [type, setType] = useState("");
   const descriptionRef = useRef();
-  const [state, dispatch] = useStoreContext();
+
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     API.saveComponent({
       name: nameRef.current.value,
-      type: typeRef.current.value,
+      type: type,
       description: descriptionRef.current.value,
     })
       .then((result) => {
@@ -45,36 +36,35 @@ function DefineComponentForm(props) {
     <div>
       <h1>Define a new component</h1>
       <form onSubmit={handleSubmit}>
-        <Input
+        <TextField
           inputRef={nameRef}
-          placeholder="Name"
+          label="Component Name (required)"
           variant="outlined"
           margin="normal"
+          fullWidth
+        />
+        <FormHelperText>Component Type (required)</FormHelperText>
+        <Select
+          name="Component Type"
           required
           fullWidth
-        />
-        <Input
-          inputRef={typeRef}
-          placeholder="Type"
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-        />
-        <Input
-          inputRef={descriptionRef}
-          placeholder="Description"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-        />
-        <Button
-          disabled={state.loading}
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
+          value={type}
+          onChange={handleChange}
         >
+          <MenuItem value="Cockpit">Cockpit</MenuItem>
+          <MenuItem value="Drivetrain">Drivetrain</MenuItem>
+          <MenuItem value="Fork">Fork</MenuItem>
+          <MenuItem value="Frame">Frame</MenuItem>
+          <MenuItem value="Wheel">Wheel</MenuItem>
+        </Select>
+        <TextField
+          inputRef={descriptionRef}
+          label="Definition"
+          variant="outlined"
+          margin="normal"
+          fullWidth
+        />
+        <Button type="submit" fullWidth variant="contained" color="secondary">
           Submit
         </Button>
       </form>
