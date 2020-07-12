@@ -70,8 +70,12 @@ function EditComponent(props) {
           {formState.formStep === 1 && (
             <EditComponentForm
               items={formState.items}
-              setFormState={(value) =>
-                setFormState({ ...formState, currentItem: value, formStep: 2 })
+              setFormState={(values) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...values },
+                  formStep: 2,
+                })
               }
             />
           )}

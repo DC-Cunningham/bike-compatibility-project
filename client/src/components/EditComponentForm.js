@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core/";
 
 function EditComponentForm(props) {
+  const [selected, setSelected] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -19,7 +20,9 @@ function EditComponentForm(props) {
     <div>
       <h1>Find the component to edit</h1>
       <form onSubmit={handleSubmit}>
-        <Search items={props.items}> </Search>
+        <Search items={props.items} onClick={handleSubmit}>
+          {" "}
+        </Search>
       </form>
     </div>
   );

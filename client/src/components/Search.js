@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Input, Button } from "@material-ui/core/";
+import React, { useState, useEffect } from "react";
+import { TextField, Button, FormControl } from "@material-ui/core/";
 import ComponentList from "./ComponentList";
 
 function Search(props) {
@@ -7,40 +7,15 @@ function Search(props) {
   const [sorted, setSorted] = useState(false);
   const [filteredComponents, setFilteredComponents] = useState([]);
 
-  function handleSortByName() {
-    if (!sorted) {
-      setFilteredComponents(
-        props.items.sort((a, b) => (a.name > b.name ? 1 : -1))
-      );
-      setSorted(true);
-    } else {
-      setFilteredComponents(
-        props.items.sort((a, b) => (a.name > b.name ? -1 : 1))
-      );
-      setSorted(false);
-    }
-  }
-
-  function handleSortByType() {
-    if (!sorted) {
-      setFilteredComponents(
-        props.items.sort((a, b) => (a.type > b.type ? 1 : -1))
-      );
-      setSorted(true);
-    } else {
-      setFilteredComponents(
-        props.items.sort((a, b) => (a.type > b.type ? -1 : 1))
-      );
-      setSorted(false);
-    }
-  }
+  useEffect(() => {
+    showAllComponents();
+  }, [1]);
 
   function handleSearch(event) {
     setSearchTerm(event.target.value);
     const filtered = props.items.filter((component) =>
       component.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    console.log(filtered);
     setFilteredComponents(filtered);
   }
 
@@ -50,25 +25,32 @@ function Search(props) {
 
   return (
     <>
-      <form>
-        <Input
+      <FormControl fullWidth>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={showAllComponents}
+        >
+          Show all Components
+        </Button>
+        <br />
+        <TextField
           value={searchTerm}
+          label="Filter"
+          variant="outlined"
           onChange={handleSearch}
           type="text"
           onKeyPress={(e) => {
             e.key === "Enter" && e.preventDefault();
           }}
         />
-      </form>
-      <div>
-        <strong>Sort by:</strong>
-        <Button onClick={handleSortByName}>Name</Button>
-        <Button onClick={handleSortByType}>Type</Button>
-      </div>
-      <div>
-        <Button onClick={showAllComponents}>Show all Components</Button>
-      </div>
-      <ComponentList components={filteredComponents} />
+        <br />
+      </FormControl>
+      <ComponentList
+        components={filteredComponents}
+        onClick={props.handleSubmit}
+      />
     </>
   );
 }
