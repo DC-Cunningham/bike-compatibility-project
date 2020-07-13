@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -12,10 +12,9 @@ import {
   TablePagination,
   TableRow,
   TableSortLabel,
-  Toolbar,
-  Typography,
+  FormControl,
   Paper,
-  IconButton,
+  TextField,
   Tooltip,
   FormControlLabel,
   Switch,
@@ -156,16 +155,36 @@ const useStyles = makeStyles((theme) => ({
 function ComponentList(props) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("calories");
+  const [orderBy, setOrderBy] = useState();
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredComponents, setFilteredComponents] = useState([]);
+
+  useEffect(() => {
+    showAllComponents();
+  }, []);
+
+  function handleSearch(event) {
+    setSearchTerm(event.target.value);
+    const filtered = props.items.filter((component) =>
+      component.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    setFilteredComponents(filtered);
+  }
+
+  function showAllComponents() {
+    setSearchTerm("");
+    setFilteredComponents(props.items);
+  }
 
   function createData({ name, type, _id }) {
     return { name, type, _id };
   }
 
-  const rows = props.components.map((component) => createData(component));
+  const rows = filteredComponents.map((component) => createData(component));
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -186,16 +205,38 @@ function ComponentList(props) {
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   const handleClick = (id) => {
-    console.log(id);
-    const newSelected = props.components.find((item) => item._id === id);
-
-    console.log(newSelected);
-    setSelected(newSelected);
+    const selected = props.items.find((item) => item._id === id);
+    console.log(selected);
+    // need to send this item to formState.currentItem
+    props.setFormState(selected);
   };
 
-  return selected.length == 0 ? (
+  return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+        <FormControl fullWidth>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={showAllComponents}
+          >
+            Show all Components
+          </Button>
+          <br />
+          <TextField
+            value={searchTerm}
+            label="Filter"
+            variant="outlined"
+            onChange={handleSearch}
+            type="text"
+            onKeyPress={(e) => {
+              e.key === "Enter" && e.preventDefault();
+            }}
+          />
+          <br />
+        </FormControl>
+
         <TableContainer>
           <Table
             className={classes.table}
@@ -224,7 +265,7 @@ function ComponentList(props) {
                           color="secondary"
                           onClick={(event) => handleClick(row._id)}
                         >
-                          More
+                          Select
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -249,8 +290,6 @@ function ComponentList(props) {
         />
       </Paper>
     </div>
-  ) : (
-    <ComponentCard currentItem={selected}></ComponentCard>
   );
 }
 

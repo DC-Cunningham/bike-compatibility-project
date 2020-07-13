@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useStoreContext } from "../utils/GlobalState";
 import API from "../utils/API";
 import {
   Select,
@@ -51,6 +50,7 @@ function DefineComponentForm(props) {
           value={type}
           onChange={handleChange}
         >
+          <MenuItem value="Brakes">Brakes</MenuItem>
           <MenuItem value="Cockpit">Cockpit</MenuItem>
           <MenuItem value="Drivetrain">Drivetrain</MenuItem>
           <MenuItem value="Fork">Fork</MenuItem>

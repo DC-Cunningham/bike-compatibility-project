@@ -1,25 +1,57 @@
-import React, { useState } from "react";
-import { Grid, Button } from "@material-ui/core/";
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Button,
+  GridListTile,
+  GridList,
+  makeStyles,
+  Typography,
+} from "@material-ui/core/";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
+    backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    width: "100%",
+    // height: 450,
+  },
+}));
 
 function LinkComponentForm(props) {
+  const classes = useStyles();
   const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    setSelected(props.currentItem[props.relationship]);
+  }, []);
 
   const selectedButtons = () => {
     return selected.length ? (
       selected.map((item) => {
         return (
-          <Button
-            key={item._id}
-            variant="contained"
-            color="primary"
-            onClick={() => handleUnlinking(item)}
-          >
-            {item.name}
-          </Button>
+          <GridListTile key={item._id} cols={1}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={() => handleUnlinking(item)}
+            >
+              {item.name}
+            </Button>
+          </GridListTile>
         );
       })
     ) : (
-      <p>You have not selected any components yet </p>
+      <GridListTile cols={3}>
+        <Typography align="center" color="primary" variant="h5">
+          There are no selected components yet
+        </Typography>
+      </GridListTile>
     );
   };
 
@@ -33,17 +65,23 @@ function LinkComponentForm(props) {
           return null;
         }
         return (
-          <Button
-            key={item._id}
-            variant="outlined"
-            onClick={() => handleLinking(item)}
-          >
-            {item.name}
-          </Button>
+          <GridListTile key={item._id} cols={1}>
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={() => handleLinking(item)}
+            >
+              {item.name}
+            </Button>
+          </GridListTile>
         );
       })
     ) : (
-      <p> There are no more components available</p>
+      <GridListTile cols={3}>
+        <Typography align="center" color="secondary" variant="h5">
+          There are no more components available
+        </Typography>
+      </GridListTile>
     );
   };
 
@@ -65,37 +103,40 @@ function LinkComponentForm(props) {
       name: name,
       _id: _id,
     }));
-    console.log(selectedItems);
     const item = {
       ...props.currentItem,
-      [props.relationship]: props.currentItem[props.relationship].concat(
-        selectedItems
-      ),
+      [props.relationship]: selectedItems,
     };
-    console.log(item);
     props.setFormState(item);
   };
 
   return (
     <>
-      <div>
-        <h5>
-          Please select all the components with which a {props.currentItem.name}{" "}
-          is {props.name}
-        </h5>
-      </div>
-
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          {unselectedButtons()}
-        </Grid>
-      </Grid>
+      <Box textAlign="center">
+        <Typography variant="h4">
+          Please select all the components with which a
+        </Typography>
+        <Typography variant="h3">{props.currentItem.name}</Typography>
+        <Typography variant="h4">is</Typography>
+        <Typography variant="h3">{props.name}</Typography>
+      </Box>
+      <GridList
+        cellHeight="auto"
+        spacing={8}
+        className={classes.gridList}
+        cols={3}
+      >
+        {unselectedButtons()}
+      </GridList>
       <h5> The components selected are below (click to deselect)</h5>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          {selectedButtons()}
-        </Grid>
-      </Grid>
+      <GridList
+        cellHeight="auto"
+        spacing={8}
+        className={classes.gridList}
+        cols={3}
+      >
+        {selectedButtons()}
+      </GridList>
       <br />
       <Button
         fullWidth
@@ -103,7 +144,7 @@ function LinkComponentForm(props) {
         color="secondary"
         onClick={handleSubmit}
       >
-        Submit
+        Continue
       </Button>
     </>
   );

@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../utils/API";
-import { useHistory } from "react-router-dom";
-import MenuContext from "material-ui-shell/lib/providers/Menu/Context";
 import { makeStyles, Paper } from "@material-ui/core/";
 import Page from "material-ui-shell/lib/containers/Page/Page";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
-import Search from "../components/Search";
-import { UPDATE_COMPONENTS } from "../utils/actions";
 import ComponentList from "../components/ComponentList";
-import { useStoreContext } from "../utils/GlobalState";
+import ComponentCard from "../components/ComponentCard";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,11 +50,14 @@ function Components() {
   const [formState, setFormState] = useState({
     items: [],
     currentItem: {},
+    currentItemExists: false,
   });
 
   useEffect(() => {
     API.getComponents()
-      .then((res) => setFormState({ items: res.data }))
+      .then((res) =>
+        setFormState({ items: res.data, currentItemExists: false })
+      )
       .catch((err) => console.log(err));
   }, []);
 
@@ -68,7 +67,38 @@ function Components() {
         style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
       >
         <Paper className={classes.paper} elevation={6}>
-          <Search items={formState.items}></Search>
+          {formState.currentItemExists === true && (
+            <ComponentCard
+              items={formState.items}
+              currentItem={formState.currentItem}
+              resetFormState={(values) =>
+                setFormState({
+                  ...formState,
+                  currentItem: {},
+                  currentItemExists: false,
+                })
+              }
+              setFormState={(values) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...values },
+                  currentItemExists: true,
+                })
+              }
+            />
+          )}
+          {formState.currentItemExists === false && (
+            <ComponentList
+              items={formState.items}
+              setFormState={(values) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...values },
+                  currentItemExists: true,
+                })
+              }
+            />
+          )}
         </Paper>
       </Scrollbar>
     </Page>

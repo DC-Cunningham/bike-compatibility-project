@@ -136,7 +136,7 @@ async function main() {
 
   app.put("/api/components", async (req, res) => {
     console.log("update in server");
-    console.log(req.body.name);
+    console.log(req.body);
     if (!req.body.name || !req.body.type)
       return res.status(404).send("Component name and type are required");
 

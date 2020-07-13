@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import API from "../utils/API";
-import { Button } from "@material-ui/core/";
-import ComponentCard from "../components/ComponentCard";
+import { Box, Button, Typography } from "@material-ui/core/";
 
 function SubmitComponentForm(props) {
   const handleSubmit = (e) => {
@@ -24,17 +23,19 @@ function SubmitComponentForm(props) {
 
   return (
     <>
-      <div>
-        <h4>You are creating the component</h4>
-        <h3> {props.currentItem.name}</h3>
-      </div>
+      <Box textAlign="center">
+        <Typography variant="h4">You have {props.term} the</Typography>
+        <Typography variant="h3"> {props.currentItem.name}</Typography>
+        <Typography variant="h4">component</Typography>
+      </Box>
+      <br />
       <Button
         fullWidth
         variant="contained"
         color="secondary"
         onClick={handleSubmit}
       >
-        Confirm
+        Save to the database
       </Button>
     </>
   );

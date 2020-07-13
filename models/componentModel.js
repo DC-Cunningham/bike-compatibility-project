@@ -5,7 +5,7 @@ const componentSchema = new Schema({
   name: { type: String, required: true },
   type: {
     type: String,
-    enum: ["Frame", "Fork", "Drivetrain", "Cockpit", "Wheel"],
+    enum: ["Brakes", "Frame", "Fork", "Drivetrain", "Cockpit", "Wheel"],
     required: true,
   },
   pointsOfContact: [],

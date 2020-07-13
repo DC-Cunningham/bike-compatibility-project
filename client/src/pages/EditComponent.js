@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, Paper } from "@material-ui/core/";
+import { Box, makeStyles, Paper, Typography } from "@material-ui/core/";
 import Page from "material-ui-shell/lib/containers/Page/Page";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
-import EditComponentForm from "../components/EditComponentForm";
 import LinkComponentForm from "../components/LinkComponentForm";
 import SubmitComponentForm from "../components/SubmitComponentForm";
 import ComponentCard from "../components/ComponentCard";
 import API from "../utils/API";
+import ComponentList from "../components/ComponentList";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function EditComponent(props) {
+function EditComponent() {
   const [formState, setFormState] = useState({
     items: [],
     currentItem: {},
@@ -68,7 +68,7 @@ function EditComponent(props) {
       >
         <Paper className={classes.paper} elevation={6}>
           {formState.formStep === 1 && (
-            <EditComponentForm
+            <ComponentList
               items={formState.items}
               setFormState={(values) =>
                 setFormState({
@@ -112,6 +112,7 @@ function EditComponent(props) {
           {formState.formStep === 4 && (
             <SubmitComponentForm
               items={formState.items}
+              term="edited"
               currentItem={formState.currentItem}
               setFormState={(value) =>
                 setFormState({
@@ -124,7 +125,11 @@ function EditComponent(props) {
           )}
           {formState.formStep === 5 && (
             <>
-              <h1>Your Component has been Submitted</h1>
+              <Box textAlign="center">
+                <Typography variant="h3">
+                  Your Component has been Submitted
+                </Typography>
+              </Box>
               <ComponentCard
                 currentItem={formState.currentItem}
               ></ComponentCard>
