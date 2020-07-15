@@ -72,17 +72,25 @@ function EditComponent() {
     <>
       <CssBaseline />
       <Container maxWidth="md">
+        <Typography align="center" variant="h2" gutterBottom>
+          Edit a component in the database
+        </Typography>
         {formState.formStep === 1 && (
-          <ComponentList
-            items={formState.items}
-            setFormState={(values) =>
-              setFormState({
-                ...formState,
-                currentItem: { ...formState.currentItem, ...values },
-                formStep: 2,
-              })
-            }
-          />
+          <>
+            <Typography align="center" variant="h3">
+              Please select a component to edit
+            </Typography>
+            <ComponentList
+              items={formState.items}
+              setFormState={(values) =>
+                setFormState({
+                  ...formState,
+                  currentItem: { ...formState.currentItem, ...values },
+                  formStep: 2,
+                })
+              }
+            />
+          </>
         )}
         {formState.formStep === 2 && (
           <LinkComponentForm

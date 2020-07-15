@@ -63,7 +63,9 @@ function DefineComponentForm(props) {
     <>
       <Paper className={classes.paper}>
         <form onSubmit={handleSubmit}>
-          <Typography variant="h2">Define a new component</Typography>
+          <Typography align="center" variant="h3">
+            Define the new component
+          </Typography>
           <TextField
             inputRef={nameRef}
             label="Component Name (required)"

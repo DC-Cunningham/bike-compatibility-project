@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, Paper, CssBaseline, Container } from "@material-ui/core/";
+import {
+  makeStyles,
+  Paper,
+  CssBaseline,
+  Container,
+  Typography,
+} from "@material-ui/core/";
 import DefineComponentForm from "../components/DefineComponentForm";
 import LinkComponentForm from "../components/LinkComponentForm";
 import SubmitComponentForm from "../components/SubmitComponentForm";
@@ -63,6 +69,9 @@ function AddComponent(props) {
     <>
       <CssBaseline />
       <Container maxWidth="md">
+        <Typography align="center" variant="h2" gutterBottom>
+          Add a component to the database
+        </Typography>
         {formState.formStep === 1 && (
           <DefineComponentForm
             setFormState={(value) =>

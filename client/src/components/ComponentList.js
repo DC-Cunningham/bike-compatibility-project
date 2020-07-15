@@ -15,7 +15,6 @@ import {
   FormControl,
   Paper,
   TextField,
-  Tooltip,
   FormControlLabel,
   Switch,
 } from "@material-ui/core/";
@@ -134,6 +133,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: "100%",
+    marginTop: theme.spacing(12),
     marginBottom: theme.spacing(2),
   },
   table: {

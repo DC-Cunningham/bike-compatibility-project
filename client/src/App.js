@@ -19,6 +19,7 @@
 // }
 import React, { Component, lazy } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Typography, makeStyles } from "@material-ui/core";
 import Menu from "./components/Menu";
 import { UserStore } from "./utils/UserState";
 import About from "./pages/About";
@@ -32,22 +33,40 @@ import PasswordReset from "./pages/PasswordReset";
 import PageNotFound from "./pages/PageNotFound";
 import Account from "./pages/Account";
 
-// const SignIn = lazy(() => import SignIn("./pages/SignIn"));
+// const SignIn = lazy(() => import("./pages/SignIn"));
 // const SignUp = lazy(() => import("./pages/SignUp"));
 // const PasswordReset = lazy(() => import("./pages/PasswordReset"));
-// const About = import("./pages/About"));
-// const Home = lazy(() => import("./pages/Home"));
+// const About = lazy(() => import("./pages/About"));
+// const HomePage = lazy(() => import("./pages/Home"));
 // const Components = lazy(() => import("./pages/Components"));
 // const AddComponent = lazy(() => import("./pages/AddComponent"));
 // const EditComponent = lazy(() => import("./pages/EditComponent"));
 // const Account = lazy(() => import("./pages/Account"));
 // const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
+const useStyles = makeStyles((theme) => ({
+  header: {
+    height: theme.spacing(14),
+    padding: theme.spacing(2),
+    color: theme.palette.primary.light,
+    backgroundColor: theme.palette.primary.dark,
+  },
+}));
+
 function App() {
+  const classes = useStyles();
   return (
     <BrowserRouter>
       <div>
         <UserStore>
+          <Typography
+            className={classes.header}
+            variant="h2"
+            display="block"
+            align="center"
+          >
+            The Bike Compatibility Project
+          </Typography>
           <Menu />
           <Switch>
             <Route exact path="/" component={HomePage} />
