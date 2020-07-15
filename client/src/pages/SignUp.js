@@ -3,6 +3,7 @@ import { saveAuthorisation, isAuthorised } from "../utils/auth";
 import Page from "material-ui-shell/lib/containers/Page/Page";
 import React, { useState, useContext } from "react";
 import {
+  Box,
   Container,
   CssBaseline,
   TextField,
@@ -19,12 +20,12 @@ import { LOGIN_ACTION } from "../utils/actions";
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: "auto",
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(20),
     marginRight: theme.spacing(3),
-    [theme.breakpoints.up(620 + theme.spacing(6))]: {
-      width: 400,
-      marginLeft: "auto",
-      marginRight: "auto",
+    [theme.breakpoints.down(620 + theme.spacing(6))]: {
+      width: "75%",
+      marginLeft: theme.spacing(10),
+      marginRight: theme.spacing(1),
     },
     marginTop: theme.spacing(8),
     display: "flex",
@@ -34,14 +35,8 @@ const useStyles = makeStyles((theme) => ({
       3
     )}px`,
   },
-  avatar: {
-    margin: theme.spacing(1),
-    width: 192,
-    height: 192,
-    color: theme.palette.secondary.main,
-  },
   form: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(4),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -52,6 +47,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     height: `100%`,
+    marginLeft: theme.spacing(4),
+    marginRight: theme.spacing(4),
+    padding: `${theme.spacing(8)}px ${theme.spacing(3)}px ${theme.spacing(
+      3
+    )}px`,
+    [theme.breakpoints.down(620)]: {
+      width: "auto",
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
   },
 }));
 
@@ -98,75 +103,77 @@ const SignUp = () => {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="md">
-        <Paper>
-          <div className={classes.container}>
-            <Typography variant="h3">Sign Up</Typography>
-            <form className={classes.form} onSubmit={handleSubmit} noValidate>
-              <TextField
-                value={name}
-                onInput={(e) => setName(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="name"
-                label="Name"
-                name="name"
-                autoComplete="name"
-                autoFocus
-              />
-              <TextField
-                value={email}
-                onInput={(e) => setEmail(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
-              />
-              <TextField
-                value={password}
-                onInput={(e) => setPassword(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <TextField
-                value={passwordVal}
-                onInput={(e) => setPasswordVal(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password_confirm"
-                label="Confirm Password"
-                type="password"
-                id="password_confirm"
-                autoComplete="current-password"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Submit
-              </Button>
-            </form>
-          </div>
-        </Paper>
-      </Container>
+      <Box>
+        <Container maxWidth="md">
+          <Paper className={classes.paper} elevation={6}>
+            <div className={classes.container}>
+              <Typography variant="h3">Sign Up</Typography>
+              <form className={classes.form} onSubmit={handleSubmit} noValidate>
+                <TextField
+                  value={name}
+                  onInput={(e) => setName(e.target.value)}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="name"
+                  label="Name"
+                  name="name"
+                  autoComplete="name"
+                  autoFocus
+                />
+                <TextField
+                  value={email}
+                  onInput={(e) => setEmail(e.target.value)}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoComplete="email"
+                />
+                <TextField
+                  value={password}
+                  onInput={(e) => setPassword(e.target.value)}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                <TextField
+                  value={passwordVal}
+                  onInput={(e) => setPasswordVal(e.target.value)}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password_confirm"
+                  label="Confirm Password"
+                  type="password"
+                  id="password_confirm"
+                  autoComplete="current-password"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Submit
+                </Button>
+              </form>
+            </div>
+          </Paper>
+        </Container>
+      </Box>
     </>
   );
 };

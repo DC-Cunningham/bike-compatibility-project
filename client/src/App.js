@@ -32,17 +32,7 @@ import Components from "./pages/Components";
 import PasswordReset from "./pages/PasswordReset";
 import PageNotFound from "./pages/PageNotFound";
 import Account from "./pages/Account";
-
-// const SignIn = lazy(() => import("./pages/SignIn"));
-// const SignUp = lazy(() => import("./pages/SignUp"));
-// const PasswordReset = lazy(() => import("./pages/PasswordReset"));
-// const About = lazy(() => import("./pages/About"));
-// const HomePage = lazy(() => import("./pages/Home"));
-// const Components = lazy(() => import("./pages/Components"));
-// const AddComponent = lazy(() => import("./pages/AddComponent"));
-// const EditComponent = lazy(() => import("./pages/EditComponent"));
-// const Account = lazy(() => import("./pages/Account"));
-// const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+import TBCPIcon from "./assets/TheBikeCompatibilityProject-Icon-W_200x200.png";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -50,6 +40,18 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     color: theme.palette.primary.contrastText,
     backgroundColor: "black",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: `100%`,
+    [theme.breakpoints.down(620)]: {
+      fontSize: theme.spacing(4),
+    },
+  },
+  icon: {
+    [theme.breakpoints.down(620)]: {
+      width: 100,
+    },
   },
 }));
 
@@ -66,6 +68,7 @@ function App() {
             display="block"
             align="center"
           >
+            <img src={TBCPIcon} className={classes.icon} />
             The Bike Compatibility Project
           </Typography>
           <Menu />

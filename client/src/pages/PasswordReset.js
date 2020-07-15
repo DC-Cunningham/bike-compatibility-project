@@ -1,13 +1,16 @@
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { saveAuthorisation, isAuthorised } from "../utils/auth";
-import Page from "material-ui-shell/lib/containers/Page/Page";
-import React, { useState, useContext } from "react";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  Box,
+  Container,
+  CssBaseline,
+  Paper,
+  TextField,
+  Typography,
+  makeStyles,
+} from "@material-ui/core/";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import MenuContext from "material-ui-shell/lib/providers/Menu/Context";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,12 +29,6 @@ const useStyles = makeStyles((theme) => ({
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    width: 192,
-    height: 192,
-    color: theme.palette.secondary.main,
   },
   form: {
     marginTop: theme.spacing(1),
@@ -53,7 +50,6 @@ const PasswordReset = () => {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { setAuthMenuOpen } = useContext(MenuContext);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -61,45 +57,45 @@ const PasswordReset = () => {
   }
 
   return (
-    <Page
-      pageTitle="Password reset"
-      onBackClick={() => {
-        history.goBack();
-      }}
-    >
-      <Paper className={classes.paper} elevation={6}>
-        <div className={classes.container}>
-          <Typography component="h1" variant="h5">
-            Password reset
-          </Typography>
-          <form className={classes.form} onSubmit={handleSubmit} noValidate>
-            <TextField
-              value={username}
-              onInput={(e) => setUsername(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="E-Mail"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
+    <>
+      <CssBaseline />
+      <Box>
+        <Container maxWidth="md">
+          <Paper className={classes.paper} elevation={6}>
+            <div className={classes.container}>
+              <Typography component="h1" variant="h5">
+                Password reset
+              </Typography>
+              <form className={classes.form} onSubmit={handleSubmit} noValidate>
+                <TextField
+                  value={username}
+                  onInput={(e) => setUsername(e.target.value)}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="E-Mail"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                />
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Reset Password
-            </Button>
-          </form>
-        </div>
-      </Paper>
-    </Page>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Reset Password
+                </Button>
+              </form>
+            </div>
+          </Paper>
+        </Container>
+      </Box>
+    </>
   );
 };
 

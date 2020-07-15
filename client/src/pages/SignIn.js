@@ -5,12 +5,12 @@ import {
   Typography,
   CssBaseline,
   Container,
+  Box,
   makeStyles,
 } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import { useStoreContext } from "../utils/UserState";
-// import MenuContext from "material-ui-shell/lib/providers/Menu/Context";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
 import { LOGIN_ACTION } from "../utils/actions";
@@ -18,7 +18,7 @@ import { LOGIN_ACTION } from "../utils/actions";
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: "auto",
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(20),
     marginRight: theme.spacing(3),
     [theme.breakpoints.up(620 + theme.spacing(6))]: {
       width: 400,
@@ -33,14 +33,8 @@ const useStyles = makeStyles((theme) => ({
       3
     )}px`,
   },
-  avatar: {
-    margin: theme.spacing(1),
-    width: 192,
-    height: 192,
-    color: theme.palette.secondary.main,
-  },
   form: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(4),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -51,6 +45,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     height: `100%`,
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    padding: `${theme.spacing(8)}px ${theme.spacing(3)}px ${theme.spacing(
+      3
+    )}px`,
+    [theme.breakpoints.down(620)]: {
+      width: "auto",
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
   },
 }));
 
@@ -92,64 +96,66 @@ const SignIn = () => {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="md">
-        <Paper>
-          <div className={classes.container}>
-            <Typography align="center" variant="h3">
-              Sign In
-            </Typography>
-            <form className={classes.form} onSubmit={handleSubmit} noValidate>
-              <TextField
-                value={email}
-                onInput={(e) => setEmail(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="E-Mail"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                value={password}
-                onInput={(e) => setPassword(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
+      <Box>
+        <Container maxWidth="md">
+          <Paper className={classes.paper} elevation={6}>
+            <div className={classes.container}>
+              <Typography align="center" variant="h3">
                 Sign In
-              </Button>
-            </form>
+              </Typography>
+              <form className={classes.form} onSubmit={handleSubmit} noValidate>
+                <TextField
+                  value={email}
+                  onInput={(e) => setEmail(e.target.value)}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="E-Mail"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                />
+                <TextField
+                  value={password}
+                  onInput={(e) => setPassword(e.target.value)}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Sign In
+                </Button>
+              </form>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                width: "100%",
-                justifyContent: "space-between",
-              }}
-            >
-              <Link to="/password_reset">Forgot Password?</Link>
-              <Link to="/signup">Register</Link>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "60%",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Link to="/password_reset">Forgot Password?</Link>
+                <Link to="/signup">Register</Link>
+              </div>
             </div>
-          </div>
-        </Paper>
-      </Container>
+          </Paper>
+        </Container>
+      </Box>
     </>
   );
 };
