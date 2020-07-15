@@ -13,31 +13,31 @@ import { logout } from "../utils/auth";
 import { LOGOUT_ACTION } from "../utils/actions";
 import { useHistory } from "react-router-dom";
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-  const location = useLocation();
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
+// function TabPanel(props) {
+//   const { children, value, index, ...other } = props;
+//   const location = useLocation();
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`vertical-tabpanel-${index}`}
+//       aria-labelledby={`vertical-tab-${index}`}
+//       {...other}
+//     >
+//       {value === index && (
+//         <Box p={3}>
+//           <Typography>{children}</Typography>
+//         </Box>
+//       )}
+//     </div>
+//   );
+// }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
+// TabPanel.propTypes = {
+//   children: PropTypes.node,
+//   index: PropTypes.any.isRequired,
+//   value: PropTypes.any.isRequired,
+// };
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   tabs: {
-    borderRight: `2px solid ${theme.palette.divider}`,
+    borderRight: `3px solid ${theme.palette.divider}`,
   },
 }));
 
@@ -193,7 +193,6 @@ export default function VerticalTabs() {
               color: "red",
             }}
           >
-            {" "}
             <Tab label="About"></Tab>
           </NavLink>
           <NavLink
@@ -201,6 +200,7 @@ export default function VerticalTabs() {
             activeStyle={{
               fontWeight: "bold",
               color: "red",
+              indicatorStyle: "",
             }}
           >
             <Tab label="SignIn" />
@@ -213,76 +213,20 @@ export default function VerticalTabs() {
   return (
     <div className={classes.root}>
       <Tabs
+        TabIndicatorProps={{
+          style: {
+            height: "0px",
+          },
+        }}
         orientation="vertical"
         variant="scrollable"
         value={value}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
+        aria-label="Menu tabs"
         className={classes.tabs}
       >
-        {/* <NavLink
-          to="/home"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "red",
-          }}
-        >
-          <Tab label="Home" />
-        </NavLink>
-        <NavLink
-          to="/about"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "red",
-          }}
-        >
-          <Tab label="About" {...a11yProps(1)}></Tab>
-        </NavLink>
-        <NavLink
-          to="/components"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "red",
-          }}
-        >
-          <Tab label="Component Database" {...a11yProps(2)} />
-        </NavLink>
-        <NavLink
-          to="/add_component"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "red",
-          }}
-        >
-          <Tab label="Add a Component" {...a11yProps(3)} />
-        </NavLink>
-        <NavLink
-          to="/edit_component"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "red",
-          }}
-        >
-          <Tab label="Edit a Component" {...a11yProps(4)} />
-        </NavLink>
-        <NavLink
-          to="/account"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "red",
-          }}
-        >
-          <Tab label="Account" {...a11yProps(5)} />
-        </NavLink> */}
         {signinMenu()}
       </Tabs>
-      <TabPanel value={value} index={0}></TabPanel>
-      <TabPanel value={value} index={1}></TabPanel>
-      <TabPanel value={value} index={2}></TabPanel>
-      <TabPanel value={value} index={3}></TabPanel>
-      <TabPanel value={value} index={4}></TabPanel>
-      <TabPanel value={value} index={5}></TabPanel>
-      <TabPanel value={value} index={6}></TabPanel>
     </div>
   );
 }

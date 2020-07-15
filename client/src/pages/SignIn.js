@@ -1,6 +1,5 @@
-import { useHistory } from "react-router-dom";
-import { saveAuthorisation, isAuthorised } from "../utils/auth";
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import {
   TextField,
   Typography,
