@@ -1,16 +1,20 @@
 import React from "react";
-import Page from "material-ui-shell/lib/containers/Page/Page";
-import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
+import { CssBaseline, Container, Typography } from "@material-ui/core";
 
-const HomePage = () => {
+function HomePage() {
   return (
-    <Page pageTitle="Home">
-      <Scrollbar
-        style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
-      >
-        <p>This just needs a big logo</p>
-      </Scrollbar>
-    </Page>
+    <>
+      <CssBaseline />
+      <Container maxWidth="md">
+        <Typography
+          component="div"
+          // style={{ backgroundColor: "#cfe8fc", height: "100vh" }}
+        >
+          This just needs a big logo
+        </Typography>
+      </Container>
+    </>
   );
-};
+}
+
 export default HomePage;

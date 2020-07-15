@@ -1,16 +1,21 @@
 import React from "react";
-import Page from "material-ui-shell/lib/containers/Page/Page";
-import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
+import { CssBaseline, Container, Typography, Paper } from "@material-ui/core";
 
-const About = () => {
+function About() {
   return (
-    <Page pageTitle="About the Project">
-      <Scrollbar
-        style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
-      >
-        <p>This is an about page</p>
-      </Scrollbar>
-    </Page>
+    <>
+      <CssBaseline />
+      <Container maxWidth="md">
+        <Paper>
+          <Typography
+            component="div"
+            // style={{ backgroundColor: "#cfe8fc", height: "100vh" }}
+          >
+            This is the About Page
+          </Typography>
+        </Paper>
+      </Container>
+    </>
   );
-};
+}
 export default About;

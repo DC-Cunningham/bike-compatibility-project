@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const PasswordReset = () => {
   const classes = useStyles();
   const history = useHistory();
   const [username, setUsername] = useState("");
@@ -103,4 +103,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default PasswordReset;

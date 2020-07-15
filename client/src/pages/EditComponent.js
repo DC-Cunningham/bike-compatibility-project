@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, makeStyles, Paper, Typography } from "@material-ui/core/";
+import {
+  Box,
+  makeStyles,
+  Paper,
+  Typography,
+  CssBaseline,
+  Container,
+} from "@material-ui/core/";
 import Page from "material-ui-shell/lib/containers/Page/Page";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import LinkComponentForm from "../components/LinkComponentForm";
@@ -62,82 +69,77 @@ function EditComponent() {
   }, []);
 
   return (
-    <Page pageTitle="Edit a component">
-      <Scrollbar
-        style={{ height: "100%", width: "100%", display: "flex", flex: 1 }}
-      >
-        <Paper className={classes.paper} elevation={6}>
-          {formState.formStep === 1 && (
-            <ComponentList
-              items={formState.items}
-              setFormState={(values) =>
-                setFormState({
-                  ...formState,
-                  currentItem: { ...formState.currentItem, ...values },
-                  formStep: 2,
-                })
-              }
-            />
-          )}
-          {formState.formStep === 2 && (
-            <LinkComponentForm
-              name="a point of contact"
-              relationship="pointsOfContact"
-              items={formState.items}
-              currentItem={formState.currentItem}
-              setFormState={(values) =>
-                setFormState({
-                  ...formState,
-                  currentItem: { ...formState.currentItem, ...values },
-                  formStep: 3,
-                })
-              }
-            />
-          )}
-          {formState.formStep === 3 && (
-            <LinkComponentForm
-              name=" an influence"
-              relationship="influencers"
-              items={formState.items}
-              currentItem={formState.currentItem}
-              setFormState={(value) =>
-                setFormState({
-                  ...formState,
-                  currentItem: { ...formState.currentItem, ...value },
-                  formStep: 4,
-                })
-              }
-            />
-          )}
-          {formState.formStep === 4 && (
-            <SubmitComponentForm
-              items={formState.items}
-              term="edited"
-              currentItem={formState.currentItem}
-              setFormState={(value) =>
-                setFormState({
-                  ...formState,
-                  currentItem: { ...formState.currentItem, ...value },
-                  formStep: 5,
-                })
-              }
-            />
-          )}
-          {formState.formStep === 5 && (
-            <>
-              <Box textAlign="center">
-                <Typography variant="h3">
-                  Your Component has been Submitted
-                </Typography>
-              </Box>
-              <ComponentCard
-                currentItem={formState.currentItem}
-              ></ComponentCard>
-            </>
-          )}
-        </Paper>
-      </Scrollbar>
-    </Page>
+    <>
+      <CssBaseline />
+      <Container maxWidth="md">
+        {formState.formStep === 1 && (
+          <ComponentList
+            items={formState.items}
+            setFormState={(values) =>
+              setFormState({
+                ...formState,
+                currentItem: { ...formState.currentItem, ...values },
+                formStep: 2,
+              })
+            }
+          />
+        )}
+        {formState.formStep === 2 && (
+          <LinkComponentForm
+            name="a point of contact"
+            relationship="pointsOfContact"
+            items={formState.items}
+            currentItem={formState.currentItem}
+            setFormState={(values) =>
+              setFormState({
+                ...formState,
+                currentItem: { ...formState.currentItem, ...values },
+                formStep: 3,
+              })
+            }
+          />
+        )}
+        {formState.formStep === 3 && (
+          <LinkComponentForm
+            name=" an influence"
+            relationship="influencers"
+            items={formState.items}
+            currentItem={formState.currentItem}
+            setFormState={(value) =>
+              setFormState({
+                ...formState,
+                currentItem: { ...formState.currentItem, ...value },
+                formStep: 4,
+              })
+            }
+          />
+        )}
+        {formState.formStep === 4 && (
+          <SubmitComponentForm
+            items={formState.items}
+            term="edited"
+            currentItem={formState.currentItem}
+            setFormState={(value) =>
+              setFormState({
+                ...formState,
+                currentItem: { ...formState.currentItem, ...value },
+                formStep: 5,
+              })
+            }
+          />
+        )}
+        {formState.formStep === 5 && (
+          <>
+            <Box textAlign="center">
+              <Typography variant="h3">
+                Your Component has been Submitted
+              </Typography>
+            </Box>
+            <ComponentCard currentItem={formState.currentItem}></ComponentCard>
+          </>
+        )}
+      </Container>
+    </>
   );
 }
 

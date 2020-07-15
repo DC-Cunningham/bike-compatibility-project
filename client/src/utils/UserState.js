@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext } from "react";
 import {
-  SET_CURRENT_COMPONENT,
-  REMOVE_COMPONENT,
+  LOGIN_ACTION,
+  LOGOUT_ACTION,
   UPDATE_COMPONENTS,
   ADD_COMPONENT,
   LOADING,
@@ -12,34 +12,19 @@ const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case SET_CURRENT_COMPONENT:
+    case LOGIN_ACTION:
       return {
         ...state,
-        currentComponent: action.component,
+        user: action.user,
         loading: false,
       };
 
-    case UPDATE_COMPONENTS:
+    case LOGOUT_ACTION:
       console.log(action);
       return {
         ...state,
-        components: [...action.components],
+        components: action.user,
         loading: false,
-      };
-
-    case ADD_COMPONENT:
-      return {
-        ...state,
-        components: [action.component, ...state.components],
-        loading: false,
-      };
-
-    case REMOVE_COMPONENT:
-      return {
-        ...state,
-        components: state.components.filter((component) => {
-          return component._id !== action._id;
-        }),
       };
 
     case LOADING:
@@ -53,16 +38,13 @@ const reducer = (state, action) => {
   }
 };
 
-const ComponentStore = ({ value = [], ...props }) => {
+const UserStore = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
-    components: [],
-    currentComponent: {
+    user: {
       _id: 0,
-      name: "",
-      type: "",
-      description: "",
-      pointsOfContact: [],
-      influencers: [],
+      DisplayName: "",
+      role: "",
+      token: "",
     },
     loading: false,
   });
@@ -74,4 +56,4 @@ const useStoreContext = () => {
   return useContext(StoreContext);
 };
 
-export { ComponentStore, useStoreContext };
+export { UserStore, useStoreContext };
