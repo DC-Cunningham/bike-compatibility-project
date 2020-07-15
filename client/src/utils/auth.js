@@ -15,6 +15,7 @@ export function saveAuthorisation(token) {
 
 export function logout() {
   if (typeof Storage !== "undefined") {
+    console.log("hit logout in auth");
     try {
       localStorage.removeItem("User_Token");
     } catch (ex) {
@@ -24,20 +25,6 @@ export function logout() {
     // No web storage Support.
   }
 }
-
-// export function isAuthorised() {
-//   try {
-//     if (typeof Storage !== "undefined") {
-//       const token = JSON.parse(localStorage.getItem("User_Token"));
-//       console.log(token);
-//       return token || false;
-//     } else {
-//       return false;
-//     }
-//   } catch (ex) {
-//     return false;
-//   }
-// }
 
 export function isAuthorised() {
   if (!localStorage) {

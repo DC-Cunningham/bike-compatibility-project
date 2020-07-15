@@ -10,9 +10,11 @@ import {
 } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
+import { useStoreContext } from "../utils/UserState";
 // import MenuContext from "material-ui-shell/lib/providers/Menu/Context";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
+import { LOGIN_ACTION } from "../utils/actions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -58,7 +60,7 @@ const SignIn = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const { setAuthMenuOpen } = useContext(MenuContext);
+  const [state, dispatch] = useStoreContext();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -69,20 +71,22 @@ const SignIn = () => {
   }
 
   const authenticate = async (user) => {
-    await API.loginAPI({
-      email: email,
-      password: password,
-    });
-    const _location = history.location;
-    const isAuth = isAuthorised();
-    if (isAuth) {
-      let _route = "/about";
-      if (_location.state && _location.state.from) {
-        _route = _location.state.from.pathname;
-        history.push(_route);
-      } else {
-        history.push(_route);
-      }
+    try {
+      const { data } = await API.loginAPI({
+        email: email,
+        password: password,
+      });
+      console.log(data.data);
+      const currentUser = {
+        displayName: data.data.user.name,
+        role: data.data.user.role,
+        token: data.data.token,
+      };
+      localStorage.setItem("User_Token", data.data.token);
+      dispatch({ type: LOGIN_ACTION, currentUser });
+      history.push("/");
+    } catch (e) {
+      console.log(e); // TODO: Fix this
     }
   };
 

@@ -81,24 +81,17 @@ const SignUp = () => {
   }
 
   const authenticate = async (user) => {
-    const token = await API.registerAPI(user);
-    const currentUser = {
-      displayName: user.name,
-      role: "user",
-      token: token.data.data.token,
-    };
-    dispatch({ type: LOGIN_ACTION, currentUser });
-    let authToken = await isAuthorised();
-    let _location = history.location;
-    if (token.data.data.token === authToken) {
-      let _route = "/home";
-      if (_location.state && _location.state.from) {
-        _route = _location.state.from.pathname;
-
-        history.push(_route);
-      } else {
-        history.push(_route);
-      }
+    try {
+      const token = await API.registerAPI(user);
+      const currentUser = {
+        displayName: user.name,
+        role: "user",
+        token: token.data.data.token,
+      };
+      dispatch({ type: LOGIN_ACTION, currentUser });
+      history.push("/");
+    } catch (e) {
+      console.log(e); // TODO: Fix this
     }
   };
 

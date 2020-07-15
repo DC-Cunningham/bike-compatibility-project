@@ -82,7 +82,6 @@ async function main() {
   });
 
   app.post("/api/signup", async (req, res) => {
-    console.log(req.body);
     const {
       body: { name, email, password },
     } = req;
@@ -97,7 +96,6 @@ async function main() {
     const token = jsonwebtoken.sign({ userId: newUser.id }, JWT_SECRET, {
       expiresIn: 60 * 60 * 24 * 3,
     });
-
     return res.json({
       data: {
         token,

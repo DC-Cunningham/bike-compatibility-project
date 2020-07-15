@@ -17,18 +17,27 @@ import ComponentList from "../components/ComponentList";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    width: "auto",
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(3),
-    [theme.breakpoints.up(620 + theme.spacing(6))]: {
-      width: "90%",
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
+    // width: "auto",
+    // marginLeft: theme.spacing(3),
+    // marginRight: theme.spacing(3),
+    // [theme.breakpoints.up(620 + theme.spacing(6))]: {
+    //   width: "90%",
+    //   marginLeft: "auto",
+    //   marginRight: "auto",
+    // },
+    // marginTop: theme.spacing(8),
+    // display: "flex",
+    // flexDirection: "column",
+    // alignItems: "center",
+    // padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
+    //   3
+    // )}px`,
     marginTop: theme.spacing(8),
+    marginLeft: 200,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    width: "80%",
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,

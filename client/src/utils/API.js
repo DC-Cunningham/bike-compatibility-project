@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAuth, saveAuthorisation, isAuthorised } from "./auth";
+import { getAuth, saveAuthorisation, isAuthorised, logout } from "./auth";
 
 export default {
   // Gets all components
@@ -49,5 +49,9 @@ export default {
         "Content-Type": "application/json",
       },
     });
+  },
+  logoutAPI: async function () {
+    logout();
+    return;
   },
 };

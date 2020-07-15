@@ -22,7 +22,7 @@ const reducer = (state, action) => {
     case LOGOUT_ACTION:
       return {
         ...state,
-        components: action.user,
+        user: {},
         loading: false,
       };
 
