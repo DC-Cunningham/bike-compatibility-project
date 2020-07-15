@@ -1,19 +1,10 @@
 import API from "./API.js";
+import jwt from "jsonwebtoken";
 
-const localStorageAuthKey = "User";
-export function saveAuthorisation(user, token) {
-  console.log(user);
-  console.log(token);
-  const userDetails = {
-    displayName: user.displayName,
-    email: user.email,
-    isAuthorised: true,
-  };
+export function saveAuthorisation(token) {
   if (typeof Storage !== "undefined") {
     try {
-      user.isAuthorised = true;
       localStorage.setItem("User_Token", token);
-      localStorage.setItem(localStorageAuthKey, JSON.stringify(userDetails));
     } catch (ex) {
       console.log(ex);
     }
@@ -25,10 +16,7 @@ export function saveAuthorisation(user, token) {
 export function logout() {
   if (typeof Storage !== "undefined") {
     try {
-      const auth = JSON.parse(localStorage.getItem(localStorageAuthKey));
-      auth.isAuthorised = false;
-      auth.Name = "";
-      localStorage.setItem(localStorageAuthKey, JSON.stringify(auth));
+      localStorage.removeItem("User_Token");
     } catch (ex) {
       console.log(ex);
     }
@@ -37,32 +25,29 @@ export function logout() {
   }
 }
 
-export function getAuth() {
-  try {
-    if (typeof Storage !== "undefined") {
-      const auth = JSON.parse(localStorage.getItem(localStorageAuthKey));
-      if (auth === null) {
-        auth = {};
-        auth.isAuthorised = false;
-      }
-      return auth;
-    } else {
-      return false;
-    }
-  } catch (ex) {
-    return false;
-  }
-}
+// export function isAuthorised() {
+//   try {
+//     if (typeof Storage !== "undefined") {
+//       const token = JSON.parse(localStorage.getItem("User_Token"));
+//       console.log(token);
+//       return token || false;
+//     } else {
+//       return false;
+//     }
+//   } catch (ex) {
+//     return false;
+//   }
+// }
 
 export function isAuthorised() {
-  try {
-    if (typeof Storage !== "undefined") {
-      const auth = JSON.parse(localStorage.getItem(localStorageAuthKey));
-      return auth.isAuthorised || false;
-    } else {
-      return false;
-    }
-  } catch (ex) {
-    return false;
+  if (!localStorage) {
+    throw new Error("Local Storage Unavailable");
   }
+  const rawToken = localStorage.getItem("User_Token") || "";
+  const token = jwt.decode(rawToken);
+  if (!token || typeof token !== "object" || Date.now() > token["exp"] * 1000) {
+    localStorage.removeItem("User_Token");
+    return "";
+  }
+  return rawToken;
 }

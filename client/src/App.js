@@ -48,8 +48,8 @@ const useStyles = makeStyles((theme) => ({
   header: {
     height: theme.spacing(14),
     padding: theme.spacing(2),
-    color: theme.palette.primary.light,
-    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.primary.contrastText,
+    backgroundColor: "black",
   },
 }));
 
@@ -61,6 +61,7 @@ function App() {
         <UserStore>
           <Typography
             className={classes.header}
+            color="secondary"
             variant="h2"
             display="block"
             align="center"

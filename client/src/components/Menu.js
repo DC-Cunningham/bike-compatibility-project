@@ -35,7 +35,6 @@ TabPanel.propTypes = {
 };
 
 function a11yProps(index) {
-  console.log(index);
   return {
     id: `vertical-tab-${index}`,
     "aria-controls": `vertical-tabpanel-${index}`,
@@ -128,15 +127,15 @@ export default function VerticalTabs() {
         >
           <Tab label="Account" {...a11yProps(5)} />
         </NavLink>
-        {/* <NavLink
-          to="/about"
+        <NavLink
+          to="/signin"
           activeStyle={{
             fontWeight: "bold",
             color: "red",
           }}
         >
-          <Tab label="Item Seven" {...a11yProps(6)} />
-        </NavLink> */}
+          <Tab label="SignIn" {...a11yProps(6)} />
+        </NavLink>
       </Tabs>
       <TabPanel value={value} index={0}></TabPanel>
       <TabPanel value={value} index={1}></TabPanel>

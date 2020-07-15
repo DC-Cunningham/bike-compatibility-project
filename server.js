@@ -84,7 +84,7 @@ async function main() {
   app.post("/api/signup", async (req, res) => {
     console.log(req.body);
     const {
-      body: { email, password },
+      body: { name, email, password },
     } = req;
     if (!email || !password)
       return res.status(404).send("Invalid details. Please check again");
@@ -92,7 +92,7 @@ async function main() {
     const user = await User.findOne({ email });
     if (user) return res.status(404).send("Email already taken");
 
-    const newUser = await User.create({ email, password });
+    const newUser = await User.create({ name, email, password });
 
     const token = jsonwebtoken.sign({ userId: newUser.id }, JWT_SECRET, {
       expiresIn: 60 * 60 * 24 * 3,

@@ -15,12 +15,11 @@ const reducer = (state, action) => {
     case LOGIN_ACTION:
       return {
         ...state,
-        user: action.user,
+        user: action.currentUser,
         loading: false,
       };
 
     case LOGOUT_ACTION:
-      console.log(action);
       return {
         ...state,
         components: action.user,
@@ -42,7 +41,7 @@ const UserStore = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     user: {
       _id: 0,
-      DisplayName: "",
+      displayName: "",
       role: "",
       token: "",
     },
