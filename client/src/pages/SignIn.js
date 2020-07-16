@@ -14,6 +14,7 @@ import { useStoreContext } from "../utils/UserState";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
 import { LOGIN_ACTION } from "../utils/actions";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -61,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = () => {
   const classes = useStyles();
   const history = useHistory();
+  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [state, dispatch] = useStoreContext();
@@ -79,6 +81,7 @@ const SignIn = () => {
         email: email,
         password: password,
       });
+      setError("");
       console.log(data.data);
       const currentUser = {
         displayName: data.data.user.name,
@@ -89,7 +92,7 @@ const SignIn = () => {
       dispatch({ type: LOGIN_ACTION, currentUser });
       history.push("/");
     } catch (e) {
-      console.log(e); // TODO: Fix this
+      setError(e.response.data.message);
     }
   };
 
@@ -130,6 +133,7 @@ const SignIn = () => {
                   id="password"
                   autoComplete="current-password"
                 />
+                {error && <Alert severity="error">{error}</Alert>}
                 <Button
                   type="submit"
                   fullWidth
@@ -145,7 +149,7 @@ const SignIn = () => {
                 style={{
                   display: "flex",
                   flexDirection: "row",
-                  width: "60%",
+                  width: "100%",
                   justifyContent: "space-between",
                 }}
               >

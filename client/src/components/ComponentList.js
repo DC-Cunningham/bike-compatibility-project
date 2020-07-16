@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
   Table,
@@ -49,7 +48,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy, rowCount, onRequestSort } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -82,26 +81,6 @@ function EnhancedTableHead(props) {
     </TableHead>
   );
 }
-
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === "light"
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  title: {
-    flex: "1 1 100%",
-  },
-}));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -138,10 +117,6 @@ function ComponentList(props) {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredComponents, setFilteredComponents] = useState([]);
-
-  useEffect(() => {
-    showAllComponents();
-  }, []);
 
   function handleSearch(event) {
     setSearchTerm(event.target.value);
@@ -203,7 +178,7 @@ function ComponentList(props) {
           <br />
           <TextField
             value={searchTerm}
-            label="Filter"
+            label="Search for a component"
             variant="outlined"
             onChange={handleSearch}
             type="text"
@@ -226,7 +201,6 @@ function ComponentList(props) {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))

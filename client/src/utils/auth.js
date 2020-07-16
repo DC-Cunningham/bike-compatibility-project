@@ -14,7 +14,6 @@ export function saveAuthorisation(token) {
 
 export function logout() {
   if (typeof Storage !== "undefined") {
-    console.log("hit logout in auth");
     try {
       localStorage.removeItem("User_Token");
     } catch (ex) {

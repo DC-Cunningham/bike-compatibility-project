@@ -13,6 +13,7 @@ import {
 import API from "../utils/API";
 import { useStoreContext } from "../utils/UserState";
 import { LOGIN_ACTION } from "../utils/actions";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -66,11 +67,11 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVal, setPasswordVal] = useState("");
+  const [error, setError] = useState("");
   const [state, dispatch] = useStoreContext();
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(password);
     if (password === passwordVal) {
       authenticate({
         name: name,
@@ -79,7 +80,7 @@ const SignUp = () => {
         role: "user",
       });
     } else {
-      return console.log("Passwords do not match");
+      setError("Passwords do not match");
     }
   }
 
@@ -94,7 +95,7 @@ const SignUp = () => {
       dispatch({ type: LOGIN_ACTION, currentUser });
       history.push("/");
     } catch (e) {
-      console.log(e); // TODO: Fix this
+      setError(e.response.data.message);
     }
   };
 
@@ -158,6 +159,7 @@ const SignUp = () => {
                   id="password_confirm"
                   autoComplete="current-password"
                 />
+                {error && <Alert severity="error">{error}</Alert>}
                 <Button
                   type="submit"
                   fullWidth

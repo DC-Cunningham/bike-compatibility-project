@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     margin: theme.spacing(3),
+    backgroundColor: theme.palette.primary,
   },
 }));
 
@@ -59,13 +60,24 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/home"
+            style={{
+              color: "black",
+            }}
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
-              <Tab label="Home" />
+              <Tab
+                disableFocusRipple
+                indicatorColor="primary"
+                label="Home"
+                textColorPrimary
+              />
             </Hidden>
             <Hidden mdUp>
               <HomeIcon />
@@ -74,9 +86,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/about"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -89,9 +104,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/components"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -104,9 +122,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/add_component"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -119,9 +140,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/edit_component"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -134,9 +158,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/account"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -162,9 +189,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/home"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -177,9 +207,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/about"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -192,9 +225,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/components"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -207,9 +243,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/account"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -235,9 +274,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/home"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -250,9 +292,12 @@ export default function VerticalTabs() {
           <NavLink
             className={classes.tab}
             to="/about"
+            style={{
+              color: "black",
+            }}
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
             }}
           >
             <Hidden smDown>
@@ -267,7 +312,7 @@ export default function VerticalTabs() {
             to="/signin"
             activeStyle={{
               fontWeight: "bold",
-              color: "red",
+              color: "blue",
               indicatorStyle: "",
             }}
           >

@@ -20,10 +20,18 @@ mongoose.set("useFindAndModify", false);
 app.use(cors());
 
 async function main() {
-  await mongoose.connect("mongodb://localhost/bikeComponentDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect(
+    process.env.MONGODB_URI ===
+      "mongodb://DCRevResLabs:r3volu7ion@ds351455.mlab.com:51455/heroku_kwq9l8jd",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  );
+
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+  }
 
   const authMiddleWare = async (req, res, done) => {
     const bearerToken = req.headers.authorization;
@@ -38,9 +46,6 @@ async function main() {
   };
 
   // Serve up static assets
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-  }
   // Add routes, both API and view
 
   app.post("/api/login", async (req, res) => {
@@ -49,19 +54,20 @@ async function main() {
     } = req;
     if (!email || !password) {
       console.log("invalid user or password");
-      return res.status(404).send("Invalid email or password");
+      // return res.status(401).send("Invalid email or password");
+      return res.send(401, { message: "invalid user or password" });
     }
 
     const user = await User.findOne({ email });
     if (!user) {
       console.log("User not found");
-      return res.status(404).send("Invalid email or password");
+      return res.send(401, { message: "invalid user or password" });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       console.log("Invalid password");
-      return res.status(404).send("Invalid email or password");
+      return res.send(401, { message: "invalid user or password" });
     }
 
     const token = jsonwebtoken.sign({ userId: user.id }, JWT_SECRET, {
@@ -85,10 +91,10 @@ async function main() {
       body: { name, email, password },
     } = req;
     if (!email || !password)
-      return res.status(404).send("Invalid details. Please check again");
+      return res.status(401).send("Invalid details. Please check again");
 
     const user = await User.findOne({ email });
-    if (user) return res.status(404).send("Email already taken");
+    if (user) return res.status(409).send("Email already exists");
 
     const newUser = await User.create({ name, email, password });
 
@@ -104,7 +110,6 @@ async function main() {
   });
 
   app.get("/api/me", authMiddleWare, (req, res) => {
-    console.log(res.user);
     return res.json(res.user);
   });
 
@@ -118,10 +123,10 @@ async function main() {
       body: { name, type, definition, wikiLink },
     } = req;
     if (!name || !type)
-      return res.status(404).send("Component name and type are required");
+      return res.status(401).send("Component name and type are required");
 
     const component = await Component.findOne({ name });
-    if (component) return res.status(404).send("Component already exists");
+    if (component) return res.status(409).send("Component already exists");
 
     const newComponent = await Component.create({
       name,
@@ -139,7 +144,7 @@ async function main() {
 
   app.put("/api/components", async (req, res) => {
     if (!req.body.name || !req.body.type)
-      return res.status(404).send("Component name and type are required");
+      return res.status(401).send("Component name and type are required");
 
     const updateComponent = await Component.findOneAndUpdate(
       { _id: req.body._id },
