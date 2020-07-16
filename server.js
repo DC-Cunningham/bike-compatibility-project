@@ -143,14 +143,11 @@ async function main() {
     if (!req.body.name || !req.body.type)
       return res.status(404).send("Component name and type are required");
 
-    const component = await Component.findOne({ name: req.body.name });
-    if (!component)
-      return res.status(404).send("A component with this name already exists");
-
     const updateComponent = await Component.findOneAndUpdate(
-      { _id: req.body.id },
+      { _id: req.body._id },
       req.body
-    ).populate("pointsOfContact");
+    );
+    console.log(res);
     return res.json({
       data: {
         component: updateComponent,

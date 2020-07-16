@@ -7,8 +7,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core/";
-import Page from "material-ui-shell/lib/containers/Page/Page";
-import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
+import DefineComponentForm from "../components/DefineComponentForm";
 import LinkComponentForm from "../components/LinkComponentForm";
 import SubmitComponentForm from "../components/SubmitComponentForm";
 import ComponentCard from "../components/ComponentCard";
@@ -100,7 +99,7 @@ function EditComponent() {
               </>
             )}
             {formState.formStep === 2 && (
-              <LinkComponentForm
+              <DefineComponentForm
                 name="a point of contact"
                 relationship="pointsOfContact"
                 items={formState.items}
@@ -116,23 +115,24 @@ function EditComponent() {
             )}
             {formState.formStep === 3 && (
               <LinkComponentForm
-                name=" an influence"
-                relationship="influencers"
+                name="a point of contact"
+                relationship="pointsOfContact"
                 items={formState.items}
                 currentItem={formState.currentItem}
-                setFormState={(value) =>
+                setFormState={(values) =>
                   setFormState({
                     ...formState,
-                    currentItem: { ...formState.currentItem, ...value },
+                    currentItem: { ...formState.currentItem, ...values },
                     formStep: 4,
                   })
                 }
               />
             )}
             {formState.formStep === 4 && (
-              <SubmitComponentForm
+              <LinkComponentForm
+                name=" an influence"
+                relationship="influencers"
                 items={formState.items}
-                term="edited"
                 currentItem={formState.currentItem}
                 setFormState={(value) =>
                   setFormState({
@@ -144,6 +144,20 @@ function EditComponent() {
               />
             )}
             {formState.formStep === 5 && (
+              <SubmitComponentForm
+                items={formState.items}
+                term="edited"
+                currentItem={formState.currentItem}
+                setFormState={(value) =>
+                  setFormState({
+                    ...formState,
+                    currentItem: { ...formState.currentItem, ...value },
+                    formStep: 6,
+                  })
+                }
+              />
+            )}
+            {formState.formStep === 6 && (
               <>
                 <Box textAlign="center">
                   <Typography variant="h3">

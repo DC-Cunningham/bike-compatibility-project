@@ -38,22 +38,28 @@ const useStyles = makeStyles((theme) => ({
 
 function DefineComponentForm(props) {
   const classes = useStyles();
-  const nameRef = useRef();
-  const [type, setType] = useState("");
-  const definitionRef = useRef();
-  const wikiLinkRef = useRef();
+  const [item, setItem] = useState({
+    id: props.currentItem._id,
+    name: props.currentItem.name,
+    type: props.currentItem.type,
+    definition: props.currentItem.definition,
+    wikiLink: props.currentItem.wiki,
+  });
 
   const handleChange = (event) => {
-    setType(event.target.value);
+    const { name, value } = event.target;
+    console.log(event.target);
+    setItem({ ...item, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    API.saveComponent({
-      name: nameRef.current.value,
-      type: type,
-      definition: definitionRef.current.value,
-      wikiLink: wikiLinkRef.current.value,
+    API.updateComponent({
+      _id: item.id,
+      name: item.name,
+      type: item.type,
+      definition: item.definition,
+      wikiLink: item.wikiLink,
     })
       .then((result) => {
         console.log(result);
@@ -67,10 +73,12 @@ function DefineComponentForm(props) {
       <Paper className={classes.paper} elevation={6}>
         <form onSubmit={handleSubmit}>
           <Typography align="center" variant="h3">
-            Define the new component
+            Define the component
           </Typography>
           <TextField
-            inputRef={nameRef}
+            name="name"
+            value={item.name}
+            onChange={handleChange}
             label="Component Name (required)"
             variant="outlined"
             margin="normal"
@@ -78,10 +86,10 @@ function DefineComponentForm(props) {
           />
           <FormHelperText>Component Type (required)</FormHelperText>
           <Select
-            name="Component Type"
+            name="type"
             required
             fullWidth
-            value={type}
+            value={item.type}
             onChange={handleChange}
           >
             <MenuItem value="Brakes">Brakes</MenuItem>
@@ -92,14 +100,18 @@ function DefineComponentForm(props) {
             <MenuItem value="Wheel">Wheel</MenuItem>
           </Select>
           <TextField
-            inputRef={definitionRef}
+            name="definition"
+            value={item.definition}
+            onChange={handleChange}
             label="Definition"
             variant="outlined"
             margin="normal"
             fullWidth
           />
           <TextField
-            inputRef={wikiLinkRef}
+            name="wikiLink"
+            value={item.wikiLink}
+            onChange={handleChange}
             label="Wikipedia Link"
             variant="outlined"
             margin="normal"

@@ -1,22 +1,3 @@
-// import React, { Component } from "react";
-// import App from "base-shell/lib";
-// import { render } from "react-dom";
-// import MUIConfig from "material-ui-shell/lib";
-// import merge from "base-shell/lib/utils/config";
-// import { ComponentStore } from "./utils/GlobalState";
-// import _config from "./config";
-
-// const config = merge(MUIConfig, _config);
-
-// export default class Demo extends Component {
-//   render() {
-//     return (
-//       <ComponentStore>
-//         <App config={config} />
-//       </ComponentStore>
-//     );
-//   }
-// }
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Typography, makeStyles } from "@material-ui/core";
@@ -65,15 +46,15 @@ function App() {
     console.log(token);
 
     // if (token)
-    // API.getUserBasedOnToken(token).then((res) => {
-    //   console.log(res);
+    //   API.getUserBasedOnToken(token).then((res) => {
+    //     console.log(res);
 
-    // let currentUser = {
-    //   displayName: res.data.name,
-    //   role: res.data.role,
-    //   token: token,
-    // };
-    // dispatch({ type: LOGIN_ACTION, currentUser });
+    //     let currentUser = {
+    //       displayName: res.data.name,
+    //       role: res.data.role,
+    //       token: token,
+    //     };
+    //     dispatch({ type: LOGIN_ACTION, currentUser });
     //   });
     // else return;
   }, []);

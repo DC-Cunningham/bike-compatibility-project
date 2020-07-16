@@ -106,7 +106,6 @@ function LinkComponentForm(props) {
       ...props.currentItem,
       [props.relationship]: selectedItems,
     };
-    console.log(item);
     props.setFormState(item);
   };
 
