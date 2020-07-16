@@ -20,7 +20,6 @@ export default {
     return axios.post("/api/components", componentData);
   },
   updateComponent: function (componentData) {
-    console.log(componentData);
     return axios.put("/api/components", componentData);
   },
   loginAPI: async function (data) {
@@ -41,7 +40,6 @@ export default {
     });
   },
   getUserBasedOnToken: function (token) {
-    console.log("inside API");
     return axios.get("/api/me", {
       headers: {
         Authorization: "Bearer " + token,

@@ -43,7 +43,6 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("User_Token");
-    console.log(token);
     if (token) {
       API.getUserBasedOnToken(token).then((res) => {
         console.log(res);

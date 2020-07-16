@@ -104,6 +104,7 @@ async function main() {
   });
 
   app.get("/api/me", authMiddleWare, (req, res) => {
+    console.log(res.user);
     return res.json(res.user);
   });
 
