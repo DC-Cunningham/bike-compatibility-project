@@ -7,6 +7,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
+import HomeImage from "../assets/TBCP_Homepage.png";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,11 +27,10 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(0),
     },
   },
-  form: {
-    marginTop: theme.spacing(4),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
+  image: {
+    height: 550,
+    width: "100%",
+    objectFit: "cover",
   },
   container: {
     display: "flex",
@@ -57,18 +57,15 @@ function HomePage() {
   return (
     <>
       <CssBaseline />
-      <Box>
-        <Container maxWidth="md">
+      <Container maxWidth="md">
+        <Box>
           <Paper className={classes.paper} elevation={6}>
-            {/* <Typography
-          variant="h1"
-          // style={{ backgroundColor: "#cfe8fc", height: "100vh" }}
-        >
-          The Bike Compatibility Project
-        </Typography> */}
+            <Box>
+              <img className={classes.image} src={HomeImage} />
+            </Box>
           </Paper>
-        </Container>
-      </Box>
+        </Box>
+      </Container>
     </>
   );
 }
