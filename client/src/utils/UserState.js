@@ -31,7 +31,7 @@ const reducer = (state, action) => {
   }
 };
 
-const UserStore = ({ value = [], ...props }) => {
+const UserState = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     user: {
       _id: 0,
@@ -49,4 +49,4 @@ const useStoreContext = () => {
   return useContext(StoreContext);
 };
 
-export { UserStore, useStoreContext };
+export { UserState, useStoreContext };

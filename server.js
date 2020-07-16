@@ -26,7 +26,6 @@ async function main() {
   });
 
   const authMiddleWare = async (req, res, done) => {
-    console.log(req.headers.authorization);
     const bearerToken = req.headers.authorization;
     if (!bearerToken) return done(true, null);
     const token = bearerToken.split(" ");
@@ -34,7 +33,7 @@ async function main() {
     const { userId } = jsonwebtoken.verify(token[1], JWT_SECRET);
     const user = await User.findOne({ _id: userId });
     if (!user) return done(true, null);
-    req.user = user;
+    res.user = user;
     return done(null, user);
   };
 
@@ -105,7 +104,7 @@ async function main() {
   });
 
   app.get("/api/me", authMiddleWare, (req, res) => {
-    return res.json({ data: "you got mail" });
+    return res.json(res.user);
   });
 
   app.get("/api/components", async (req, res) => {
@@ -138,8 +137,6 @@ async function main() {
   });
 
   app.put("/api/components", async (req, res) => {
-    console.log("update in server");
-    console.log(req.body);
     if (!req.body.name || !req.body.type)
       return res.status(404).send("Component name and type are required");
 
@@ -147,7 +144,6 @@ async function main() {
       { _id: req.body._id },
       req.body
     );
-    console.log(res);
     return res.json({
       data: {
         component: updateComponent,

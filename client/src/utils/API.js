@@ -41,8 +41,8 @@ export default {
     });
   },
   getUserBasedOnToken: function (token) {
-    console.log(token);
-    return axios.get("/api/user", {
+    console.log("inside API");
+    return axios.get("/api/me", {
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
