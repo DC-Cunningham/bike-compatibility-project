@@ -127,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: "100%",
-    marginTop: theme.spacing(12),
+    marginTop: theme.spacing(4),
     marginBottom: theme.spacing(2),
   },
   table: {

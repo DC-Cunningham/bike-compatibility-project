@@ -7,7 +7,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core/";
-import DefineComponentForm from "../components/DefineComponentForm";
+import RefineComponentForm from "../components/RefineComponentForm";
 import LinkComponentForm from "../components/LinkComponentForm";
 import SubmitComponentForm from "../components/SubmitComponentForm";
 import ComponentCard from "../components/ComponentCard";
@@ -99,7 +99,7 @@ function EditComponent() {
               </>
             )}
             {formState.formStep === 2 && (
-              <DefineComponentForm
+              <RefineComponentForm
                 name="a point of contact"
                 relationship="pointsOfContact"
                 items={formState.items}

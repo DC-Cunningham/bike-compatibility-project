@@ -39,10 +39,11 @@ const useStyles = makeStyles((theme) => ({
 function RefineComponentForm(props) {
   const classes = useStyles();
   const [item, setItem] = useState({
-    name: "",
-    type: "",
-    definition: "",
-    wikiLink: "",
+    id: props.currentItem._id,
+    name: props.currentItem.name,
+    type: props.currentItem.type,
+    definition: props.currentItem.definition,
+    wikiLink: props.currentItem.wiki,
   });
 
   const handleChange = (event) => {
