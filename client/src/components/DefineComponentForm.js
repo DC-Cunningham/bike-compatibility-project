@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: "100%",
+    padding: theme.spacing(2),
     marginBottom: theme.spacing(2),
   },
   table: {
@@ -39,7 +40,8 @@ function DefineComponentForm(props) {
   const classes = useStyles();
   const nameRef = useRef();
   const [type, setType] = useState("");
-  const descriptionRef = useRef();
+  const definitionRef = useRef();
+  const wikiLinkRef = useRef();
 
   const handleChange = (event) => {
     setType(event.target.value);
@@ -50,7 +52,8 @@ function DefineComponentForm(props) {
     API.saveComponent({
       name: nameRef.current.value,
       type: type,
-      description: descriptionRef.current.value,
+      definition: definitionRef.current.value,
+      wikiLink: wikiLinkRef.current.value,
     })
       .then((result) => {
         console.log(result);
@@ -61,7 +64,7 @@ function DefineComponentForm(props) {
 
   return (
     <>
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={6}>
         <form onSubmit={handleSubmit}>
           <Typography align="center" variant="h3">
             Define the new component
@@ -89,8 +92,15 @@ function DefineComponentForm(props) {
             <MenuItem value="Wheel">Wheel</MenuItem>
           </Select>
           <TextField
-            inputRef={descriptionRef}
+            inputRef={definitionRef}
             label="Definition"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+          />
+          <TextField
+            inputRef={wikiLinkRef}
+            label="Wikipedia Link"
             variant="outlined"
             margin="normal"
             fullWidth

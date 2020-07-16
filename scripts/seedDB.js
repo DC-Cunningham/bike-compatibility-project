@@ -13,7 +13,8 @@ const componentSeed = [
     type: "Drivetrain",
     pointsOfContact: [],
     influencers: [],
-    description: "",
+    definition: "",
+    wikiLink: "",
     date: new Date(Date.now()),
   },
   {
@@ -21,7 +22,8 @@ const componentSeed = [
     type: "Drivetrain",
     pointsOfContact: [],
     influencers: [],
-    description: "",
+    definition: "",
+    wikiLink: "",
     date: new Date(Date.now()),
   },
   {
@@ -29,7 +31,8 @@ const componentSeed = [
     type: "Drivetrain",
     pointsOfContact: [],
     influencers: [],
-    description: "",
+    definition: "",
+    wikiLink: "",
     date: new Date(Date.now()),
   },
   {
@@ -37,7 +40,8 @@ const componentSeed = [
     type: "Cockpit",
     pointsOfContact: [],
     influencers: [],
-    description: "",
+    definition: "",
+    wikiLink: "",
     date: new Date(Date.now()),
   },
   {
@@ -45,7 +49,8 @@ const componentSeed = [
     type: "Drivetrain",
     pointsOfContact: [],
     influencers: [],
-    description: "",
+    definition: "",
+    wikiLink: "",
     date: new Date(Date.now()),
   },
 ];

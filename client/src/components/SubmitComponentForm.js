@@ -13,6 +13,7 @@ function SubmitComponentForm(props) {
       description: props.currentItem.description,
       pointsOfContact: props.currentItem.pointsOfContact,
       influencers: props.currentItem.influencers,
+      wikiLink: props.currentItem.wikiLink,
     })
       .then((result) => {
         console.log(result);

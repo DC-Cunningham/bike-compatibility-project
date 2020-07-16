@@ -115,7 +115,7 @@ async function main() {
 
   app.post("/api/components", async (req, res) => {
     const {
-      body: { name, type, description },
+      body: { name, type, definition, wikiLink },
     } = req;
     if (!name || !type)
       return res.status(404).send("Component name and type are required");
@@ -123,7 +123,12 @@ async function main() {
     const component = await Component.findOne({ name });
     if (component) return res.status(404).send("Component already exists");
 
-    const newComponent = await Component.create({ name, type, description });
+    const newComponent = await Component.create({
+      name,
+      type,
+      definition,
+      wikiLink,
+    });
 
     return res.json({
       data: {

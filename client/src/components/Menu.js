@@ -1,43 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useStoreContext } from "../utils/UserState";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import HomeIcon from "@material-ui/icons/Home";
 import API from "../utils/API";
-import { logout } from "../utils/auth";
 import { LOGOUT_ACTION } from "../utils/actions";
-import { useHistory } from "react-router-dom";
-
-// function TabPanel(props) {
-//   const { children, value, index, ...other } = props;
-//   const location = useLocation();
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`vertical-tabpanel-${index}`}
-//       aria-labelledby={`vertical-tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && (
-//         <Box p={3}>
-//           <Typography>{children}</Typography>
-//         </Box>
-//       )}
-//     </div>
-//   );
-// }
-
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.any.isRequired,
-//   value: PropTypes.any.isRequired,
-// };
+import { Hidden, Tab } from "@material-ui/core";
+import HomeIcon from "@material-ui/icons/Home";
+import InfoOutlined from "@material-ui/icons/InfoOutlined";
+import StorageIcon from "@material-ui/icons/Storage";
+import AddBoxIcon from "@material-ui/icons/AddBox";
+import EditIcon from "@material-ui/icons/Edit";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
   },
   tabs: {
     borderRight: `3px solid ${theme.palette.divider}`,
+  },
+  tab: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: theme.spacing(3),
   },
 }));
 
@@ -76,126 +57,213 @@ export default function VerticalTabs() {
       return (
         <>
           <NavLink
+            className={classes.tab}
             to="/home"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="Home" />
+            <Hidden smDown>
+              <Tab label="Home" />
+            </Hidden>
+            <Hidden mdUp>
+              <HomeIcon />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/about"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="About"></Tab>
+            <Hidden smDown>
+              <Tab label="About" />
+            </Hidden>
+            <Hidden mdUp>
+              <InfoOutlined />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/components"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="Component Database" />
+            <Hidden smDown>
+              <Tab label="Component Database" />
+            </Hidden>
+            <Hidden mdUp>
+              <StorageIcon />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/add_component"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="Add a Component" />
+            <Hidden smDown>
+              <Tab label="Add a Component" />
+            </Hidden>
+            <Hidden mdUp>
+              <AddBoxIcon />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/edit_component"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="Edit a Component" />
+            <Hidden smDown>
+              <Tab label="Edit a Component" />
+            </Hidden>
+            <Hidden mdUp>
+              <EditIcon />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/account"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="Account" />
+            <Hidden smDown>
+              <Tab label="Account" />
+            </Hidden>
+            <Hidden mdUp>
+              <AccountBoxIcon />
+            </Hidden>
           </NavLink>
-          <Tab label="Logout" onClick={logout} />
+          <Hidden smDown>
+            <Tab label="Logout" onClick={logout} />
+          </Hidden>
+          <Hidden mdUp>
+            <div className={classes.tab}>
+              <ExitToAppIcon />
+            </div>
+          </Hidden>
         </>
       );
     } else if (state.user.role === "user") {
       return (
         <>
           <NavLink
+            className={classes.tab}
             to="/home"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="Home" />
+            <Hidden smDown>
+              <Tab label="Home" />
+            </Hidden>
+            <Hidden mdUp>
+              <HomeIcon />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/about"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="About"></Tab>
+            <Hidden smDown>
+              <Tab label="About" />
+            </Hidden>
+            <Hidden mdUp>
+              <InfoOutlined />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/components"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="Component Database" />
+            <Hidden smDown>
+              <Tab label="Component Database" />
+            </Hidden>
+            <Hidden mdUp>
+              <StorageIcon />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/account"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="Account" />
+            <Hidden smDown>
+              <Tab label="Account" />
+            </Hidden>
+            <Hidden mdUp>
+              <AccountBoxIcon />
+            </Hidden>
           </NavLink>
-          <Tab label="Logout" onClick={logout} />
+          <Hidden smDown>
+            <Tab className={classes.logout} label="Logout" onClick={logout} />
+          </Hidden>
+          <Hidden mdUp>
+            <div className={classes.tab}>
+              <ExitToAppIcon />
+            </div>
+          </Hidden>
         </>
       );
     } else {
       return (
         <>
           <NavLink
+            className={classes.tab}
             to="/home"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="Home" />
+            <Hidden smDown>
+              <Tab label="Home" />
+            </Hidden>
+            <Hidden mdUp>
+              <HomeIcon />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/about"
             activeStyle={{
               fontWeight: "bold",
               color: "red",
             }}
           >
-            <Tab label="About"></Tab>
+            <Hidden smDown>
+              <Tab label="About" />
+            </Hidden>
+            <Hidden mdUp>
+              <InfoOutlined />
+            </Hidden>
           </NavLink>
           <NavLink
+            className={classes.tab}
             to="/signin"
             activeStyle={{
               fontWeight: "bold",
@@ -203,7 +271,12 @@ export default function VerticalTabs() {
               indicatorStyle: "",
             }}
           >
-            <Tab label="SignIn" />
+            <Hidden smDown>
+              <Tab label="Sign In" />
+            </Hidden>
+            <Hidden mdUp>
+              <AccountBoxIcon />
+            </Hidden>
           </NavLink>
         </>
       );

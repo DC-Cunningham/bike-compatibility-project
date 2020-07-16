@@ -1,7 +1,5 @@
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { saveAuthorisation, isAuthorised } from "../utils/auth";
-import Page from "material-ui-shell/lib/containers/Page/Page";
-import React, { useState, useContext } from "react";
 import {
   Box,
   Container,
@@ -15,25 +13,25 @@ import {
 import API from "../utils/API";
 import { useStoreContext } from "../utils/UserState";
 import { LOGIN_ACTION } from "../utils/actions";
-// import MenuContext from "material-ui-shell/lib/providers/Menu/Context";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: "auto",
+    marginTop: theme.spacing(8),
     marginLeft: theme.spacing(20),
     marginRight: theme.spacing(3),
-    [theme.breakpoints.down(620 + theme.spacing(6))]: {
-      width: "75%",
-      marginLeft: theme.spacing(10),
-      marginRight: theme.spacing(1),
-    },
-    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,
+    [theme.breakpoints.down(600)]: {
+      width: "75%",
+      marginTop: theme.spacing(4),
+      marginLeft: theme.spacing(10),
+      marginRight: theme.spacing(1),
+    },
   },
   form: {
     marginTop: theme.spacing(4),
@@ -52,10 +50,11 @@ const useStyles = makeStyles((theme) => ({
     padding: `${theme.spacing(8)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,
-    [theme.breakpoints.down(620)]: {
+    [theme.breakpoints.down(600)]: {
       width: "auto",
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
+      paddingTop: theme.spacing(1),
     },
   },
 }));
@@ -68,7 +67,6 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordVal, setPasswordVal] = useState("");
   const [state, dispatch] = useStoreContext();
-  // const { setAuthMenuOpen } = useContext(MenuContext);
 
   function handleSubmit(event) {
     event.preventDefault();

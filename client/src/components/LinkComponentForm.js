@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
   },
   gridList: {
     width: "100%",
-    // height: 450,
   },
 }));
 
@@ -49,7 +48,7 @@ function LinkComponentForm(props) {
     ) : (
       <GridListTile cols={3}>
         <Typography align="center" color="primary" variant="h5">
-          There are no selected components yet
+          There are no components selected as {props.name}.
         </Typography>
       </GridListTile>
     );
@@ -79,7 +78,7 @@ function LinkComponentForm(props) {
     ) : (
       <GridListTile cols={3}>
         <Typography align="center" color="secondary" variant="h5">
-          There are no more components available
+          There are no more components available to be {props.name}
         </Typography>
       </GridListTile>
     );
@@ -107,6 +106,7 @@ function LinkComponentForm(props) {
       ...props.currentItem,
       [props.relationship]: selectedItems,
     };
+    console.log(item);
     props.setFormState(item);
   };
 

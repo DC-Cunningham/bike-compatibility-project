@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAuth, saveAuthorisation, isAuthorised, logout } from "./auth";
+import { saveAuthorisation, isAuthorised, logout } from "./auth";
 
 export default {
   // Gets all components
@@ -29,9 +29,7 @@ export default {
     return response;
   },
   registerAPI: async function (data) {
-    console.log(data);
     const response = await axios.post("/api/signup", data);
-    console.log(response);
     saveAuthorisation(response.data.data.token);
     return response;
   },
@@ -43,6 +41,7 @@ export default {
     });
   },
   getUserBasedOnToken: function (token) {
+    console.log(token);
     return axios.get("/api/user", {
       headers: {
         Authorization: "Bearer " + token,

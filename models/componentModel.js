@@ -10,7 +10,8 @@ const componentSchema = new Schema({
   },
   pointsOfContact: [],
   influencers: [],
-  description: String,
+  definition: String,
+  wikiLink: String,
   date: { type: Date, default: Date.now },
 });
 

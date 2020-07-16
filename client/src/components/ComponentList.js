@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -15,12 +14,7 @@ import {
   FormControl,
   Paper,
   TextField,
-  FormControlLabel,
-  Switch,
 } from "@material-ui/core/";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import ComponentCard from "./ComponentCard";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -137,7 +131,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 750,
+    padding: theme.spacing(4),
+    // minWidth: 750,
   },
   visuallyHidden: {
     border: 0,
@@ -241,7 +236,7 @@ function ComponentList(props) {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size="medium"
+            size="small"
             aria-label="enhanced table"
           >
             <EnhancedTableHead

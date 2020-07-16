@@ -1,4 +1,3 @@
-import API from "./API.js";
 import jwt from "jsonwebtoken";
 
 export function saveAuthorisation(token) {

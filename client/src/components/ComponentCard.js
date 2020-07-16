@@ -5,6 +5,7 @@ import {
   GridListTile,
   GridList,
   Icon,
+  makeStyles,
 } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -13,7 +14,7 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Icons from "../assets/images";
 
-const useStyles = () => ({
+const useStyles = makeStyles((theme) => ({
   card: {
     margin: "auto",
     transition: "0.3s",
@@ -22,7 +23,10 @@ const useStyles = () => ({
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
     },
   },
-});
+  gridList: {
+    padding: theme.spacing(2),
+  },
+}));
 
 function ComponentCard(props) {
   const classes = useStyles();
@@ -33,6 +37,7 @@ function ComponentCard(props) {
     description,
     pointsOfContact,
     influencers,
+    wikiLink,
   } = props.currentItem;
 
   const POCArray = () => {
@@ -129,19 +134,23 @@ function ComponentCard(props) {
             {InfArray()}
           </GridList>
           <Divider className={classes.divider} light />
-          <Button
-            target="_blank"
-            variant="contained"
-            href="https://en.wikipedia.org/wiki/Bicycle_handlebar"
-            color="primary"
-          >
-            See Component on Wikipedia
-          </Button>
+          {/* {if (wikilink !== "") {
+            return (
+            <Button
+              target="_blank"
+              variant="contained"
+              href="https://en.wikipedia.org/wiki/Bicycle_handlebar"
+            >
+              See Component on Wikipedia
+            </Button>
+          ) else {
+            return null} */}
         </CardContent>
       </Card>
       <Button
         fullWidth
-        variant="outlined"
+        variant="contained"
+        color="primary"
         onClick={(event) => handleBackClick()}
       >
         Back to search

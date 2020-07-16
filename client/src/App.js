@@ -17,11 +17,13 @@
 //     );
 //   }
 // }
-import React, { Component, lazy } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Typography, makeStyles } from "@material-ui/core";
 import Menu from "./components/Menu";
-import { UserStore } from "./utils/UserState";
+import { UserStore, useStoreContext } from "./utils/UserState";
+import API from "./utils/API";
+import { LOGIN_ACTION } from "./utils/actions";
 import About from "./pages/About";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -36,14 +38,13 @@ import TBCPIcon from "./assets/TheBikeCompatibilityProject-Icon-W_200x200.png";
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    height: theme.spacing(14),
+    height: "100%",
     padding: theme.spacing(2),
     color: theme.palette.primary.contrastText,
     backgroundColor: "black",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    height: `100%`,
     [theme.breakpoints.down(620)]: {
       fontSize: theme.spacing(4),
     },
@@ -57,6 +58,26 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  // const [state, dispatch] = useStoreContext();
+
+  useEffect(() => {
+    const token = localStorage.getItem("User_Token");
+    console.log(token);
+
+    // if (token)
+    // API.getUserBasedOnToken(token).then((res) => {
+    //   console.log(res);
+
+    // let currentUser = {
+    //   displayName: res.data.name,
+    //   role: res.data.role,
+    //   token: token,
+    // };
+    // dispatch({ type: LOGIN_ACTION, currentUser });
+    //   });
+    // else return;
+  }, []);
+
   return (
     <BrowserRouter>
       <div>
@@ -68,7 +89,7 @@ function App() {
             display="block"
             align="center"
           >
-            <img src={TBCPIcon} className={classes.icon} />
+            <img src={TBCPIcon} className={classes.icon} alt="Project Icon" />
             The Bike Compatibility Project
           </Typography>
           <Menu />
