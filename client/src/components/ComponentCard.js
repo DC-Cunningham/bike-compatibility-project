@@ -1,4 +1,6 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+
 import {
   Avatar,
   Button,
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ComponentCard(props) {
   const classes = useStyles();
+  const history = useHistory();
 
   const {
     name,
@@ -97,6 +100,7 @@ function ComponentCard(props) {
 
   const handleBackClick = (event) => {
     props.resetFormState();
+    history.push("/components");
   };
 
   return (
@@ -153,7 +157,7 @@ function ComponentCard(props) {
         color="primary"
         onClick={(event) => handleBackClick()}
       >
-        Back to search
+        Back to the database
       </Button>
     </div>
   );

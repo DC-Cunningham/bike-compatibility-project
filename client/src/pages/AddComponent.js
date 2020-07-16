@@ -139,6 +139,13 @@ function AddComponent(props) {
                 <h1>Your Component has been Submitted</h1>
                 <ComponentCard
                   currentItem={formState.currentItem}
+                  resetFormState={(value) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: { ...formState.currentItem, ...value },
+                      formStep: 1,
+                    })
+                  }
                 ></ComponentCard>
               </>
             )}

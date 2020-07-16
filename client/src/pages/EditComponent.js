@@ -152,6 +152,13 @@ function EditComponent() {
                 </Box>
                 <ComponentCard
                   currentItem={formState.currentItem}
+                  resetFormState={(value) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: { ...formState.currentItem, ...value },
+                      formStep: 1,
+                    })
+                  }
                 ></ComponentCard>
               </>
             )}
