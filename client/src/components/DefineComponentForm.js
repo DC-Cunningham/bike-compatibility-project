@@ -53,8 +53,7 @@ function RefineComponentForm(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    API.updateComponent({
-      _id: item.id,
+    API.saveComponent({
       name: item.name,
       type: item.type,
       definition: item.definition,
