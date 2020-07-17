@@ -15,7 +15,6 @@ import Components from "./pages/Components";
 import PasswordReset from "./pages/PasswordReset";
 import PageNotFound from "./pages/PageNotFound";
 import Account from "./pages/Account";
-import TBCPIcon from "./assets/TheBikeCompatibilityProject-Icon-W_200x200.png";
 import Footer from "./components/Footer";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,17 +22,16 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     padding: theme.spacing(2),
     color: theme.palette.primary.contrastText,
-    backgroundColor: "black",
+    background: "linear-gradient(90deg, #ffffff 10%, #000000 100%)",
+    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    [theme.breakpoints.down(620)]: {
+    paddingLeft: theme.spacing(30),
+    [theme.breakpoints.down(960)]: {
+      height: "75px",
+      paddingLeft: theme.spacing(10),
       fontSize: theme.spacing(4),
-    },
-  },
-  icon: {
-    [theme.breakpoints.down(620)]: {
-      width: 100,
     },
   },
 }));
@@ -62,6 +60,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
+        <Menu />
         <Typography
           className={classes.header}
           color="secondary"
@@ -69,10 +68,8 @@ function App() {
           display="block"
           align="center"
         >
-          <img src={TBCPIcon} className={classes.icon} alt="Project Icon" />
           The Bike Compatibility Project
         </Typography>
-        <Menu />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/home" component={HomePage} />

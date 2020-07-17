@@ -13,18 +13,16 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import EditIcon from "@material-ui/icons/Edit";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import TBCPIcon from "../assets/TheBikeCompatibilityProject-Icon-B_200x200.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    position: "fixed",
+    position: "absolute",
     backgroundColor: theme.palette.background.paper,
     display: "flex",
     height: "100vh",
     textDecoration: "none",
-  },
-  tabs: {
-    borderRight: `3px solid ${theme.palette.divider}`,
   },
   tab: {
     display: "flex",
@@ -33,6 +31,12 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3),
     backgroundColor: theme.palette.primary,
     textDecoration: "none",
+  },
+  icon: {
+    width: "150px",
+    [theme.breakpoints.down(960)]: {
+      width: "75px",
+    },
   },
 }));
 
@@ -343,8 +347,10 @@ export default function VerticalTabs() {
         value={value}
         onChange={handleChange}
         aria-label="Menu tabs"
-        className={classes.tabs}
       >
+        <div align="center">
+          <img src={TBCPIcon} className={classes.icon} alt="Project Icon" />
+        </div>
         {signinMenu()}
       </Tabs>
     </div>
