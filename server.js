@@ -121,10 +121,10 @@ async function main() {
       body: { name, type, definition, wikiLink },
     } = req;
     if (!name || !type)
-      return res.status(401).send("Component name and type are required");
-
+      return res.send(401, { message: "Component name and type are required" });
     const component = await Component.findOne({ name });
-    if (component) return res.status(409).send("Component already exists");
+    if (component)
+      return res.send(409, { message: "Component already exists" });
 
     const newComponent = await Component.create({
       name,
@@ -142,7 +142,7 @@ async function main() {
 
   app.put("/api/components", async (req, res) => {
     if (!req.body.name || !req.body.type)
-      return res.status(401).send("Component name and type are required");
+      return res.send(401, { message: "Component name and type are required" });
 
     const updateComponent = await Component.findOneAndUpdate(
       { _id: req.body._id },
