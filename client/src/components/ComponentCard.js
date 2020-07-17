@@ -17,6 +17,7 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme) => ({
   card: {
     margin: "auto",
+    marginTop: theme.spacing(4),
     transition: "0.3s",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
@@ -35,13 +36,13 @@ function ComponentCard(props) {
   const {
     name,
     type,
-    description,
+    definition,
     pointsOfContact,
     influencers,
     wikiLink,
   } = props.currentItem;
 
-  const POCArray = () => {
+  const pointOfContactArray = () => {
     return pointsOfContact.length ? (
       pointsOfContact.map((item) => {
         return (
@@ -65,7 +66,7 @@ function ComponentCard(props) {
     );
   };
 
-  const InfArray = () => {
+  const influencersArray = () => {
     return influencers.length ? (
       influencers.map((item) => {
         return (
@@ -110,7 +111,7 @@ function ComponentCard(props) {
           </Typography>
           {/* <Avatar src={`Icon.${type}`} /> */}
 
-          <Typography variant={"caption"}>{description}</Typography>
+          <Typography variant={"caption"}>{definition}</Typography>
           <Divider className={classes.divider} light />
           <Typography variant={"caption"}>
             Components that contact a {name}:
@@ -121,7 +122,7 @@ function ComponentCard(props) {
             className={classes.gridList}
             cols={3}
           >
-            {POCArray()}
+            {pointOfContactArray()}
           </GridList>
           <Divider className={classes.divider} light />
           <Typography variant={"caption"}>
@@ -133,24 +134,25 @@ function ComponentCard(props) {
             className={classes.gridList}
             cols={3}
           >
-            {InfArray()}
+            {influencersArray()}
           </GridList>
           <Divider className={classes.divider} light />
-          {/* {if (wikilink !== "") {
-            return (
+          {wikiLink ? (
             <Button
+              fullWidth
               target="_blank"
               variant="contained"
-              href="https://en.wikipedia.org/wiki/Bicycle_handlebar"
+              href={wikiLink}
             >
               See Component on Wikipedia
             </Button>
-          ) else {
-            return null} */}
+          ) : (
+            <></>
+          )}
         </CardContent>
       </Card>
+      <br />
       <Button
-        fullWidth
         variant="contained"
         color="primary"
         onClick={(event) => handleBackClick()}

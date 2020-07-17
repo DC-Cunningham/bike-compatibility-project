@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    // alignItems: "center",
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,
@@ -60,12 +60,18 @@ function About() {
       <Box>
         <Container maxWidth="md">
           <Paper className={classes.paper} elevation={6}>
-            {/* <Typography
-          variant="h1"
-          // style={{ backgroundColor: "#cfe8fc", height: "100vh" }}
-        >
-          The Bike Compatibility Project
-        </Typography> */}
+            <Typography variant="h4">What is the project?</Typography>
+            <Typography variant="body">lorem ipsum dolor sit amet</Typography>
+            <Typography variant="h4">Why does the project exist?</Typography>
+            <Typography variant="body1">lorem ipsim dolor sit amet</Typography>
+            <Typography variant="h4">Who is the project for?</Typography>
+            <Typography variant="body1">lorem ipsim dolor sit amet</Typography>
+            <br />
+            <Typography variant="h4">Definitions:</Typography>
+            <Typography variant="h5">Point of Contact</Typography>
+            <Typography variant="body1">lorem ipsim dolor sit amet</Typography>
+            <Typography variant="h5">Influencers</Typography>
+            <Typography variant="body1">lorem ipsim dolor sit amet</Typography>
           </Paper>
         </Container>
       </Box>
