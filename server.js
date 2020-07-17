@@ -20,10 +20,13 @@ mongoose.set("useFindAndModify", false);
 app.use(cors());
 
 async function main() {
-  await mongoose.connect("mongodb://localhost/bikeComponentDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect(
+    process.env.MONGODB_URL || "mongodb://localhost/bikeComponentDB",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  );
 
   const authMiddleWare = async (req, res, done) => {
     const bearerToken = req.headers.authorization;
