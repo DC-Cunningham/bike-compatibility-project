@@ -28,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
   gridList: {
     padding: theme.spacing(2),
   },
+  type: {
+    [theme.breakpoints.down(960)]: {
+      fontSize: theme.spacing(1),
+    },
+  },
 }));
 
 function ComponentCard(props) {
@@ -49,6 +54,8 @@ function ComponentCard(props) {
         return (
           <GridListTile key={item._id} cols={1}>
             <Button
+              className={classes.type}
+              size="small"
               fullWidth
               variant="outlined"
               onClick={() => handleClick(item)}
@@ -73,6 +80,8 @@ function ComponentCard(props) {
         return (
           <GridListTile key={item._id} cols={1}>
             <Button
+              className={classes.type}
+              size="small"
               fullWidth
               variant="outlined"
               onClick={() => handleClick(item)}
@@ -135,6 +144,7 @@ function ComponentCard(props) {
           <Divider className={classes.divider} light />
           {wikiLink ? (
             <Button
+              className={classes.type}
               fullWidth
               target="_blank"
               variant="contained"

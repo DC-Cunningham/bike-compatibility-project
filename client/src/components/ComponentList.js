@@ -93,7 +93,16 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     padding: theme.spacing(4),
-    // minWidth: 750,
+    [theme.breakpoints.down(960)]: {
+      padding: theme.spacing(1),
+    },
+  },
+  cell: {
+    // padding: theme.spacing(4),
+    [theme.breakpoints.down(960)]: {
+      paddingLeft: theme.spacing(0),
+      paddingRight: theme.spacing(0),
+    },
   },
   visuallyHidden: {
     border: 0,
@@ -105,6 +114,11 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 20,
     width: 1,
+  },
+  type: {
+    [theme.breakpoints.down(960)]: {
+      fontSize: theme.spacing(1),
+    },
   },
 }));
 
@@ -205,10 +219,15 @@ function ComponentList(props) {
                 .map((row, index) => {
                   return (
                     <TableRow hover tabIndex={-1} key={row.name}>
-                      <TableCell align="center">{row.name}</TableCell>
-                      <TableCell align="center">{row.type}</TableCell>
-                      <TableCell align="center">
+                      <TableCell className={classes.cell} align="center">
+                        {row.name}
+                      </TableCell>
+                      <TableCell className={classes.cell} align="center">
+                        {row.type}
+                      </TableCell>
+                      <TableCell className={classes.cell} align="center">
                         <Button
+                          size="small"
                           variant="outlined"
                           color="secondary"
                           onClick={(event) => handleClick(row._id)}

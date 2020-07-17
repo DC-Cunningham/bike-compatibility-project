@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
     marginLeft: theme.spacing(24),
     marginRight: theme.spacing(3),
+    marginBottom: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
   type: {
     [theme.breakpoints.down(960)]: {
-      fontSize: theme.spacing(3),
+      fontSize: theme.spacing(1),
     },
   },
 }));

@@ -35,6 +35,7 @@ function LinkComponentForm(props) {
         return (
           <GridListTile key={item._id} cols={1}>
             <Button
+              size="small"
               fullWidth
               variant="contained"
               color="primary"
@@ -66,6 +67,7 @@ function LinkComponentForm(props) {
         return (
           <GridListTile key={item._id} cols={1}>
             <Button
+              size="small"
               fullWidth
               variant="contained"
               onClick={() => handleLinking(item)}
