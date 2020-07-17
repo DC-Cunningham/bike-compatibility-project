@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     height: "100vh",
     textDecoration: "none",
+    [theme.breakpoints.down(620)]: {
+      width: "40px",
+    },
   },
   tab: {
     display: "flex",
@@ -36,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
     width: "150px",
     [theme.breakpoints.down(960)]: {
       width: "75px",
+    },
+    [theme.breakpoints.down(620)]: {
+      width: "40px",
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
     },
   },
 }));
@@ -184,7 +192,7 @@ export default function VerticalTabs() {
           </Hidden>
           <Hidden mdUp>
             <div className={classes.tab}>
-              <ExitToAppIcon />
+              <ExitToAppIcon onClick={logout} />
             </div>
           </Hidden>
         </>
@@ -269,7 +277,7 @@ export default function VerticalTabs() {
           </Hidden>
           <Hidden mdUp>
             <div className={classes.tab}>
-              <ExitToAppIcon />
+              <ExitToAppIcon onClick={logout} />
             </div>
           </Hidden>
         </>

@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(10),
       marginRight: theme.spacing(0),
     },
+    [theme.breakpoints.down(620)]: {
+      marginLeft: theme.spacing(4),
+    },
   },
   image: {
     height: 550,

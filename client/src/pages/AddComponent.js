@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(10),
       marginRight: theme.spacing(0),
     },
+    [theme.breakpoints.down(620)]: {
+      marginLeft: theme.spacing(4),
+    },
   },
   form: {
     marginTop: theme.spacing(4),
@@ -54,6 +57,11 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
       paddingTop: theme.spacing(1),
+    },
+  },
+  type: {
+    [theme.breakpoints.down(960)]: {
+      fontSize: theme.spacing(3),
     },
   },
 }));
@@ -86,7 +94,12 @@ function AddComponent(props) {
       <Box>
         <Container maxWidth="md">
           <Paper className={classes.paper} elevation={6}>
-            <Typography align="center" variant="h2" gutterBottom>
+            <Typography
+              className={classes.type}
+              align="center"
+              variant="h2"
+              gutterBottom
+            >
               Add a component to the database
             </Typography>
             {formState.formStep === 1 && (

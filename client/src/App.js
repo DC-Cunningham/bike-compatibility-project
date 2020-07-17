@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(960)]: {
       height: "75px",
       paddingLeft: theme.spacing(10),
-      fontSize: theme.spacing(4),
+      fontSize: theme.spacing(3),
     },
   },
 }));

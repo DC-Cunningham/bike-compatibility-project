@@ -1,60 +1,87 @@
-import React from 'react'
-import { injectIntl } from 'react-intl'
-import Page from 'material-ui-shell/lib/containers/Page/Page'
-import Button from '@material-ui/core/Button'
-import Home from '@material-ui/icons/Home'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import React from "react";
+import {
+  Button,
+  Divider,
+  Paper,
+  Typography,
+  makeStyles,
+} from "@material-ui/core/";
 
-const styles = theme => ({
-  icon: {
-    width: 192,
-    height: 192,
-    color: theme.palette.secondary.main,
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    width: "auto",
+    marginTop: theme.spacing(8),
+    marginLeft: theme.spacing(28),
+    marginRight: theme.spacing(3),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
+      3
+    )}px`,
+    [theme.breakpoints.down(960)]: {
+      marginTop: theme.spacing(4),
+      marginLeft: theme.spacing(10),
+      marginRight: theme.spacing(0),
+    },
+    [theme.breakpoints.down(620)]: {
+      marginLeft: theme.spacing(6),
+    },
+  },
+  form: {
+    marginTop: theme.spacing(4),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
   },
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     height: `100%`,
+    marginLeft: theme.spacing(4),
+    marginRight: theme.spacing(4),
+    padding: `${theme.spacing(8)}px ${theme.spacing(3)}px ${theme.spacing(
+      3
+    )}px`,
+    [theme.breakpoints.down(960)]: {
+      width: "auto",
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${theme.spacing(
+        0
+      )}px`,
+    },
   },
-  paper: {
-    backgroundColor: theme.palette.background.default,
-    margin: 0,
-    height: `calc(100vh - 64px)`,
+  type: {
+    [theme.breakpoints.down(960)]: {
+      fontSize: theme.spacing(3),
+    },
   },
-  button: {
-    marginTop: 20,
-  },
-})
+}));
 
-const PageNotFound = ({ intl, classes }) => {
+function PageNotFound() {
+  const classes = useStyles();
   return (
-    <Page pageTitle={intl.formatMessage({ id: 'page_not_found' })}>
-      <Paper className={classes.paper}>
-        <div className={classes.container}>
-          <Typography variant="h4">
-            404
-          </Typography>
-          <Typography variant="subtitle1">
-            {intl.formatMessage({ id: 'page_not_found' })}
-          </Typography>
-          <Button
-            color="secondary"
-            aria-label="home"
-            href="/"
-            className={classes.button}
-          >
-            <Home />
-          </Button>
-        </div>
-      </Paper>
-    </Page>
-  )
+    <Paper className={classes.paper}>
+      <div className={classes.container}>
+        <Divider className={classes.divider} light />
+        <Typography variant="h5">Sorry</Typography>
+        <Typography variant="subtitle1">Page Not Found</Typography>
+        <Divider className={classes.divider} light />
+
+        {/* <Button
+          color="secondary"
+          aria-label="home"
+          href="/"
+          className={classes.button}
+        >
+          <Home />
+        </Button> */}
+      </div>
+    </Paper>
+  );
 }
 
-export default injectIntl(
-  withStyles(styles, { withTheme: true })(PageNotFound)
-)
+export default PageNotFound;

@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(1),
   },
+  type: {
+    [theme.breakpoints.down(960)]: {
+      fontSize: theme.spacing(1),
+    },
+  },
 }));
 
 function Footer() {
@@ -31,6 +36,7 @@ function Footer() {
   return (
     <footer className={classes.footer}>
       <Typography
+        className={classes.type}
         variant="h6"
         align="center"
         color="textSecondary"

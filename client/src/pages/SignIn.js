@@ -19,20 +19,23 @@ import { Alert } from "@material-ui/lab";
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: "auto",
-    marginLeft: theme.spacing(20),
-    marginRight: theme.spacing(3),
-    [theme.breakpoints.up(620 + theme.spacing(6))]: {
-      width: 400,
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
     marginTop: theme.spacing(8),
+    marginLeft: theme.spacing(28),
+    marginRight: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,
+    [theme.breakpoints.down(960)]: {
+      marginTop: theme.spacing(4),
+      marginLeft: theme.spacing(10),
+      marginRight: theme.spacing(0),
+    },
+    [theme.breakpoints.down(620)]: {
+      marginLeft: theme.spacing(6),
+    },
   },
   form: {
     marginTop: theme.spacing(4),
@@ -46,15 +49,23 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     height: `100%`,
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(4),
+    marginRight: theme.spacing(4),
     padding: `${theme.spacing(8)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,
-    [theme.breakpoints.down(620)]: {
+    [theme.breakpoints.down(960)]: {
       width: "auto",
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
+      padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${theme.spacing(
+        0
+      )}px`,
+    },
+  },
+  type: {
+    [theme.breakpoints.down(960)]: {
+      fontSize: theme.spacing(3),
     },
   },
 }));
@@ -103,11 +114,12 @@ const SignIn = () => {
         <Container maxWidth="md">
           <Paper className={classes.paper} elevation={6}>
             <div className={classes.container}>
-              <Typography align="center" variant="h3">
+              <Typography className={classes.type} align="center" variant="h3">
                 Sign In
               </Typography>
               <form className={classes.form} onSubmit={handleSubmit} noValidate>
                 <TextField
+                  className={classes.type}
                   value={email}
                   onInput={(e) => setEmail(e.target.value)}
                   variant="outlined"
@@ -121,6 +133,7 @@ const SignIn = () => {
                   autoFocus
                 />
                 <TextField
+                  className={classes.type}
                   value={password}
                   onInput={(e) => setPassword(e.target.value)}
                   variant="outlined"
@@ -135,6 +148,7 @@ const SignIn = () => {
                 />
                 {error && <Alert severity="error">{error}</Alert>}
                 <Button
+                  className={classes.type}
                   type="submit"
                   fullWidth
                   variant="contained"

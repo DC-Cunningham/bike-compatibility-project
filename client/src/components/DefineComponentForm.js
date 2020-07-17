@@ -35,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  type: {
+    [theme.breakpoints.down(960)]: {
+      fontSize: theme.spacing(3),
+    },
+  },
 }));
 
 function RefineComponentForm(props) {
@@ -72,7 +77,7 @@ function RefineComponentForm(props) {
     <>
       <Paper className={classes.paper} elevation={6}>
         <form onSubmit={handleSubmit}>
-          <Typography align="center" variant="h4">
+          <Typography className={classes.type} align="center" variant="h4">
             Define the component
           </Typography>
           <TextField

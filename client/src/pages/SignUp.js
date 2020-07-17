@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: "auto",
     marginTop: theme.spacing(8),
-    marginLeft: theme.spacing(20),
+    marginLeft: theme.spacing(24),
     marginRight: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
@@ -27,11 +27,13 @@ const useStyles = makeStyles((theme) => ({
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,
-    [theme.breakpoints.down(600)]: {
-      width: "75%",
+    [theme.breakpoints.down(960)]: {
       marginTop: theme.spacing(4),
       marginLeft: theme.spacing(10),
-      marginRight: theme.spacing(1),
+      marginRight: theme.spacing(0),
+    },
+    [theme.breakpoints.down(620)]: {
+      marginLeft: theme.spacing(4),
     },
   },
   form: {
@@ -51,11 +53,18 @@ const useStyles = makeStyles((theme) => ({
     padding: `${theme.spacing(8)}px ${theme.spacing(3)}px ${theme.spacing(
       3
     )}px`,
-    [theme.breakpoints.down(600)]: {
+    [theme.breakpoints.down(960)]: {
       width: "auto",
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      paddingTop: theme.spacing(1),
+      padding: `${theme.spacing(1)}px ${theme.spacing(0)}px ${theme.spacing(
+        0
+      )}px`,
+    },
+  },
+  type: {
+    [theme.breakpoints.down(960)]: {
+      fontSize: theme.spacing(3),
     },
   },
 }));
@@ -109,6 +118,7 @@ const SignUp = () => {
               <Typography variant="h3">Sign Up</Typography>
               <form className={classes.form} onSubmit={handleSubmit} noValidate>
                 <TextField
+                  className={classes.type}
                   value={name}
                   onInput={(e) => setName(e.target.value)}
                   variant="outlined"
@@ -122,6 +132,7 @@ const SignUp = () => {
                   autoFocus
                 />
                 <TextField
+                  className={classes.type}
                   value={email}
                   onInput={(e) => setEmail(e.target.value)}
                   variant="outlined"
@@ -134,6 +145,7 @@ const SignUp = () => {
                   autoComplete="email"
                 />
                 <TextField
+                  className={classes.type}
                   value={password}
                   onInput={(e) => setPassword(e.target.value)}
                   variant="outlined"
@@ -147,6 +159,7 @@ const SignUp = () => {
                   autoComplete="current-password"
                 />
                 <TextField
+                  className={classes.type}
                   value={passwordVal}
                   onInput={(e) => setPasswordVal(e.target.value)}
                   variant="outlined"
@@ -161,6 +174,7 @@ const SignUp = () => {
                 />
                 {error && <Alert severity="error">{error}</Alert>}
                 <Button
+                  className={classes.type}
                   type="submit"
                   fullWidth
                   variant="contained"
