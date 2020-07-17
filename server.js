@@ -52,7 +52,6 @@ async function main() {
     } = req;
     if (!email || !password) {
       console.log("invalid user or password");
-      // return res.status(401).send("Invalid email or password");
       return res.send(401, { message: "invalid user or password" });
     }
 
@@ -121,7 +120,9 @@ async function main() {
       body: { name, type, definition, wikiLink },
     } = req;
     if (!name || !type)
-      return res.send(401, { message: "Component name and type are required" });
+      return res.send(401, {
+        message: "Component name and type are both required",
+      });
     const component = await Component.findOne({ name });
     if (component)
       return res.send(409, { message: "Component already exists" });
@@ -142,7 +143,9 @@ async function main() {
 
   app.put("/api/components", async (req, res) => {
     if (!req.body.name || !req.body.type)
-      return res.send(401, { message: "Component name and type are required" });
+      return res.send(401, {
+        message: "Component name and type are both required",
+      });
 
     const updateComponent = await Component.findOneAndUpdate(
       { _id: req.body._id },

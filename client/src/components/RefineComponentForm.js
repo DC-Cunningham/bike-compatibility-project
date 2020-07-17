@@ -120,6 +120,7 @@ function RefineComponentForm(props) {
             fullWidth
           />
           {error && <Alert severity="error">{error}</Alert>}
+          <br />
           <Button type="submit" fullWidth variant="contained" color="secondary">
             Submit
           </Button>

@@ -10,6 +10,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core/";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 function RefineComponentForm(props) {
   const classes = useStyles();
+  const [error, setError] = useState("");
   const [item, setItem] = useState({
     name: "",
     type: "",
@@ -63,7 +65,7 @@ function RefineComponentForm(props) {
         console.log(result);
         props.setFormState(result.data.data.component);
       })
-      .catch((err) => console.log(err));
+      .catch((e) => setError(e.response.data.message));
   };
 
   return (
@@ -115,6 +117,8 @@ function RefineComponentForm(props) {
             margin="normal"
             fullWidth
           />
+          {error && <Alert severity="error">{error}</Alert>}
+          <br />
           <Button type="submit" fullWidth variant="contained" color="secondary">
             Submit
           </Button>
