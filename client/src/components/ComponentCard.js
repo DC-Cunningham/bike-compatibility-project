@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     margin: "auto",
     marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
     transition: "0.3s",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
@@ -97,11 +98,6 @@ function ComponentCard(props) {
     props.setFormState(selected);
   };
 
-  const handleBackClick = (event) => {
-    props.resetFormState();
-    history.push("/components");
-  };
-
   return (
     <div className="App">
       <Card className={classes.card}>
@@ -151,14 +147,6 @@ function ComponentCard(props) {
           )}
         </CardContent>
       </Card>
-      <br />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={(event) => handleBackClick()}
-      >
-        Back to the database
-      </Button>
     </div>
   );
 }

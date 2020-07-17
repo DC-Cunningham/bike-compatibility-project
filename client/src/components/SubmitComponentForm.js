@@ -5,18 +5,8 @@ import { Box, Button, Typography } from "@material-ui/core/";
 function SubmitComponentForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(props.currentItem);
-    API.updateComponent({
-      id: props.currentItem._id,
-      name: props.currentItem.name,
-      type: props.currentItem.type,
-      description: props.currentItem.description,
-      pointsOfContact: props.currentItem.pointsOfContact,
-      influencers: props.currentItem.influencers,
-      wikiLink: props.currentItem.wikiLink,
-    })
+    API.updateComponent(props.currentItem)
       .then((result) => {
-        console.log(result);
         props.setFormState(result);
       })
       .catch((err) => console.log(err));

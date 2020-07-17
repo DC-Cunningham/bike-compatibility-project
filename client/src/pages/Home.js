@@ -5,7 +5,6 @@ import {
   Container,
   makeStyles,
   Paper,
-  Typography,
 } from "@material-ui/core";
 import HomeImage from "../assets/TBCP_Homepage_ST.jpg";
 
@@ -61,7 +60,11 @@ function HomePage() {
         <Box>
           <Paper className={classes.paper} elevation={6}>
             <Box>
-              <img className={classes.image} src={HomeImage} />
+              <img
+                className={classes.image}
+                src={HomeImage}
+                alt="SingleTrack"
+              />
             </Box>
           </Paper>
         </Box>

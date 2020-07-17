@@ -114,7 +114,6 @@ function ComponentList(props) {
   const [orderBy, setOrderBy] = useState();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredComponents, setFilteredComponents] = useState([]);
 
@@ -158,8 +157,6 @@ function ComponentList(props) {
 
   const handleClick = (id) => {
     const selected = props.items.find((item) => item._id === id);
-    console.log(selected);
-    // need to send this item to formState.currentItem
     props.setFormState(selected);
   };
 

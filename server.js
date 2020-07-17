@@ -117,7 +117,7 @@ async function main() {
 
   app.post("/api/components", async (req, res) => {
     const {
-      body: { name, type, definition, wikiLink },
+      body: { name, type, definition, wikiLink, pointsOfContact, influencers },
     } = req;
     if (!name || !type)
       return res.send(401, {
@@ -132,8 +132,9 @@ async function main() {
       type,
       definition,
       wikiLink,
+      pointsOfContact,
+      influencers,
     });
-
     return res.json({
       data: {
         component: newComponent,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
+  Button,
   Container,
   CssBaseline,
   makeStyles,
@@ -71,6 +72,12 @@ function EditComponent() {
       .then((res) => setFormState({ items: res.data, formStep: 1 }))
       .catch((err) => console.log(err));
   }, []);
+
+  const handleBackClick = () => {
+    API.getComponents()
+      .then((res) => setFormState({ items: res.data, formStep: 1 }))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -174,6 +181,14 @@ function EditComponent() {
                     })
                   }
                 ></ComponentCard>
+                <Button
+                  align="left"
+                  variant="contained"
+                  color="primary"
+                  onClick={(event) => handleBackClick()}
+                >
+                  Edit another Component
+                </Button>
               </>
             )}
           </Paper>

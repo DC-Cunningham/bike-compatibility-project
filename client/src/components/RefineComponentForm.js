@@ -46,6 +46,8 @@ function RefineComponentForm(props) {
     type: props.currentItem.type,
     definition: props.currentItem.definition,
     wikiLink: props.currentItem.wikiLink,
+    pointsOfContact: props.currentItem.pointsOfContact,
+    influencers: props.currentItem.influencers,
   });
 
   const handleChange = (event) => {
@@ -62,9 +64,10 @@ function RefineComponentForm(props) {
       type: item.type,
       definition: item.definition,
       wikiLink: item.wikiLink,
+      pointsOfContact: item.pointsOfContact,
+      influencers: item.influencers,
     })
       .then((result) => {
-        console.log(result);
         props.setFormState(result.data.data.component);
       })
       .catch((e) => setError(e.response.data.message));

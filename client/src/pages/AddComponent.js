@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
+  Button,
   Container,
   CssBaseline,
   makeStyles,
@@ -70,6 +71,14 @@ function AddComponent(props) {
       .then((res) => setFormState({ items: res.data, formStep: 1 }))
       .catch((err) => console.log(err));
   }, []);
+
+  const handleBackClick = () => {
+    setFormState({
+      items: [],
+      currentItem: {},
+      formStep: 1,
+    });
+  };
 
   return (
     <>
@@ -147,6 +156,14 @@ function AddComponent(props) {
                     })
                   }
                 ></ComponentCard>
+                <Button
+                  align="left"
+                  variant="contained"
+                  color="primary"
+                  onClick={(event) => handleBackClick()}
+                >
+                  Add another Component
+                </Button>
               </>
             )}
           </Paper>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import {
   Box,
+  Button,
   CssBaseline,
   Container,
   makeStyles,
@@ -71,6 +72,14 @@ function Components() {
       .catch((err) => console.log(err));
   }, []);
 
+  const handleBackClick = (event) => {
+    setFormState({
+      items: [],
+      currentItem: {},
+      currentItemExists: false,
+    });
+  };
+
   return (
     <>
       <CssBaseline />
@@ -81,24 +90,33 @@ function Components() {
               Component Database
             </Typography>
             {formState.currentItemExists === true && (
-              <ComponentCard
-                items={formState.items}
-                currentItem={formState.currentItem}
-                resetFormState={(values) =>
-                  setFormState({
-                    ...formState,
-                    currentItem: {},
-                    currentItemExists: false,
-                  })
-                }
-                setFormState={(values) =>
-                  setFormState({
-                    ...formState,
-                    currentItem: { ...formState.currentItem, ...values },
-                    currentItemExists: true,
-                  })
-                }
-              />
+              <>
+                <ComponentCard
+                  items={formState.items}
+                  currentItem={formState.currentItem}
+                  resetFormState={(values) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: {},
+                      currentItemExists: false,
+                    })
+                  }
+                  setFormState={(values) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: { ...formState.currentItem, ...values },
+                      currentItemExists: true,
+                    })
+                  }
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={(event) => handleBackClick()}
+                >
+                  Back to the database
+                </Button>
+              </>
             )}
             {formState.currentItemExists === false && (
               <ComponentList
