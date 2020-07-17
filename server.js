@@ -20,18 +20,10 @@ mongoose.set("useFindAndModify", false);
 app.use(cors());
 
 async function main() {
-  await mongoose.connect(
-    process.env.MONGODB_URI ===
-      "mongodb://DCRevResLabs:r3volu7ion@ds351455.mlab.com:51455/heroku_kwq9l8jd",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  );
-
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-  }
+  await mongoose.connect("mongodb://localhost/bikeComponentDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
   const authMiddleWare = async (req, res, done) => {
     const bearerToken = req.headers.authorization;
@@ -46,6 +38,9 @@ async function main() {
   };
 
   // Serve up static assets
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+  }
   // Add routes, both API and view
 
   app.post("/api/login", async (req, res) => {
