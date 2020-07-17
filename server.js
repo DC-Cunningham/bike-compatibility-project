@@ -21,7 +21,7 @@ app.use(cors());
 
 async function main() {
   await mongoose.connect(
-    process.env.MONGODB_URL || "mongodb://localhost/bikeComponentDB",
+    process.env.MONGODB_URI || "mongodb://localhost/bikeComponentDB",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
