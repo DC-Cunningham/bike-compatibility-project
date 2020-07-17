@@ -16,6 +16,9 @@ import PasswordReset from "./pages/PasswordReset";
 import PageNotFound from "./pages/PageNotFound";
 import Account from "./pages/Account";
 import Footer from "./components/Footer";
+import PublicRoute from "./components/routes/PublicRoute";
+import PrivateRoute from "./components/routes/PrivateRoute";
+import AdminRoute from "./components/routes/AdminRoute";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -38,7 +41,14 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const [state, dispatch] = useStoreContext();
+  const [state, dispatch] = useStoreContext({
+    user: {
+      _id: 0,
+      displayName: "",
+      role: "",
+      token: "",
+    },
+  });
 
   useEffect(() => {
     const token = localStorage.getItem("User_Token");
@@ -71,16 +81,71 @@ function App() {
           The Bike Compatibility Project
         </Typography>
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/home" component={HomePage} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/components" component={Components} />
-          <Route exact path="/add_component" component={AddComponent} />
-          <Route exact path="/edit_component" component={EditComponent} />
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/account" component={Account} />
-          <Route exact path="/password_reset" component={PasswordReset} />
+          <PublicRoute
+            role={state.user.role}
+            restricted={false}
+            exact
+            path="/"
+            component={HomePage}
+          />
+          <PublicRoute
+            role={state.user.role}
+            restricted={false}
+            exact
+            path="/home"
+            component={HomePage}
+          />
+          <PublicRoute
+            role={state.user.role}
+            restricted={false}
+            exact
+            path="/about"
+            component={About}
+          />
+          <PrivateRoute
+            role={state.user.role}
+            exact
+            path="/components"
+            component={Components}
+          />
+          <AdminRoute
+            role={state.user.role}
+            exact
+            path="/add_component"
+            component={AddComponent}
+          />
+          <AdminRoute
+            role={state.user.role}
+            exact
+            path="/edit_component"
+            component={EditComponent}
+          />
+          <PublicRoute
+            role={state.user.role}
+            restricted={true}
+            exact
+            path="/signin"
+            component={SignIn}
+          />
+          <PrivateRoute
+            role={state.user.role}
+            exact
+            path="/signup"
+            component={SignUp}
+          />
+          <PrivateRoute
+            role={state.user.role}
+            exact
+            path="/account"
+            component={Account}
+          />
+          <PublicRoute
+            role={state.user.role}
+            restricted={true}
+            exact
+            path="/password_reset"
+            component={PasswordReset}
+          />
           <Route component={PageNotFound} />
         </Switch>
       </div>
