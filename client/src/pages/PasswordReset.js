@@ -95,6 +95,7 @@ const PasswordReset = () => {
                   margin="normal"
                   required
                   fullWidth
+                  type="email"
                   id="email"
                   label="E-Mail"
                   name="email"
