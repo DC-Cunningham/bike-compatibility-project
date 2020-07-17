@@ -147,6 +147,7 @@ function LinkComponentForm(props) {
       >
         Continue
       </Button>
+      <br />
     </>
   );
 }

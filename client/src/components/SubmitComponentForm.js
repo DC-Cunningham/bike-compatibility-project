@@ -28,6 +28,7 @@ function SubmitComponentForm(props) {
       >
         Save to the database
       </Button>
+      <br />
     </>
   );
 }

@@ -112,6 +112,7 @@ function RefineComponentForm(props) {
             variant="outlined"
             margin="normal"
             fullWidth
+            multiline
           />
           <TextField
             name="wikiLink"

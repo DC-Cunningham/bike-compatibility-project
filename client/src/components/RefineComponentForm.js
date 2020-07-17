@@ -83,7 +83,7 @@ function RefineComponentForm(props) {
       <Paper className={classes.paper} elevation={6}>
         <form onSubmit={handleSubmit}>
           <Typography className={classes.type} align="center" variant="h4">
-            Define the component
+            Edit the component
           </Typography>
           <TextField
             name="name"
@@ -117,6 +117,7 @@ function RefineComponentForm(props) {
             variant="outlined"
             margin="normal"
             fullWidth
+            multiline
           />
           <TextField
             name="wikiLink"

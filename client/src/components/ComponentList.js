@@ -98,7 +98,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   cell: {
-    // padding: theme.spacing(4),
     [theme.breakpoints.down(960)]: {
       paddingLeft: theme.spacing(0),
       paddingRight: theme.spacing(0),

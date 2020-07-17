@@ -115,47 +115,95 @@ function AddComponent(props) {
               />
             )}
             {formState.formStep === 2 && (
-              <LinkComponentForm
-                name="a point of contact"
-                relationship="pointsOfContact"
-                items={formState.items}
-                currentItem={formState.currentItem}
-                setFormState={(values) =>
-                  setFormState({
-                    ...formState,
-                    currentItem: { ...formState.currentItem, ...values },
-                    formStep: 3,
-                  })
-                }
-              />
+              <>
+                <LinkComponentForm
+                  name="a point of contact"
+                  relationship="pointsOfContact"
+                  items={formState.items}
+                  currentItem={formState.currentItem}
+                  setFormState={(values) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: { ...formState.currentItem, ...values },
+                      formStep: 3,
+                    })
+                  }
+                />
+                <Button
+                  align="left"
+                  variant="contained"
+                  color="primary"
+                  onClick={(values) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: { ...formState.currentItem, ...values },
+                      formStep: 1,
+                    })
+                  }
+                >
+                  Back
+                </Button>
+              </>
             )}
             {formState.formStep === 3 && (
-              <LinkComponentForm
-                name=" an influence"
-                relationship="influencers"
-                items={formState.items}
-                currentItem={formState.currentItem}
-                setFormState={(value) =>
-                  setFormState({
-                    ...formState,
-                    currentItem: { ...formState.currentItem, ...value },
-                    formStep: 4,
-                  })
-                }
-              />
+              <>
+                <LinkComponentForm
+                  name=" an influence"
+                  relationship="influencers"
+                  items={formState.items}
+                  currentItem={formState.currentItem}
+                  setFormState={(value) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: { ...formState.currentItem, ...value },
+                      formStep: 4,
+                    })
+                  }
+                />
+                <Button
+                  align="left"
+                  variant="contained"
+                  color="primary"
+                  onClick={(values) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: { ...formState.currentItem, ...values },
+                      formStep: 2,
+                    })
+                  }
+                >
+                  Back
+                </Button>
+              </>
             )}
             {formState.formStep === 4 && (
-              <SubmitComponentForm
-                items={formState.items}
-                currentItem={formState.currentItem}
-                setFormState={(value) =>
-                  setFormState({
-                    ...formState,
-                    currentItem: { ...formState.currentItem, ...value },
-                    formStep: 5,
-                  })
-                }
-              />
+              <>
+                <SubmitComponentForm
+                  items={formState.items}
+                  currentItem={formState.currentItem}
+                  setFormState={(value) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: { ...formState.currentItem, ...value },
+                      formStep: 5,
+                    })
+                  }
+                />
+                <Button
+                  align="left"
+                  variant="contained"
+                  color="primary"
+                  onClick={(values) =>
+                    setFormState({
+                      ...formState,
+                      currentItem: { ...formState.currentItem, ...values },
+                      formStep: 3,
+                    })
+                  }
+                >
+                  Back
+                </Button>
+              </>
             )}
             {formState.formStep === 5 && (
               <>
