@@ -74,7 +74,7 @@ function RefineComponentForm(props) {
     <>
       <Paper className={classes.paper} elevation={6}>
         <form onSubmit={handleSubmit}>
-          <Typography align="center" variant="h3">
+          <Typography align="center" variant="h4">
             Define the component
           </Typography>
           <TextField

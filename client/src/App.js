@@ -16,6 +16,7 @@ import PasswordReset from "./pages/PasswordReset";
 import PageNotFound from "./pages/PageNotFound";
 import Account from "./pages/Account";
 import TBCPIcon from "./assets/TheBikeCompatibilityProject-Icon-W_200x200.png";
+import Footer from "./components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -86,6 +87,7 @@ function App() {
           <Route component={PageNotFound} />
         </Switch>
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }

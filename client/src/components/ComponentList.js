@@ -167,15 +167,6 @@ function ComponentList(props) {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <FormControl fullWidth>
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={showAllComponents}
-          >
-            Show all Components
-          </Button>
-          <br />
           <TextField
             value={searchTerm}
             label="Search for a component"
@@ -186,6 +177,15 @@ function ComponentList(props) {
               e.key === "Enter" && e.preventDefault();
             }}
           />
+          <br />
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={showAllComponents}
+          >
+            Show all Components
+          </Button>
           <br />
         </FormControl>
 
