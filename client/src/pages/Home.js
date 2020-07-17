@@ -7,7 +7,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import HomeImage from "../assets/TBCP_Homepage.png";
+import HomeImage from "../assets/TBCP_Homepage_ST.jpg";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

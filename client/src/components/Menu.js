@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     display: "flex",
     height: "100vh",
+    textDecoration: "none",
   },
   tabs: {
     borderRight: `3px solid ${theme.palette.divider}`,
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     margin: theme.spacing(3),
     backgroundColor: theme.palette.primary,
+    textDecoration: "none",
   },
 }));
 
