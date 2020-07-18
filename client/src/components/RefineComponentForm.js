@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import API from "../utils/API";
 import {
+  Grid,
   Button,
   FormHelperText,
   makeStyles,
@@ -9,12 +10,13 @@ import {
   Select,
   TextField,
   Typography,
+  Container,
 } from "@material-ui/core/";
 import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
+    flexGrow: "100",
   },
   paper: {
     width: "100%",
@@ -136,25 +138,32 @@ function RefineComponentForm(props) {
           />
           {error && <Alert severity="error">{error}</Alert>}
           <br />
-          <Button
-            onClick={handleSubmit}
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="secondary"
-          >
-            Continue
-          </Button>
-          <Button
-            align="left"
-            variant="contained"
-            color="primary"
-            onClick={handleBackClick}
-          >
-            Back
-          </Button>
         </form>
       </Paper>
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="baseline"
+      >
+        <Button
+          align="left"
+          variant="contained"
+          color="primary"
+          onClick={handleBackClick}
+        >
+          Back
+        </Button>
+        <Button
+          align="right"
+          onClick={handleSubmit}
+          type="submit"
+          variant="contained"
+          color="secondary"
+        >
+          Continue
+        </Button>
+      </Grid>
     </>
   );
 }

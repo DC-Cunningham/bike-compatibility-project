@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
+  Grid,
   GridListTile,
   GridList,
   makeStyles,
@@ -144,22 +145,30 @@ function LinkComponentForm(props) {
         {selectedButtons()}
       </GridList>
       <br />
-      <Button
-        align="left"
-        variant="contained"
-        color="primary"
-        onClick={handleBackClick}
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="baseline"
       >
-        Back
-      </Button>
-      <Button
-        fullWidth
-        variant="contained"
-        color="secondary"
-        onClick={handleSubmit}
-      >
-        Continue
-      </Button>
+        <Button
+          align="left"
+          variant="contained"
+          color="primary"
+          onClick={handleBackClick}
+        >
+          Back
+        </Button>
+        <Button
+          align="right"
+          onClick={handleSubmit}
+          type="submit"
+          variant="contained"
+          color="secondary"
+        >
+          Continue
+        </Button>
+      </Grid>
       <br />
     </>
   );

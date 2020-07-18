@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import {
+  Grid,
   Select,
   FormHelperText,
   MenuItem,
@@ -42,19 +43,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RefineComponentForm(props) {
+function DefineComponentForm(props) {
   const classes = useStyles();
   const [error, setError] = useState("");
   const [item, setItem] = useState({
-    name: "",
-    type: "",
-    definition: "",
-    wikiLink: "",
+    id: props.currentItem._id,
+    name: props.currentItem.name,
+    type: props.currentItem.type,
+    definition: props.currentItem.definition,
+    wikiLink: props.currentItem.wikiLink,
+    pointsOfContact: props.currentItem.pointsOfContact,
+    influencers: props.currentItem.influencers,
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(event.target);
     setItem({ ...item, [name]: value });
   };
 
@@ -71,6 +74,11 @@ function RefineComponentForm(props) {
         props.setFormState(result.data.data.component);
       })
       .catch((e) => setError(e.response.data.message));
+  };
+
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    props.resetFormState();
   };
 
   return (
@@ -125,13 +133,37 @@ function RefineComponentForm(props) {
           />
           {error && <Alert severity="error">{error}</Alert>}
           <br />
-          <Button type="submit" fullWidth variant="contained" color="secondary">
+          {/* <Button type="submit" fullWidth variant="contained" color="secondary">
             Submit
-          </Button>
+          </Button> */}
         </form>
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="baseline"
+        >
+          <Button
+            align="left"
+            variant="contained"
+            color="primary"
+            onClick={handleBackClick}
+          >
+            Back
+          </Button>
+          <Button
+            align="right"
+            onClick={handleSubmit}
+            type="submit"
+            variant="contained"
+            color="secondary"
+          >
+            Continue
+          </Button>
+        </Grid>
       </Paper>
     </>
   );
 }
 
-export default RefineComponentForm;
+export default DefineComponentForm;

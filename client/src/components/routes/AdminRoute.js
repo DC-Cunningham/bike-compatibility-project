@@ -8,7 +8,11 @@ const AdminRoute = ({ role, component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        role === "admin" ? <Component {...props} /> : <Redirect to="/home" />
+        role === "admin" ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/components" />
+        )
       }
     />
   );

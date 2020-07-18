@@ -77,7 +77,17 @@ function AddComponent(props) {
 
   useEffect(() => {
     API.getComponents()
-      .then((res) => setFormState({ items: res.data, formStep: 1 }))
+      .then((res) =>
+        setFormState({
+          items: res.data,
+          formStep: 1,
+          currentItem: {
+            items: [],
+            currentItem: {},
+            formStep: 1,
+          },
+        })
+      )
       .catch((err) => console.log(err));
   }, []);
 
@@ -105,6 +115,7 @@ function AddComponent(props) {
             </Typography>
             {formState.formStep === 1 && (
               <DefineComponentForm
+                currentItem={formState.currentItem}
                 setFormState={(value) =>
                   setFormState({
                     ...formState,
@@ -128,21 +139,14 @@ function AddComponent(props) {
                       formStep: 3,
                     })
                   }
-                />
-                <Button
-                  align="left"
-                  variant="contained"
-                  color="primary"
-                  onClick={(values) =>
+                  resetFormState={(values) =>
                     setFormState({
                       ...formState,
                       currentItem: { ...formState.currentItem, ...values },
                       formStep: 1,
                     })
                   }
-                >
-                  Back
-                </Button>
+                />
               </>
             )}
             {formState.formStep === 3 && (
@@ -159,21 +163,14 @@ function AddComponent(props) {
                       formStep: 4,
                     })
                   }
-                />
-                <Button
-                  align="left"
-                  variant="contained"
-                  color="primary"
-                  onClick={(values) =>
+                  resetFormState={(values) =>
                     setFormState({
                       ...formState,
                       currentItem: { ...formState.currentItem, ...values },
                       formStep: 2,
                     })
                   }
-                >
-                  Back
-                </Button>
+                />
               </>
             )}
             {formState.formStep === 4 && (
@@ -188,21 +185,14 @@ function AddComponent(props) {
                       formStep: 5,
                     })
                   }
-                />
-                <Button
-                  align="left"
-                  variant="contained"
-                  color="primary"
-                  onClick={(values) =>
+                  resetFormState={(values) =>
                     setFormState({
                       ...formState,
                       currentItem: { ...formState.currentItem, ...values },
                       formStep: 3,
                     })
                   }
-                >
-                  Back
-                </Button>
+                />
               </>
             )}
             {formState.formStep === 5 && (

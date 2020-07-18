@@ -17,6 +17,7 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme) => ({
   card: {
     margin: "auto",
+    flexGrow: "100",
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
     transition: "0.3s",

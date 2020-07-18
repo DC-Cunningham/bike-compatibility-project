@@ -147,7 +147,6 @@ async function main() {
       return res.send(401, {
         message: "Component name and type are both required",
       });
-    console.log("req.body", JSON.stringify(req.body, null, 2));
     const updateComponent = await Component.findOneAndUpdate(
       { _id: req.body._id },
       req.body,
@@ -155,7 +154,6 @@ async function main() {
         new: true,
       }
     );
-    console.log("updateComponent", JSON.stringify(updateComponent, null, 2));
     return res.json({
       data: {
         component: updateComponent,
