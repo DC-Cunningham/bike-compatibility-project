@@ -55,6 +55,8 @@ Upon signing in as an admin the user is able to add more compnents to the databa
 
 - a mechanism to check for reciprocal relationships, for example if one component is linked to another it's relationship is checked to be mirrored by the other.
 
+- sorting of buttons in the component linking panels.
+
 ## Authors and Acknowledgment
 
 ### Main Author
