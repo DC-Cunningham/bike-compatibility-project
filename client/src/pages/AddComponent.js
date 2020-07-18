@@ -92,11 +92,19 @@ function AddComponent(props) {
   }, []);
 
   const handleBackClick = () => {
-    setFormState({
-      items: [],
-      currentItem: {},
-      formStep: 1,
-    });
+    API.getComponents()
+      .then((res) =>
+        setFormState({
+          items: res.data,
+          formStep: 1,
+          currentItem: {
+            items: [],
+            currentItem: {},
+            formStep: 1,
+          },
+        })
+      )
+      .catch((err) => console.log(err));
   };
 
   return (
