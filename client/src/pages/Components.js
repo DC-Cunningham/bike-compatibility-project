@@ -82,11 +82,11 @@ function Components() {
   }, []);
 
   const handleBackClick = (event) => {
-    setFormState({
-      items: [],
-      currentItem: {},
-      currentItemExists: false,
-    });
+    API.getComponents()
+      .then((res) =>
+        setFormState({ items: res.data, currentItemExists: false })
+      )
+      .catch((err) => console.log(err));
   };
 
   return (
