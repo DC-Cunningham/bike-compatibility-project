@@ -39,11 +39,21 @@ The application has been deployed on Heroku [here](https://floating-retreat-8407
 
 ## Usage
 
-When the user loads the main page, they are given the ability to search the BoogleBooks database:
+Upon signing in a user is able to search the component database:
 
-- Once a search is done a list of books is rendered from the search request, within this list the user is able to save books to a Mongo database.
+- Once a user has chosen the component they are interested in they will see the details displayed for that item. Within the details pane there are all the components relationships which are all able to be clicked through to. The useer is also able to click out to a new browser window with a wikipedia link for the component.
 
-- In the Saved Page the user is able to view all the saved books within the database, and delete at will.
+Upon signing in as an admin the user is able to add more compnents to the database. They are also able to edit any of the current components.
+
+## Future Plans and Known Bugs
+
+- better control over routing for user roles
+
+- integration of component measurement types and potential values
+
+- a tooltip or the like that can be filled to define an influence between components
+
+- a mechanism to check for reciprocal relationships, for example if one component is linked to another it's relationship is checked to be mirrored by the other.
 
 ## Authors and Acknowledgment
 

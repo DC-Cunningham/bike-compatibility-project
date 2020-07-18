@@ -116,7 +116,7 @@ function AddComponent(props) {
             <Typography
               className={classes.type}
               align="center"
-              variant="h2"
+              variant="h3"
               gutterBottom
             >
               Add a component to the database
@@ -186,6 +186,7 @@ function AddComponent(props) {
                 <SubmitComponentForm
                   items={formState.items}
                   currentItem={formState.currentItem}
+                  term="created"
                   setFormState={(value) =>
                     setFormState({
                       ...formState,
