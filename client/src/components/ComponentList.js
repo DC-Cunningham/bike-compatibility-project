@@ -148,7 +148,6 @@ function ComponentList(props) {
   }
 
   const showAllComponents = () => {
-    debugger;
     setSearchTerm("");
     setFilteredComponents(props.items);
   };

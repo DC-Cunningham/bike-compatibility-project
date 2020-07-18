@@ -85,7 +85,6 @@ function EditComponent() {
   const handleBackClick = () => {
     API.getComponents()
       .then((res) => {
-        debugger;
         setFormState({ items: res.data, formStep: 1 });
       })
       .catch((err) => console.log(err));

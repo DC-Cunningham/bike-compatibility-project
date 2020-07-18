@@ -62,8 +62,6 @@ function App() {
         };
         dispatch({ type: LOGIN_ACTION, currentUser });
       });
-    } else {
-      return null;
     }
   }, []);
 
