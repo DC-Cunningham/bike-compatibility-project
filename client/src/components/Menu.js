@@ -329,6 +329,9 @@ export default function VerticalTabs() {
               color: "blue",
               indicatorStyle: "",
             }}
+            onClick={() => {
+              debugger;
+            }}
           >
             <Hidden smDown>
               <Tab label="Sign In" />

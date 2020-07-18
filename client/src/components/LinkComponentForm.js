@@ -111,6 +111,11 @@ function LinkComponentForm(props) {
     props.setFormState(item);
   };
 
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    props.resetFormState(props.currentItem);
+  };
+
   return (
     <>
       <Box textAlign="center">
@@ -139,6 +144,14 @@ function LinkComponentForm(props) {
         {selectedButtons()}
       </GridList>
       <br />
+      <Button
+        align="left"
+        variant="contained"
+        color="primary"
+        onClick={handleBackClick}
+      >
+        Back
+      </Button>
       <Button
         fullWidth
         variant="contained"

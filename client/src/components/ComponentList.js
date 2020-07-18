@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -129,6 +129,14 @@ function ComponentList(props) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredComponents, setFilteredComponents] = useState([]);
+  const [rows, setRows] = useState([]);
+  const [emptyRows, setEmptyRows] = useState(0);
+  useEffect(() => {
+    setRows(filteredComponents.map((component) => createData(component)));
+    setEmptyRows(
+      rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
+    );
+  }, [filteredComponents]);
 
   function handleSearch(event) {
     setSearchTerm(event.target.value);
@@ -139,16 +147,15 @@ function ComponentList(props) {
     createData(filtered);
   }
 
-  function showAllComponents() {
+  const showAllComponents = () => {
+    debugger;
     setSearchTerm("");
     setFilteredComponents(props.items);
-  }
+  };
 
   function createData({ name, type, _id }) {
     return { name, type, _id };
   }
-
-  const rows = filteredComponents.map((component) => createData(component));
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -164,9 +171,6 @@ function ComponentList(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   const handleClick = (id) => {
     const selected = props.items.find((item) => item._id === id);
@@ -188,6 +192,7 @@ function ComponentList(props) {
             }}
           />
           <br />
+
           <Button
             fullWidth
             variant="contained"

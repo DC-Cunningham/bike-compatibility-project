@@ -84,7 +84,10 @@ function EditComponent() {
 
   const handleBackClick = () => {
     API.getComponents()
-      .then((res) => setFormState({ items: res.data, formStep: 1 }))
+      .then((res) => {
+        debugger;
+        setFormState({ items: res.data, formStep: 1 });
+      })
       .catch((err) => console.log(err));
   };
 
@@ -129,21 +132,14 @@ function EditComponent() {
                       formStep: 3,
                     })
                   }
-                />
-                <Button
-                  align="left"
-                  variant="contained"
-                  color="primary"
-                  onClick={(values) =>
+                  resetFormState={(values) =>
                     setFormState({
                       ...formState,
-                      currentItem: { ...formState.currentItem, ...values },
+                      currentItem: {},
                       formStep: 1,
                     })
                   }
-                >
-                  Back
-                </Button>
+                />
               </>
             )}
             {formState.formStep === 3 && (
@@ -160,21 +156,14 @@ function EditComponent() {
                       formStep: 4,
                     })
                   }
-                />
-                <Button
-                  align="left"
-                  variant="contained"
-                  color="primary"
-                  onClick={(values) =>
+                  resetFormState={(values) =>
                     setFormState({
                       ...formState,
                       currentItem: { ...formState.currentItem, ...values },
                       formStep: 2,
                     })
                   }
-                >
-                  Back
-                </Button>
+                />
               </>
             )}
             {formState.formStep === 4 && (
@@ -191,21 +180,14 @@ function EditComponent() {
                       formStep: 5,
                     })
                   }
-                />
-                <Button
-                  align="left"
-                  variant="contained"
-                  color="primary"
-                  onClick={(values) =>
+                  resetFromState={(values) =>
                     setFormState({
                       ...formState,
                       currentItem: { ...formState.currentItem, ...values },
                       formStep: 3,
                     })
                   }
-                >
-                  Back
-                </Button>
+                />
               </>
             )}
             {formState.formStep === 5 && (
@@ -221,21 +203,14 @@ function EditComponent() {
                       formStep: 6,
                     })
                   }
-                />
-                <Button
-                  align="left"
-                  variant="contained"
-                  color="primary"
-                  onClick={(values) =>
+                  resetFromState={(values) =>
                     setFormState({
                       ...formState,
                       currentItem: { ...formState.currentItem, ...values },
                       formStep: 4,
                     })
                   }
-                >
-                  Back
-                </Button>
+                />
               </>
             )}
             {formState.formStep === 6 && (

@@ -57,12 +57,12 @@ function RefineComponentForm(props) {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(event.target);
     setItem({ ...item, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(item);
     API.updateComponent({
       _id: item.id,
       name: item.name,
@@ -73,15 +73,21 @@ function RefineComponentForm(props) {
       influencers: item.influencers,
     })
       .then((result) => {
+        console.log(result.data.data);
         props.setFormState(result.data.data.component);
       })
       .catch((e) => setError(e.response.data.message));
   };
 
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    props.resetFormState();
+  };
+
   return (
     <>
       <Paper className={classes.paper} elevation={6}>
-        <form onSubmit={handleSubmit}>
+        <form>
           <Typography className={classes.type} align="center" variant="h4">
             Edit the component
           </Typography>
@@ -130,8 +136,22 @@ function RefineComponentForm(props) {
           />
           {error && <Alert severity="error">{error}</Alert>}
           <br />
-          <Button type="submit" fullWidth variant="contained" color="secondary">
-            Submit
+          <Button
+            onClick={handleSubmit}
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="secondary"
+          >
+            Continue
+          </Button>
+          <Button
+            align="left"
+            variant="contained"
+            color="primary"
+            onClick={handleBackClick}
+          >
+            Back
           </Button>
         </form>
       </Paper>

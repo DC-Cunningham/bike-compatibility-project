@@ -5,6 +5,7 @@ import { Box, Button, Typography } from "@material-ui/core/";
 function SubmitComponentForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(props.currentItem);
     API.updateComponent(props.currentItem)
       .then((result) => {
         props.setFormState(result);
