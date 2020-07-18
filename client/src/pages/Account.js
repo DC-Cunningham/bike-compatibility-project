@@ -79,35 +79,6 @@ const Account = () => {
   const [error, setError] = useState("");
   const [state, dispatch] = useStoreContext();
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (password === passwordVal) {
-      authenticate({
-        name: name,
-        email: email,
-        password: password,
-        role: "user",
-      });
-    } else {
-      setError("Passwords do not match");
-    }
-  }
-
-  const authenticate = async (user) => {
-    try {
-      const token = await API.registerAPI(user);
-      const currentUser = {
-        displayName: user.name,
-        role: "user",
-        token: token.data.data.token,
-      };
-      dispatch({ type: LOGIN_ACTION, currentUser });
-      history.push("/");
-    } catch (e) {
-      setError(e.response.data.message);
-    }
-  };
-
   return (
     <>
       <CssBaseline />
@@ -115,7 +86,24 @@ const Account = () => {
         <Container maxWidth="md">
           <Paper className={classes.paper} elevation={6}>
             <div className={classes.container}>
-              <Typography variant="h3">Account</Typography>
+              <Typography variant="h3">Account Details</Typography>
+              <br />
+              <Typography align="center" variant="h5">
+                Thanks for joining up to The Bike compatibility Project. Your
+                details supplied are as follows:
+              </Typography>
+              <br />
+              <Typography variant="h5">Username:</Typography>
+              <Typography variant="h4">{state.user.displayName}</Typography>
+              <br />
+              <Typography variant="h5">Email:</Typography>
+              <Typography variant="h4">{state.user.email}</Typography>
+
+              <br />
+              <Typography variant="h5">
+                You are currently logged in with a {state.user.role} level role.
+              </Typography>
+              <br />
               {/* <form className={classes.form} onSubmit={handleSubmit} noValidate>
                 <TextField
                   className={classes.type}

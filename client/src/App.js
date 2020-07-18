@@ -57,6 +57,7 @@ function App() {
         console.log(res);
         let currentUser = {
           displayName: res.data.name,
+          email: res.data.email,
           role: res.data.role,
           token: token,
         };

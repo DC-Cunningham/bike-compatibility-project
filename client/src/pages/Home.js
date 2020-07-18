@@ -1,11 +1,15 @@
 import React from "react";
 import {
   Box,
+  Button,
   CssBaseline,
   Container,
   makeStyles,
   Paper,
+  Typography,
+  Link,
 } from "@material-ui/core";
+import { useStoreContext } from "../utils/UserState";
 import HomeImage from "../assets/TBCP_Homepage_ST.jpg";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +60,8 @@ const useStyles = makeStyles((theme) => ({
 
 function HomePage() {
   const classes = useStyles();
+  const [state, dispatch] = useStoreContext();
+  console.log(state);
   return (
     <>
       <CssBaseline />
@@ -68,6 +74,20 @@ function HomePage() {
                 src={HomeImage}
                 alt="SingleTrack"
               />
+              <br />
+              <br />
+              {state.user.role ? (
+                <></>
+              ) : (
+                <Button
+                  fullWidth
+                  variant="contained"
+                  align="center"
+                  href="/signin"
+                >
+                  Please sign in to access the database
+                </Button>
+              )}
             </Box>
           </Paper>
         </Box>

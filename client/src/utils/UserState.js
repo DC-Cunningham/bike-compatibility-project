@@ -36,6 +36,7 @@ const UserState = ({ value = [], ...props }) => {
     user: {
       _id: 0,
       displayName: "",
+      email: "",
       role: "",
       token: "",
     },
