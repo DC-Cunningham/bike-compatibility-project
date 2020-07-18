@@ -6,7 +6,7 @@
 
 A React-based application deployed using a Mongo, Express, Node and Material UI build.
 
-This project is a proof of concept for an application dealing with the intricate compatibility relationships of bicycle components. The application hopes to make a user friendly database of information for bicycle industry. It shows which other components can come into contact with, and also which other components can influence any individual component. By having a quick at hand reference less issues can result from not considering all possible compatibility issues.
+This project is a proof of concept for an application dealing with the intricate compatibility relationships of bicycle components. The application hopes to make a user friendly database of information for bicycle industry. It shows which other components can come into contact with, and also which other components can influence any individual component. By having a quick at hand reference less repair, replacement or customisation issues will result from not considering all possible compatibility issues.
 
 The application employs role based authentication that has a user and an admin level. Users are able to see the database but not edit or add components. An admin role can add and edit components.
 
@@ -56,6 +56,8 @@ Upon signing in as an admin the user is able to add more compnents to the databa
 - a mechanism to check for reciprocal relationships, for example if one component is linked to another it's relationship is checked to be mirrored by the other.
 
 - sorting of buttons in the component linking panels.
+
+- functionality to the password reset mechanism.
 
 ## Authors and Acknowledgment
 
