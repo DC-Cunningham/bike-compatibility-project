@@ -6,8 +6,6 @@ import {
   Container,
   makeStyles,
   Paper,
-  Typography,
-  Link,
 } from "@material-ui/core";
 import { useStoreContext } from "../utils/UserState";
 import HomeImage from "../assets/TBCP_Homepage_ST.jpg";
@@ -16,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: "auto",
     marginTop: theme.spacing(8),
-    marginLeft: theme.spacing(24),
-    marginRight: theme.spacing(3),
+    marginLeft: theme.spacing(29),
+    marginRight: theme.spacing(),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

@@ -23,9 +23,9 @@ import AdminRoute from "./components/routes/AdminRoute";
 const useStyles = makeStyles((theme) => ({
   header: {
     height: "100%",
-    padding: theme.spacing(2),
+    marginLeft: theme.spacing(29),
     color: theme.palette.primary.contrastText,
-    background: "linear-gradient(90deg, #ffffff 10%, #000000 100%)",
+    background: "linear-gradient(90deg, #ffffff 1%, #000000 100%)",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     display: "flex",
     alignItems: "center",
@@ -33,7 +33,12 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(30),
     [theme.breakpoints.down(960)]: {
       height: "75px",
-      paddingLeft: theme.spacing(10),
+      marginLeft: theme.spacing(9),
+      fontSize: theme.spacing(3),
+    },
+    [theme.breakpoints.down(620)]: {
+      height: "75px",
+      marginLeft: theme.spacing(5),
       fontSize: theme.spacing(3),
     },
   },

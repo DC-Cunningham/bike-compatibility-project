@@ -41,9 +41,9 @@ The application has been deployed on Heroku [here](https://floating-retreat-8407
 
 Upon signing in a user is able to search the component database:
 
-- Once a user has chosen the component they are interested in they will see the details displayed for that item. Within the details pane there are all the components relationships which are all able to be clicked through to. The useer is also able to click out to a new browser window with a wikipedia link for the component.
+- Once a user has chosen the component they are interested in they will see the details displayed for that item. Within the details pane there are all the components relationships which are all able to be clicked through to. The user is also able to click out to a new browser window with a wikipedia link for the component.
 
-Upon signing in as an admin the user is able to add more compnents to the database. They are also able to edit any of the current components.
+Upon signing in as an admin the user is able to add more components to the database. They are also able to edit any of the current components.
 
 ## Future Plans and Known Bugs
 
