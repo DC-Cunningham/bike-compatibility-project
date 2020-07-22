@@ -137,20 +137,7 @@ function DefineComponentForm(props) {
             Submit
           </Button> */}
         </form>
-        <Grid
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="baseline"
-        >
-          <Button
-            align="left"
-            variant="contained"
-            color="primary"
-            onClick={handleBackClick}
-          >
-            Back
-          </Button>
+        <Grid container direction="row" justify="flex-end" alignItems="right">
           <Button
             align="right"
             onClick={handleSubmit}
