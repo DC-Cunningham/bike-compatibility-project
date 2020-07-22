@@ -22,7 +22,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    height: "100%",
+    height: "150px",
     marginLeft: theme.spacing(29),
     color: theme.palette.primary.contrastText,
     background: "linear-gradient(90deg, #ffffff 1%, #000000 100%)",
@@ -30,11 +30,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    paddingLeft: theme.spacing(30),
     [theme.breakpoints.down(960)]: {
       height: "75px",
       marginLeft: theme.spacing(9),
-      fontSize: theme.spacing(3),
+      fontSize: theme.spacing(5),
     },
     [theme.breakpoints.down(620)]: {
       height: "75px",
@@ -50,6 +49,7 @@ function App() {
     user: {
       _id: 0,
       displayName: "",
+      email: "",
       role: "",
       token: "",
     },
@@ -59,7 +59,6 @@ function App() {
     const token = localStorage.getItem("User_Token");
     if (token) {
       API.getUserBasedOnToken(token).then((res) => {
-        console.log(res);
         let currentUser = {
           displayName: res.data.name,
           email: res.data.email,

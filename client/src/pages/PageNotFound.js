@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Divider,
-  Paper,
-  Typography,
-  makeStyles,
-} from "@material-ui/core/";
+import { Divider, Paper, Typography, makeStyles } from "@material-ui/core/";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

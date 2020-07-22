@@ -1,19 +1,13 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import {
   Box,
   Container,
   CssBaseline,
-  TextField,
   Typography,
-  Button,
   Paper,
   makeStyles,
 } from "@material-ui/core/";
-import API from "../utils/API";
 import { useStoreContext } from "../utils/UserState";
-import { LOGIN_ACTION } from "../utils/actions";
-import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,12 +65,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Account = () => {
   const classes = useStyles();
-  const history = useHistory();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordVal, setPasswordVal] = useState("");
-  const [error, setError] = useState("");
   const [state, dispatch] = useStoreContext();
 
   return (
@@ -104,74 +92,6 @@ const Account = () => {
                 You are currently logged in with a {state.user.role} level role.
               </Typography>
               <br />
-              {/* <form className={classes.form} onSubmit={handleSubmit} noValidate>
-                <TextField
-                  className={classes.type}
-                  value={name}
-                  onInput={(e) => setName(e.target.value)}
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="name"
-                  label="Name"
-                  name="name"
-                  autoComplete="name"
-                  autoFocus
-                />
-                <TextField
-                  className={classes.type}
-                  value={email}
-                  onInput={(e) => setEmail(e.target.value)}
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
-                />
-                <TextField
-                  className={classes.type}
-                  value={password}
-                  onInput={(e) => setPassword(e.target.value)}
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-                <TextField
-                  className={classes.type}
-                  value={passwordVal}
-                  onInput={(e) => setPasswordVal(e.target.value)}
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password_confirm"
-                  label="Confirm Password"
-                  type="password"
-                  id="password_confirm"
-                  autoComplete="current-password"
-                />
-                {error && <Alert severity="error">{error}</Alert>}
-                <Button
-                  className={classes.type}
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Submit
-                </Button>
-              </form> */}
             </div>
           </Paper>
         </Container>

@@ -131,7 +131,7 @@ function EditComponent() {
                       formStep: 3,
                     })
                   }
-                  resetFormState={(values) =>
+                  resetFormState={() =>
                     setFormState({
                       ...formState,
                       currentItem: {},
@@ -172,14 +172,14 @@ function EditComponent() {
                   relationship="influencers"
                   items={formState.items}
                   currentItem={formState.currentItem}
-                  setFormState={(value) =>
+                  setFormState={(values) =>
                     setFormState({
                       ...formState,
-                      currentItem: { ...formState.currentItem, ...value },
+                      currentItem: { ...formState.currentItem, ...values },
                       formStep: 5,
                     })
                   }
-                  resetFromState={(values) =>
+                  resetFormState={(values) =>
                     setFormState({
                       ...formState,
                       currentItem: { ...formState.currentItem, ...values },
@@ -195,14 +195,14 @@ function EditComponent() {
                   items={formState.items}
                   term="edited"
                   currentItem={formState.currentItem}
-                  setFormState={(value) =>
+                  setFormState={(values) =>
                     setFormState({
                       ...formState,
-                      currentItem: { ...formState.currentItem, ...value },
+                      currentItem: { ...formState.currentItem, ...values },
                       formStep: 6,
                     })
                   }
-                  resetFromState={(values) =>
+                  resetFormState={(values) =>
                     setFormState({
                       ...formState,
                       currentItem: { ...formState.currentItem, ...values },
@@ -221,10 +221,10 @@ function EditComponent() {
                 </Box>
                 <ComponentCard
                   currentItem={formState.currentItem}
-                  resetFormState={(value) =>
+                  resetFormState={(values) =>
                     setFormState({
                       ...formState,
-                      currentItem: { ...formState.currentItem, ...value },
+                      currentItem: { ...formState.currentItem, ...values },
                       formStep: 1,
                     })
                   }

@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
 function HomePage() {
   const classes = useStyles();
   const [state, dispatch] = useStoreContext();
-  console.log(state);
   return (
     <>
       <CssBaseline />

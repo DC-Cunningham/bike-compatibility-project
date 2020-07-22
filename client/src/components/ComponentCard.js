@@ -1,14 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-
-import {
-  Avatar,
-  Button,
-  GridListTile,
-  GridList,
-  Icon,
-  makeStyles,
-} from "@material-ui/core";
+import { Button, GridListTile, GridList, makeStyles } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
@@ -38,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
 function ComponentCard(props) {
   const classes = useStyles();
-  const history = useHistory();
 
   const {
     name,
