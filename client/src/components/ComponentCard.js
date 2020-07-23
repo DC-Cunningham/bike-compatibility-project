@@ -25,6 +25,12 @@ const useStyles = makeStyles((theme) => ({
       fontSize: theme.spacing(1),
     },
   },
+  caption: {
+    fontWeight: "bold",
+  },
+  divider: {
+    margin: theme.spacing(3),
+  },
 }));
 
 function ComponentCard(props) {
@@ -102,14 +108,12 @@ function ComponentCard(props) {
     <div className="App">
       <Card className={classes.card}>
         <CardContent className={classes.content}>
-          <Typography variant={"h5"} gutterBottom>
+          <Typography variant={"h4"} gutterBottom>
             {name}
           </Typography>
-          {/* <Avatar src={`Icon.${type}`} /> */}
-
           <Typography variant={"caption"}>{definition}</Typography>
           <Divider className={classes.divider} light />
-          <Typography variant={"caption"}>
+          <Typography className={classes.caption} variant={"caption"}>
             Components that contact a {name}:
           </Typography>
           <GridList
@@ -121,7 +125,7 @@ function ComponentCard(props) {
             {pointOfContactArray()}
           </GridList>
           <Divider className={classes.divider} light />
-          <Typography variant={"caption"}>
+          <Typography className={classes.caption} variant={"caption"}>
             Components that influence a {name}:
           </Typography>
           <GridList

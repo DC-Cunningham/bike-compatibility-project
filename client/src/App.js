@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
     height: "150px",
     marginLeft: theme.spacing(29),
     color: theme.palette.primary.contrastText,
+    fontWeight: "bold",
+    textShadow: "2px 2px 8px #000000",
     background: "linear-gradient(90deg, #ffffff 1%, #000000 100%)",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     display: "flex",

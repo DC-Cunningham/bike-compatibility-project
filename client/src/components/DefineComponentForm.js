@@ -133,9 +133,6 @@ function DefineComponentForm(props) {
           />
           {error && <Alert severity="error">{error}</Alert>}
           <br />
-          {/* <Button type="submit" fullWidth variant="contained" color="secondary">
-            Submit
-          </Button> */}
         </form>
         <Grid container direction="row" justify="flex-end" alignItems="right">
           <Button

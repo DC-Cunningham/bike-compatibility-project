@@ -95,7 +95,7 @@ function Components() {
       <Box>
         <Container maxWidth="md">
           <Paper className={classes.paper} elevation={6}>
-            <Typography className={classes.type} align="center" variant="h2">
+            <Typography className={classes.type} align="center" variant="h4">
               Component Database
             </Typography>
             {formState.currentItemExists === true && (
